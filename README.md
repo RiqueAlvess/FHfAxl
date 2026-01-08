@@ -64,8 +64,8 @@ NEXTAUTH_SECRET="your-secret-key-min-32-characters"
 NEXTAUTH_URL="http://localhost:3000"
 
 # Email (Resend)
-RESEND_API_KEY="re_QsmSYLiT_ErtMjZCKfKz7T3GKJjaWKKtM"
-EMAIL_FROM="help@3sdev.com.br"
+RESEND_API_KEY="re_********iT_ErtMjZCKfKz7T3GKJjaWKKtM"
+EMAIL_FROM="help@****.com"
 
 # App Configuration
 MAGIC_LINK_EXPIRATION_HOURS=48
