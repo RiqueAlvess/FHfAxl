@@ -1,0 +1,317 @@
+// Prisma Schema for VIVAMENTE360
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USUÁRIOS E AUTENTICAÇÃO
+// ============================================
+
+enum Role {
+  ADMIN
+  RH
+  LIDERANCA
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  nome              String
+  senha             String    // bcrypt hash
+  role              Role      @default(RH)
+  ativo             Boolean   @default(true)
+  empresaId         String
+  empresa           Empresa   @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  unidadeId         String?   // Apenas para LIDERANCA
+  unidade           Unidade?  @relation(fields: [unidadeId], references: [id], onDelete: SetNull)
+  lastLoginAt       DateTime?
+  lastLoginIp       String?
+  forcarTrocaSenha  Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Histórico de senhas (para evitar reutilização)
+  senhasAnteriores  String[]  @default([])
+
+  // Tokens de reset de senha
+  passwordResetTokens PasswordResetToken[]
+
+  // Logs de auditoria
+  auditLogs         AuditLog[]
+
+  @@index([empresaId])
+  @@index([email])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  usado     Boolean   @default(false)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+// ============================================
+// ESTRUTURA ORGANIZACIONAL
+// ============================================
+
+model Empresa {
+  id              String       @id @default(cuid())
+  nome            String
+  cnpj            String       @unique
+  logo            String?
+  corPrimaria     String       @default("#2563eb")
+  ativo           Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  usuarios        User[]
+  unidades        Unidade[]
+  colaboradores   Colaborador[]
+  ciclosAvaliacao CicloAvaliacao[]
+
+  @@index([cnpj])
+}
+
+model Unidade {
+  id          String        @id @default(cuid())
+  nome        String
+  empresaId   String
+  empresa     Empresa       @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  ativo       Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  setores     Setor[]
+  colaboradores Colaborador[]
+  usuarios    User[]
+
+  @@index([empresaId])
+}
+
+model Setor {
+  id          String        @id @default(cuid())
+  nome        String
+  unidadeId   String
+  unidade     Unidade       @relation(fields: [unidadeId], references: [id], onDelete: Cascade)
+  ativo       Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  cargos      Cargo[]
+  colaboradores Colaborador[]
+
+  @@index([unidadeId])
+}
+
+model Cargo {
+  id            String        @id @default(cuid())
+  nome          String
+  setorId       String
+  setor         Setor         @relation(fields: [setorId], references: [id], onDelete: Cascade)
+  ativo         Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  colaboradores Colaborador[]
+
+  @@index([setorId])
+}
+
+// ============================================
+// COLABORADORES
+// ============================================
+
+enum Sexo {
+  MASCULINO
+  FEMININO
+  OUTRO
+  NAO_INFORMADO
+}
+
+model Colaborador {
+  id              String      @id @default(cuid())
+  email           String      @unique
+  empresaId       String
+  empresa         Empresa     @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  unidadeId       String
+  unidade         Unidade     @relation(fields: [unidadeId], references: [id], onDelete: Cascade)
+  setorId         String
+  setor           Setor       @relation(fields: [setorId], references: [id], onDelete: Cascade)
+  cargoId         String
+  cargo           Cargo       @relation(fields: [cargoId], references: [id], onDelete: Cascade)
+  dataNascimento  DateTime?
+  sexo            Sexo        @default(NAO_INFORMADO)
+  ativo           Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  magicLinks      MagicLink[]
+  respostas       Resposta[]
+
+  @@index([empresaId])
+  @@index([unidadeId])
+  @@index([setorId])
+  @@index([cargoId])
+  @@index([email])
+}
+
+// ============================================
+// MAGIC LINKS E QUESTIONÁRIO
+// ============================================
+
+enum MagicLinkStatus {
+  PENDING
+  SENT
+  ACCESSED
+  COMPLETED
+  EXPIRED
+}
+
+model MagicLink {
+  id              String          @id @default(cuid())
+  token           String          @unique
+  colaboradorId   String
+  colaborador     Colaborador     @relation(fields: [colaboradorId], references: [id], onDelete: Cascade)
+  cicloAvaliacaoId String
+  cicloAvaliacao  CicloAvaliacao  @relation(fields: [cicloAvaliacaoId], references: [id], onDelete: Cascade)
+  status          MagicLinkStatus @default(PENDING)
+  expiresAt       DateTime
+  sentAt          DateTime?
+  accessedAt      DateTime?
+  completedAt     DateTime?
+  createdAt       DateTime        @default(now())
+
+  resposta        Resposta?
+
+  @@index([token])
+  @@index([colaboradorId])
+  @@index([status])
+  @@index([cicloAvaliacaoId])
+}
+
+model CicloAvaliacao {
+  id          String      @id @default(cuid())
+  nome        String
+  empresaId   String
+  empresa     Empresa     @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  dataInicio  DateTime
+  dataFim     DateTime
+  ativo       Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+
+  magicLinks  MagicLink[]
+  respostas   Resposta[]
+
+  @@index([empresaId])
+  @@index([ativo])
+}
+
+// ============================================
+// RESPOSTAS E SCORES
+// ============================================
+
+model Resposta {
+  id              String      @id @default(cuid())
+  magicLinkId     String      @unique
+  magicLink       MagicLink   @relation(fields: [magicLinkId], references: [id], onDelete: Cascade)
+  colaboradorId   String
+  colaborador     Colaborador @relation(fields: [colaboradorId], references: [id], onDelete: Cascade)
+  cicloAvaliacaoId String
+  cicloAvaliacao  CicloAvaliacao @relation(fields: [cicloAvaliacaoId], references: [id], onDelete: Cascade)
+
+  // Consentimento LGPD
+  consentimentoLGPD Boolean   @default(false)
+
+  // Respostas (35 perguntas, escala 0-4)
+  // Demandas (8 perguntas - NEGATIVA)
+  demandas        Int[]       // Array de 8 valores (0-4)
+
+  // Controle (6 perguntas - POSITIVA)
+  controle        Int[]       // Array de 6 valores (0-4)
+
+  // Apoio Gerencial (5 perguntas - POSITIVA)
+  apoioGerencial  Int[]       // Array de 5 valores (0-4)
+
+  // Apoio de Colegas (4 perguntas - POSITIVA)
+  apoioColegas    Int[]       // Array de 4 valores (0-4)
+
+  // Relacionamentos (4 perguntas - NEGATIVA)
+  relacionamentos Int[]       // Array de 4 valores (0-4)
+
+  // Papel (5 perguntas - POSITIVA)
+  papel           Int[]       // Array de 5 valores (0-4)
+
+  // Mudanças (3 perguntas - POSITIVA)
+  mudancas        Int[]       // Array de 3 valores (0-4)
+
+  // Scores calculados
+  scoreDemandas         Float
+  scoreControle         Float
+  scoreApoioGerencial   Float
+  scoreApoioColegas     Float
+  scoreRelacionamentos  Float
+  scorePapel            Float
+  scoreMudancas         Float
+  scoreGlobal           Float   // Soma de todos os scores (0-140)
+
+  // Classificação
+  classificacao   String      // "SATISFATORIO", "ATENCAO", "CRITICO"
+
+  // Tempo de resposta
+  tempoResposta   Int         // Em segundos
+
+  createdAt       DateTime    @default(now())
+
+  @@index([colaboradorId])
+  @@index([cicloAvaliacaoId])
+  @@index([scoreGlobal])
+  @@index([classificacao])
+}
+
+// ============================================
+// AUDITORIA
+// ============================================
+
+enum AcaoAuditoria {
+  LOGIN
+  LOGOUT
+  CREATE
+  UPDATE
+  DELETE
+  VIEW
+  EXPORT
+  SEND_EMAIL
+  IMPORT
+}
+
+model AuditLog {
+  id          String         @id @default(cuid())
+  userId      String
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  acao        AcaoAuditoria
+  entidade    String         // Nome da entidade (User, Colaborador, etc)
+  entidadeId  String?        // ID do registro afetado
+  detalhes    String?        // JSON com detalhes da ação
+  ip          String?
+  userAgent   String?
+  createdAt   DateTime       @default(now())
+
+  @@index([userId])
+  @@index([acao])
+  @@index([entidade])
+  @@index([createdAt])
+}
