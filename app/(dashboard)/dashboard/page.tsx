@@ -2,9 +2,47 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, FileCheck, AlertTriangle, TrendingUp } from "lucide-react";
+import { prisma } from "@/lib/prisma";
+import DashboardCharts from "@/components/dashboard/DashboardCharts";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
+
+  // Buscar dados básicos do servidor
+  const totalColaboradores = await prisma.colaborador.count({
+    where: { empresaId: session!.user.empresaId, ativo: true },
+  });
+
+  const totalRespostas = await prisma.resposta.count({
+    where: {
+      colaborador: {
+        empresaId: session!.user.empresaId,
+        ativo: true,
+      },
+    },
+  });
+
+  const taxaAdesao = totalColaboradores > 0
+    ? ((totalRespostas / totalColaboradores) * 100).toFixed(1)
+    : "0";
+
+  // Calcular IGRP (Índice Geral de Risco Psicossocial)
+  const scoresGlobais = await prisma.resposta.findMany({
+    where: {
+      colaborador: {
+        empresaId: session!.user.empresaId,
+        ativo: true,
+      },
+    },
+    select: { scoreGlobal: true, classificacao: true },
+  });
+
+  const igrp = scoresGlobais.length > 0
+    ? (scoresGlobais.reduce((acc, r) => acc + r.scoreGlobal, 0) / scoresGlobais.length).toFixed(2)
+    : "-";
+
+  const classificacaoGeral =
+    igrp === "-" ? "-" : parseFloat(igrp) <= 40 ? "Satisfatório" : parseFloat(igrp) <= 80 ? "Atenção" : "Crítico";
 
   return (
     <div className="space-y-8">
@@ -21,7 +59,7 @@ export default async function DashboardPage() {
             <Users className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">0</div>
+            <div className="text-2xl font-bold">{totalColaboradores}</div>
             <p className="text-xs text-gray-500">Cadastrados no sistema</p>
           </CardContent>
         </Card>
@@ -32,19 +70,21 @@ export default async function DashboardPage() {
             <FileCheck className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">0%</div>
-            <p className="text-xs text-gray-500">Questionários respondidos</p>
+            <div className="text-2xl font-bold">{taxaAdesao}%</div>
+            <p className="text-xs text-gray-500">
+              {totalRespostas} de {totalColaboradores} responderam
+            </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Índice de Risco</CardTitle>
+            <CardTitle className="text-sm font-medium">IGRP</CardTitle>
             <AlertTriangle className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">-</div>
-            <p className="text-xs text-gray-500">Score médio global</p>
+            <div className="text-2xl font-bold">{igrp}</div>
+            <p className="text-xs text-gray-500">Índice Geral de Risco (0-140)</p>
           </CardContent>
         </Card>
 
@@ -54,23 +94,20 @@ export default async function DashboardPage() {
             <TrendingUp className="h-4 w-4 text-gray-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">-</div>
+            <div className={`text-2xl font-bold ${
+              classificacaoGeral === "Satisfatório" ? "text-green-600" :
+              classificacaoGeral === "Atenção" ? "text-yellow-600" :
+              classificacaoGeral === "Crítico" ? "text-red-600" : ""
+            }`}>
+              {classificacaoGeral}
+            </div>
             <p className="text-xs text-gray-500">Classificação geral</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Placeholder para gráficos */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Análise de Riscos Psicossociais</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="h-64 flex items-center justify-center text-gray-400">
-            Configure o sistema e envie questionários para visualizar análises
-          </div>
-        </CardContent>
-      </Card>
+      {/* Gráficos e Análises */}
+      <DashboardCharts />
     </div>
   );
 }
