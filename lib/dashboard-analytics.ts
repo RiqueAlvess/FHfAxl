@@ -207,9 +207,7 @@ export async function getScoresPorDimensao(empresaId: string): Promise<ScorePorD
 
     return {
       dimensao: dim.nome,
-      scoreM
-
-edio: Number(media.toFixed(2)),
+      scoreMedio: Number(media.toFixed(2)),
       desvioPadrao: Number(desvioPadrao.toFixed(2)),
       count: scores.length,
     };

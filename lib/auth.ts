@@ -1,15 +1,17 @@
-import { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
+import type { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { Role } from "@prisma/client";
 
 const loginSchema = z.object({
   email: z.string().email(),
   senha: z.string().min(8),
 });
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthConfig = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -17,7 +19,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         senha: { label: "Senha", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, _request) {
         try {
           // Validar dados de entrada
           const { email, senha } = loginSchema.parse(credentials);
@@ -55,7 +57,7 @@ export const authOptions: NextAuthOptions = {
             name: user.nome,
             role: user.role,
             empresaId: user.empresaId,
-            unidadeId: user.unidadeId,
+            unidadeId: user.unidadeId ?? undefined,
             forcarTrocaSenha: user.forcarTrocaSenha,
           };
         } catch (error) {
@@ -79,7 +81,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as string;
+        session.user.role = token.role as Role;
         session.user.empresaId = token.empresaId as string;
         session.user.unidadeId = token.unidadeId as string | undefined;
         session.user.forcarTrocaSenha = token.forcarTrocaSenha as boolean;
@@ -97,3 +99,5 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
