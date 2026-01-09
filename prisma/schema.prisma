@@ -28,10 +28,12 @@ model User {
   senha             String    // bcrypt hash
   role              Role      @default(RH)
   ativo             Boolean   @default(true)
-  empresaId         String
-  empresa           Empresa   @relation(fields: [empresaId], references: [id], onDelete: Cascade)
-  unidadeId         String?   // Apenas para LIDERANCA
+  empresaId         String?   // Opcional: ADMIN não precisa de empresa
+  empresa           Empresa?  @relation(fields: [empresaId], references: [id], onDelete: Cascade)
+  unidadeId         String?   // Opcional: usado para LIDERANCA limitada a unidade
   unidade           Unidade?  @relation(fields: [unidadeId], references: [id], onDelete: SetNull)
+  setorId           String?   // Opcional: usado para LIDERANCA limitada a setor
+  setor             Setor?    @relation(fields: [setorId], references: [id], onDelete: SetNull)
   lastLoginAt       DateTime?
   lastLoginIp       String?
   forcarTrocaSenha  Boolean   @default(false)
@@ -114,6 +116,7 @@ model Setor {
 
   cargos      Cargo[]
   colaboradores Colaborador[]
+  usuarios    User[]        // Usuários (LIDERANCA) limitados a este setor
 
   @@index([unidadeId])
 }

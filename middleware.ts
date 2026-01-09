@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import { canAccessAdminPanel } from "@/lib/authorization";
 
 export default auth((req) => {
   const session = req.auth;
@@ -28,11 +29,16 @@ export default auth((req) => {
     return NextResponse.redirect(new URL("/trocar-senha", req.url));
   }
 
-  // Proteger rotas de admin
+  // Proteger rotas de admin - apenas ADMIN pode acessar
   if (path.startsWith("/admin")) {
-    if (session.user.role !== "ADMIN") {
+    if (!canAccessAdminPanel(session)) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
+  }
+
+  // Redirecionar ADMIN para painel admin se tentar acessar dashboard
+  if (path === "/dashboard" && session.user.role === "ADMIN") {
+    return NextResponse.redirect(new URL("/admin", req.url));
   }
 
   // Permitir acesso
