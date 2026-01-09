@@ -27,11 +27,26 @@ export const authOptions: NextAuthConfig = {
           // Buscar usuário no banco
           const user = await prisma.user.findUnique({
             where: { email },
-            include: { empresa: true },
+            include: {
+              empresa: true,
+              unidade: true,
+              setor: true,
+            },
           });
 
           // Verificar se usuário existe e está ativo
           if (!user || !user.ativo) {
+            return null;
+          }
+
+          // Validar regras de negócio por role
+          if (user.role === "RH" && !user.empresaId) {
+            console.error("RH deve estar vinculado a uma empresa");
+            return null;
+          }
+
+          if (user.role === "LIDERANCA" && !user.empresaId) {
+            console.error("LIDERANCA deve estar vinculado a uma empresa");
             return null;
           }
 
@@ -56,8 +71,9 @@ export const authOptions: NextAuthConfig = {
             email: user.email,
             name: user.nome,
             role: user.role,
-            empresaId: user.empresaId,
+            empresaId: user.empresaId ?? undefined,
             unidadeId: user.unidadeId ?? undefined,
+            setorId: user.setorId ?? undefined,
             forcarTrocaSenha: user.forcarTrocaSenha,
           };
         } catch (error) {
@@ -74,6 +90,7 @@ export const authOptions: NextAuthConfig = {
         token.role = user.role;
         token.empresaId = user.empresaId;
         token.unidadeId = user.unidadeId;
+        token.setorId = user.setorId;
         token.forcarTrocaSenha = user.forcarTrocaSenha;
       }
       return token;
@@ -82,8 +99,9 @@ export const authOptions: NextAuthConfig = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as Role;
-        session.user.empresaId = token.empresaId as string;
+        session.user.empresaId = token.empresaId as string | undefined;
         session.user.unidadeId = token.unidadeId as string | undefined;
+        session.user.setorId = token.setorId as string | undefined;
         session.user.forcarTrocaSenha = token.forcarTrocaSenha as boolean;
       }
       return session;
