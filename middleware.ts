@@ -12,6 +12,7 @@ export default auth((req) => {
     path.startsWith("/recuperar-senha") ||
     path.startsWith("/redefinir-senha") ||
     path.startsWith("/questionario") ||
+    path.startsWith("/FHfAxl") ||
     path === "/";
 
   // Se é rota pública, permitir acesso
