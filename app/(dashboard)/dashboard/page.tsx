@@ -46,61 +46,61 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-gray-500">Bem-vindo, {session?.user.name}</p>
+        <h1 className="text-3xl font-bold text-zinc-50">Dashboard</h1>
+        <p className="text-zinc-400">Bem-vindo, {session?.user.name}</p>
       </div>
 
       {/* KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
+        <Card className="bg-zinc-900 border-zinc-800">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Colaboradores</CardTitle>
-            <Users className="h-4 w-4 text-gray-500" />
+            <CardTitle className="text-sm font-medium text-zinc-100">Total Colaboradores</CardTitle>
+            <Users className="h-4 w-4 text-violet-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalColaboradores}</div>
-            <p className="text-xs text-gray-500">Cadastrados no sistema</p>
+            <div className="text-2xl font-bold text-zinc-50">{totalColaboradores}</div>
+            <p className="text-xs text-zinc-400">Cadastrados no sistema</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-zinc-900 border-zinc-800">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Taxa de Adesão</CardTitle>
-            <FileCheck className="h-4 w-4 text-gray-500" />
+            <CardTitle className="text-sm font-medium text-zinc-100">Taxa de Adesão</CardTitle>
+            <FileCheck className="h-4 w-4 text-blue-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{taxaAdesao}%</div>
-            <p className="text-xs text-gray-500">
+            <div className="text-2xl font-bold text-zinc-50">{taxaAdesao}%</div>
+            <p className="text-xs text-zinc-400">
               {totalRespostas} de {totalColaboradores} responderam
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-zinc-900 border-zinc-800">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">IGRP</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-gray-500" />
+            <CardTitle className="text-sm font-medium text-zinc-100">IGRP</CardTitle>
+            <AlertTriangle className="h-4 w-4 text-amber-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{igrp}</div>
-            <p className="text-xs text-gray-500">Índice Geral de Risco (0-140)</p>
+            <div className="text-2xl font-bold text-zinc-50">{igrp}</div>
+            <p className="text-xs text-zinc-400">Índice Geral de Risco (0-140)</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-zinc-900 border-zinc-800">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Status</CardTitle>
-            <TrendingUp className="h-4 w-4 text-gray-500" />
+            <CardTitle className="text-sm font-medium text-zinc-100">Status</CardTitle>
+            <TrendingUp className="h-4 w-4 text-emerald-400" />
           </CardHeader>
           <CardContent>
             <div className={`text-2xl font-bold ${
-              classificacaoGeral === "Satisfatório" ? "text-green-600" :
-              classificacaoGeral === "Atenção" ? "text-yellow-600" :
-              classificacaoGeral === "Crítico" ? "text-red-600" : ""
+              classificacaoGeral === "Satisfatório" ? "text-emerald-400" :
+              classificacaoGeral === "Atenção" ? "text-amber-400" :
+              classificacaoGeral === "Crítico" ? "text-red-400" : "text-zinc-400"
             }`}>
               {classificacaoGeral}
             </div>
-            <p className="text-xs text-gray-500">Classificação geral</p>
+            <p className="text-xs text-zinc-400">Classificação geral</p>
           </CardContent>
         </Card>
       </div>
