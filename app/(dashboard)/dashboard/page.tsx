@@ -1,12 +1,11 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, FileCheck, AlertTriangle, TrendingUp } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import DashboardCharts from "@/components/dashboard/DashboardCharts";
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   // Buscar dados básicos do servidor
   const totalColaboradores = await prisma.colaborador.count({
