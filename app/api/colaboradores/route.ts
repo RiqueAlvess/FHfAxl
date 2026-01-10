@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-// GET - Listar colaboradores
+// GET - Listar colaboradores (com filtros e paginação)
 export async function GET(request: NextRequest) {
   try {
     const session = await auth();
@@ -11,27 +11,95 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     }
 
-    // Verificar permissão (apenas RH e ADMIN podem listar todos)
-    if (session.user.role !== "RH" && session.user.role !== "ADMIN") {
+    // Verificar permissão (apenas RH, ADMIN e LIDERANCA podem listar)
+    if (session.user.role !== "RH" && session.user.role !== "ADMIN" && session.user.role !== "LIDERANCA") {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
     }
 
-    const colaboradores = await prisma.colaborador.findMany({
-      where: {
-        empresaId: session.user.empresaId,
-        ativo: true,
-      },
-      include: {
-        unidade: true,
-        setor: true,
-        cargo: true,
-      },
-      orderBy: {
-        createdAt: "desc",
+    // Obter parâmetros de query
+    const { searchParams } = new URL(request.url);
+    const busca = searchParams.get("busca") || "";
+    const unidadeId = searchParams.get("unidadeId") || "";
+    const setorId = searchParams.get("setorId") || "";
+    const cargoId = searchParams.get("cargoId") || "";
+    const status = searchParams.get("status") || "todos";
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "1000");
+
+    // Construir filtros
+    const where: any = {
+      empresaId: session.user.empresaId,
+    };
+
+    // Filtro de status
+    if (status === "ativo") {
+      where.ativo = true;
+    } else if (status === "inativo") {
+      where.ativo = false;
+    }
+    // Se status === "todos", não filtra por ativo
+
+    // Filtro de busca por email
+    if (busca) {
+      where.email = {
+        contains: busca,
+        mode: "insensitive",
+      };
+    }
+
+    // Filtros por estrutura organizacional
+    if (unidadeId) {
+      where.unidadeId = unidadeId;
+    }
+
+    if (setorId) {
+      where.setorId = setorId;
+    }
+
+    if (cargoId) {
+      where.cargoId = cargoId;
+    }
+
+    // Aplicar filtro de LIDERANCA se for o caso
+    if (session.user.role === "LIDERANCA") {
+      if (session.user.setorId) {
+        where.setorId = session.user.setorId;
+      } else if (session.user.unidadeId) {
+        where.unidadeId = session.user.unidadeId;
+      }
+    }
+
+    // Calcular paginação
+    const skip = (page - 1) * limit;
+
+    // Buscar total e colaboradores
+    const [total, colaboradores] = await Promise.all([
+      prisma.colaborador.count({ where }),
+      prisma.colaborador.findMany({
+        where,
+        include: {
+          unidade: true,
+          setor: true,
+          cargo: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip,
+        take: limit,
+      }),
+    ]);
+
+    // Retornar com metadados de paginação
+    return NextResponse.json({
+      data: colaboradores,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
     });
-
-    return NextResponse.json(colaboradores);
   } catch (error) {
     console.error("Erro ao buscar colaboradores:", error);
     return NextResponse.json(

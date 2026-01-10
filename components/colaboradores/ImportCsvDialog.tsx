@@ -1,0 +1,299 @@
+"use client";
+
+import { useState, useRef } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Download, Upload, FileText, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import Papa from "papaparse";
+import { Card, CardContent } from "@/components/ui/card";
+
+interface ImportCsvDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onSuccess: () => void;
+}
+
+export default function ImportCsvDialog({
+  open,
+  onOpenChange,
+  onSuccess,
+}: ImportCsvDialogProps) {
+  const [isImporting, setIsImporting] = useState(false);
+  const [importResult, setImportResult] = useState<any>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileSelect = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsImporting(true);
+    setImportResult(null);
+
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: async (results) => {
+        try {
+          const response = await fetch("/api/colaboradores/import-csv", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ rows: results.data }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            setImportResult(result);
+            toast.success(
+              `Importação concluída! ${result.success} de ${result.total} colaboradores importados.`
+            );
+
+            if (result.errors.length > 0) {
+              toast.warning(`${result.errors.length} erros encontrados`);
+            }
+
+            // Chamar callback de sucesso após um delay
+            setTimeout(() => {
+              onSuccess();
+              onOpenChange(false);
+              setImportResult(null);
+            }, 3000);
+          } else {
+            toast.error(result.error || "Erro ao importar arquivo");
+            setImportResult({
+              success: 0,
+              total: results.data.length,
+              errors: [{ linha: 0, erro: result.error }],
+            });
+          }
+        } catch (error) {
+          console.error("Erro ao processar arquivo:", error);
+          toast.error("Erro ao processar arquivo");
+        } finally {
+          setIsImporting(false);
+        }
+      },
+      error: () => {
+        toast.error("Erro ao ler arquivo CSV");
+        setIsImporting(false);
+      },
+    });
+
+    // Reset input
+    event.target.value = "";
+  };
+
+  const downloadTemplate = () => {
+    const template = `email,unidade,setor,cargo,data_nascimento,sexo
+funcionario@empresa.com,Matriz,TI,Desenvolvedor,15/03/1990,M
+exemplo@empresa.com,Filial São Paulo,RH,Analista,20/05/1985,F`;
+
+    const blob = new Blob([template], { type: "text/csv;charset=utf-8;" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "template_colaboradores.csv";
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-100 max-w-3xl">
+          <DialogHeader>
+            <DialogTitle className="text-zinc-50">
+              Importar Colaboradores via CSV
+            </DialogTitle>
+            <DialogDescription className="text-zinc-400">
+              Faça upload de um arquivo CSV para importar múltiplos colaboradores
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-6">
+            {/* Instruções */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="bg-zinc-800 border-zinc-700">
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold mb-3 text-zinc-200 flex items-center">
+                    <FileText className="mr-2 h-4 w-4 text-violet-400" />
+                    Formato do CSV
+                  </h3>
+                  <ul className="text-sm space-y-1 text-zinc-400">
+                    <li>• <strong className="text-zinc-300">email</strong>: Email do colaborador (obrigatório)</li>
+                    <li>• <strong className="text-zinc-300">unidade</strong>: Nome da unidade (obrigatório)</li>
+                    <li>• <strong className="text-zinc-300">setor</strong>: Nome do setor (obrigatório)</li>
+                    <li>• <strong className="text-zinc-300">cargo</strong>: Nome do cargo (obrigatório)</li>
+                    <li>• <strong className="text-zinc-300">data_nascimento</strong>: DD/MM/AAAA (opcional)</li>
+                    <li>• <strong className="text-zinc-300">sexo</strong>: M, F ou O (opcional)</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-zinc-800 border-zinc-700">
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold mb-3 text-zinc-200 flex items-center">
+                    <AlertCircle className="mr-2 h-4 w-4 text-yellow-400" />
+                    Regras de Importação
+                  </h3>
+                  <ul className="text-sm space-y-1 text-zinc-400">
+                    <li>• Máximo de 5.000 linhas por arquivo</li>
+                    <li>• Emails duplicados atualizam dados</li>
+                    <li>• Unidades/Setores/Cargos criados automaticamente</li>
+                    <li>• Importação é atômica (tudo ou nada)</li>
+                    <li>• Máximo de 10% de erros permitidos</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Template Download */}
+            <div className="flex justify-center">
+              <Button
+                variant="outline"
+                onClick={downloadTemplate}
+                className="border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Baixar Template CSV
+              </Button>
+            </div>
+
+            {/* Upload Area */}
+            <div className="border-2 border-dashed border-zinc-700 rounded-lg p-8 text-center hover:border-violet-500 transition-colors">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".csv"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+
+              {isImporting ? (
+                <div className="space-y-3">
+                  <Loader2 className="h-12 w-12 mx-auto text-violet-400 animate-spin" />
+                  <p className="text-zinc-300">Importando colaboradores...</p>
+                  <p className="text-sm text-zinc-500">
+                    Por favor, aguarde. Isso pode levar alguns instantes.
+                  </p>
+                </div>
+              ) : importResult ? (
+                <div className="space-y-3">
+                  {importResult.success > 0 ? (
+                    <>
+                      <CheckCircle2 className="h-12 w-12 mx-auto text-green-400" />
+                      <p className="text-zinc-300 font-medium">
+                        Importação concluída com sucesso!
+                      </p>
+                      <div className="flex justify-center gap-6 text-sm">
+                        <div>
+                          <span className="text-zinc-500">Sucesso: </span>
+                          <span className="text-green-400 font-medium">
+                            {importResult.success}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-zinc-500">Total: </span>
+                          <span className="text-zinc-300 font-medium">
+                            {importResult.total}
+                          </span>
+                        </div>
+                        {importResult.errors.length > 0 && (
+                          <div>
+                            <span className="text-zinc-500">Erros: </span>
+                            <span className="text-red-400 font-medium">
+                              {importResult.errors.length}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      {importResult.errors.length > 0 && (
+                        <div className="mt-4 max-h-40 overflow-y-auto">
+                          <div className="text-left bg-zinc-950 rounded p-3 text-xs space-y-1">
+                            {importResult.errors.slice(0, 10).map((error: any, idx: number) => (
+                              <div key={idx} className="text-red-400">
+                                Linha {error.linha}: {error.erro}
+                              </div>
+                            ))}
+                            {importResult.errors.length > 10 && (
+                              <div className="text-zinc-500">
+                                ... e mais {importResult.errors.length - 10} erros
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <AlertCircle className="h-12 w-12 mx-auto text-red-400" />
+                      <p className="text-zinc-300 font-medium">
+                        Erro na importação
+                      </p>
+                      {importResult.errors.length > 0 && (
+                        <div className="mt-4 max-h-40 overflow-y-auto">
+                          <div className="text-left bg-zinc-950 rounded p-3 text-xs space-y-1">
+                            {importResult.errors.map((error: any, idx: number) => (
+                              <div key={idx} className="text-red-400">
+                                {error.erro}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <Upload className="h-12 w-12 mx-auto text-zinc-500" />
+                  <div>
+                    <p className="text-zinc-300 font-medium">
+                      Selecione um arquivo CSV
+                    </p>
+                    <p className="text-sm text-zinc-500 mt-1">
+                      Clique no botão abaixo para escolher o arquivo
+                    </p>
+                  </div>
+                  <Button
+                    onClick={handleFileSelect}
+                    className="bg-violet-600 hover:bg-violet-700"
+                  >
+                    <Upload className="mr-2 h-4 w-4" />
+                    Selecionar Arquivo
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => {
+                onOpenChange(false);
+                setImportResult(null);
+              }}
+              disabled={isImporting}
+              className="border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+            >
+              {importResult ? "Fechar" : "Cancelar"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
