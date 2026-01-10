@@ -1,11 +1,10 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Building2, Shield, Activity } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminDashboardPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   // Estatísticas gerais do sistema
   const totalEmpresas = await prisma.empresa.count({

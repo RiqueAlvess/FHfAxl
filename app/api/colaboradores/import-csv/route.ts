@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { importColaboradoresFromCsv } from "@/lib/csv-import";
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
@@ -13,6 +12,10 @@ export async function POST(request: NextRequest) {
 
     if (session.user.role !== "RH" && session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
+    }
+
+    if (!session.user.empresaId) {
+      return NextResponse.json({ error: "Usuário sem empresa vinculada" }, { status: 403 });
     }
 
     const body = await request.json();

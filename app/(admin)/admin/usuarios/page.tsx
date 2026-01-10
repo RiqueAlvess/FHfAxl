@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -7,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import UserManagementTable from "@/components/admin/UserManagementTable";
 
 export default async function UsuariosAdminPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   // Buscar todos os usuários com suas relações
   const usuarios = await prisma.user.findMany({
