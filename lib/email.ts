@@ -28,12 +28,20 @@ export async function sendEmail({ to, subject, html }: SendEmailOptions) {
 export function getMagicLinkEmailTemplate(
   nomeColaborador: string,
   magicLink: string,
-  expiresAt: Date
+  expiresAt: Date,
+  empresaNome?: string,
+  empresaLogo?: string,
+  empresaCorPrimaria?: string
 ) {
   const expiresFormatted = new Intl.DateTimeFormat("pt-BR", {
     dateStyle: "long",
     timeStyle: "short",
   }).format(expiresAt);
+
+  const corPrimaria = empresaCorPrimaria || "#2563eb";
+  const corEscura = empresaCorPrimaria
+    ? `${empresaCorPrimaria}dd`
+    : "#1e40af";
 
   return `
     <!DOCTYPE html>
@@ -44,8 +52,16 @@ export function getMagicLinkEmailTemplate(
       <title>Questionário VIVAMENTE360</title>
     </head>
     <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <div style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+      <div style="background: linear-gradient(135deg, ${corPrimaria} 0%, ${corEscura} 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+        ${empresaLogo
+          ? `<img src="${empresaLogo}" alt="${empresaNome || 'Logo'}" style="max-width: 150px; max-height: 60px; margin-bottom: 15px;" />`
+          : ''
+        }
         <h1 style="color: white; margin: 0;">VIVAMENTE360</h1>
+        ${empresaNome
+          ? `<p style="color: #e0e7ff; margin: 5px 0 0 0; font-size: 14px;">${empresaNome}</p>`
+          : ''
+        }
         <p style="color: #e0e7ff; margin: 10px 0 0 0;">Avaliação de Riscos Psicossociais</p>
       </div>
 
@@ -58,7 +74,7 @@ export function getMagicLinkEmailTemplate(
 
         <div style="text-align: center; margin: 30px 0;">
           <a href="${magicLink}"
-             style="background: #2563eb; color: white; padding: 14px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+             style="background: ${corPrimaria}; color: white; padding: 14px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
             Responder Questionário
           </a>
         </div>
@@ -69,7 +85,7 @@ export function getMagicLinkEmailTemplate(
 
         <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
           Se você não conseguir clicar no botão, copie e cole este link no seu navegador:<br>
-          <span style="word-break: break-all; color: #2563eb;">${magicLink}</span>
+          <span style="word-break: break-all; color: ${corPrimaria};">${magicLink}</span>
         </p>
       </div>
 

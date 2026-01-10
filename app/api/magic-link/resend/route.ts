@@ -5,9 +5,8 @@ import { nanoid } from "nanoid";
 import { addHours } from "date-fns";
 import { sendEmail, getMagicLinkEmailTemplate } from "@/lib/email";
 
-interface GenerateMagicLinkRequest {
-  colaboradorIds: string[];
-  cicloAvaliacaoId: string;
+interface ResendMagicLinkRequest {
+  magicLinkIds: string[];
 }
 
 export async function POST(request: NextRequest) {
@@ -22,20 +21,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
     }
 
-    const body: GenerateMagicLinkRequest = await request.json();
-    const { colaboradorIds, cicloAvaliacaoId } = body;
+    const body: ResendMagicLinkRequest = await request.json();
+    const { magicLinkIds } = body;
 
-    if (!colaboradorIds || !Array.isArray(colaboradorIds) || colaboradorIds.length === 0) {
+    if (!magicLinkIds || !Array.isArray(magicLinkIds) || magicLinkIds.length === 0) {
       return NextResponse.json(
-        { error: "IDs de colaboradores inválidos" },
+        { error: "IDs de magic links inválidos" },
         { status: 400 }
       );
     }
 
     // Limite de 500 emails por vez (rate limit Resend)
-    if (colaboradorIds.length > 500) {
+    if (magicLinkIds.length > 500) {
       return NextResponse.json(
-        { error: "Máximo de 500 colaboradores por vez" },
+        { error: "Máximo de 500 magic links por vez" },
         { status: 400 }
       );
     }
@@ -50,38 +49,57 @@ export async function POST(request: NextRequest) {
       errors: [] as Array<{ email: string; erro: string }>,
     };
 
-    // Processar cada colaborador
-    for (const colaboradorId of colaboradorIds) {
+    // Processar cada magic link
+    for (const magicLinkId of magicLinkIds) {
       try {
-        // Buscar colaborador com dados da empresa
-        const colaborador = await prisma.colaborador.findUnique({
-          where: { id: colaboradorId },
+        // Buscar magic link com colaborador e empresa
+        const magicLinkExistente = await prisma.magicLink.findUnique({
+          where: { id: magicLinkId },
           include: {
-            empresa: {
-              select: {
-                nome: true,
-                logo: true,
-                corPrimaria: true,
+            colaborador: {
+              include: {
+                empresa: {
+                  select: {
+                    nome: true,
+                    logo: true,
+                    corPrimaria: true,
+                  },
+                },
               },
             },
           },
         });
 
+        if (!magicLinkExistente) {
+          results.errors.push({
+            email: magicLinkId,
+            erro: "Magic link não encontrado",
+          });
+          continue;
+        }
+
+        const colaborador = magicLinkExistente.colaborador;
+
         if (!colaborador || !colaborador.ativo) {
           results.errors.push({
-            email: colaboradorId,
+            email: colaborador?.email || magicLinkId,
             erro: "Colaborador não encontrado ou inativo",
           });
           continue;
         }
 
-        // Invalidar magic links anteriores do mesmo ciclo
-        await prisma.magicLink.updateMany({
-          where: {
-            colaboradorId,
-            cicloAvaliacaoId,
-            status: { in: ["PENDING", "SENT", "ACCESSED"] },
-          },
+        // Verificar se já foi completado
+        if (magicLinkExistente.status === "COMPLETED") {
+          results.errors.push({
+            email: colaborador.email,
+            erro: "Questionário já foi completado",
+          });
+          continue;
+        }
+
+        // Invalidar magic link anterior
+        await prisma.magicLink.update({
+          where: { id: magicLinkId },
           data: { status: "EXPIRED" },
         });
 
@@ -89,12 +107,12 @@ export async function POST(request: NextRequest) {
         const token = nanoid(64);
         const expiresAt = addHours(new Date(), expirationHours);
 
-        // Criar magic link
-        const magicLink = await prisma.magicLink.create({
+        // Criar novo magic link
+        const novoMagicLink = await prisma.magicLink.create({
           data: {
             token,
-            colaboradorId,
-            cicloAvaliacaoId,
+            colaboradorId: colaborador.id,
+            cicloAvaliacaoId: magicLinkExistente.cicloAvaliacaoId,
             expiresAt,
             status: "PENDING",
           },
@@ -113,14 +131,14 @@ export async function POST(request: NextRequest) {
 
         const emailResult = await sendEmail({
           to: colaborador.email,
-          subject: "Questionário VIVAMENTE360 - Avaliação de Riscos Psicossociais",
+          subject: "Questionário VIVAMENTE360 - Avaliação de Riscos Psicossociais (Reenvio)",
           html: emailHtml,
         });
 
         if (emailResult.success) {
           // Atualizar status para SENT
           await prisma.magicLink.update({
-            where: { id: magicLink.id },
+            where: { id: novoMagicLink.id },
             data: {
               status: "SENT",
               sentAt: new Date(),
@@ -135,7 +153,7 @@ export async function POST(request: NextRequest) {
         }
       } catch (error) {
         results.errors.push({
-          email: colaboradorId,
+          email: magicLinkId,
           erro: error instanceof Error ? error.message : "Erro desconhecido",
         });
       }
@@ -143,9 +161,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(results);
   } catch (error) {
-    console.error("Erro ao gerar magic links:", error);
+    console.error("Erro ao reenviar magic links:", error);
     return NextResponse.json(
-      { error: "Erro ao gerar magic links" },
+      { error: "Erro ao reenviar magic links" },
       { status: 500 }
     );
   }
