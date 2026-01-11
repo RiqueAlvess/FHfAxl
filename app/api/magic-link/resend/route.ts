@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { nanoid } from "nanoid";
 import { addHours } from "date-fns";
 import { sendEmail, getMagicLinkEmailTemplate } from "@/lib/email";
+import { withRateLimit } from "@/lib/rate-limit-helpers";
 
 interface ResendMagicLinkRequest {
   magicLinkIds: string[];
@@ -20,6 +21,17 @@ export async function POST(request: NextRequest) {
     if (session.user.role !== "RH" && session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
     }
+
+    // Aplicar rate limiting: 5 requisições por 10 minutos
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "magic-link:resend",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/magic-link/resend" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const body: ResendMagicLinkRequest = await request.json();
     const { magicLinkIds } = body;

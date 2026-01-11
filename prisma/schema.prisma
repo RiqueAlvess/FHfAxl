@@ -319,6 +319,7 @@ enum AcaoAuditoria {
   ANALYTICS_VIEWED
   K_ANONYMITY_CHECK
   K_ANONYMITY_BLOCKED
+  RATE_LIMIT_EXCEEDED
 }
 
 model AuditLog {
@@ -332,11 +333,9 @@ model AuditLog {
   ipAddress   String?        @map("ip") // IP do usuário
   userAgent   String?
   timestamp   DateTime       @default(now()) @map("createdAt") // Compatibilidade
-  createdAt   DateTime       @default(now())
 
   @@index([userId])
   @@index([action])
   @@index([entity])
   @@index([timestamp])
-  @@index([createdAt])
 }

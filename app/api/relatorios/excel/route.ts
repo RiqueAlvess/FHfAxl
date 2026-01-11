@@ -5,6 +5,7 @@ import { gerarExcel } from "@/lib/reports/excel-generator";
 import * as reportService from "@/lib/reports/report-data-service";
 import type { GerarRelatorioRequest } from "@/types/reports";
 import { readFile } from "fs/promises";
+import { withRateLimit } from "@/lib/rate-limit-helpers";
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,6 +22,17 @@ export async function POST(request: NextRequest) {
         { status: 403 }
       );
     }
+
+    // Aplicar rate limiting: 2 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "excel-report",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/relatorios/excel" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const body: GerarRelatorioRequest = await request.json();
     const { filtros, configuracao } = body;

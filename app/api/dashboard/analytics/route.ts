@@ -8,6 +8,7 @@ import {
 import { verificarKAnonymity, getMensagemKAnonymityNaoAtendido } from "@/lib/k-anonymity";
 import { registrarVisualizacaoAnalytics, registrarBloqueioKAnonymity } from "@/lib/audit-log";
 import { addPrivacyHeaders } from "@/lib/k-anonymity-middleware";
+import { withRateLimit } from "@/lib/rate-limit-helpers";
 
 export async function GET(request: NextRequest) {
   try {
@@ -27,6 +28,17 @@ export async function GET(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Aplicar rate limiting: 30 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "dashboard-analytics",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/dashboard/analytics" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     // Extrair filtros dos query params
     const { searchParams } = new URL(request.url);

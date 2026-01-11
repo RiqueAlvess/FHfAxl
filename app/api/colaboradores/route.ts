@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { withRateLimit } from "@/lib/rate-limit-helpers";
 
 // GET - Listar colaboradores (com filtros e paginação)
 export async function GET(request: NextRequest) {
@@ -15,6 +16,17 @@ export async function GET(request: NextRequest) {
     if (session.user.role !== "RH" && session.user.role !== "ADMIN" && session.user.role !== "LIDERANCA") {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
     }
+
+    // Aplicar rate limiting: 60 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "api-read",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/colaboradores", method: "GET" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     // Obter parâmetros de query
     const { searchParams } = new URL(request.url);
@@ -121,6 +133,17 @@ export async function POST(request: NextRequest) {
     if (session.user.role !== "RH" && session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
     }
+
+    // Aplicar rate limiting: 30 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "api-write",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/colaboradores", method: "POST" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const body = await request.json();
 

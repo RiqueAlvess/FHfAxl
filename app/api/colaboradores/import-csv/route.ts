@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { importColaboradoresFromCsv } from "@/lib/csv-import";
+import { withRateLimit } from "@/lib/rate-limit-helpers";
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
@@ -29,6 +30,17 @@ export async function POST(request: NextRequest) {
         { status: 403 }
       );
     }
+
+    // Aplicar rate limiting: 3 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "csv-import",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/colaboradores/import-csv" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const body = await request.json();
     const { rows } = body;

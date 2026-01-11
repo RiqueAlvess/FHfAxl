@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { calcularScores, RespostasQuestionario } from "@/lib/scoring";
 import { registrarConsentimentoLGPD } from "@/lib/audit-log";
+import { withRateLimit, getClientIp } from "@/lib/rate-limit-helpers";
 
 interface SubmitQuestionarioRequest {
   token: string;
@@ -18,6 +19,17 @@ export async function POST(request: NextRequest) {
     if (!token || !respostas || !consentimentoLGPD) {
       return NextResponse.json({ error: "Dados incompletos. É necessário consentir com os termos LGPD para prosseguir." }, { status: 400 });
     }
+
+    // Aplicar rate limiting: 1 requisição por 30 segundos por IP+token
+    const clientIp = getClientIp(request);
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "questionario:submit",
+      identifier: `${clientIp}:${token}`,
+      request,
+      auditDetails: { endpoint: "/api/questionario/submit", token },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     // Extrair dados do request para LGPD
     const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
