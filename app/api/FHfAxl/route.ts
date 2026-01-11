@@ -17,18 +17,24 @@ const createUserSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("[API] Iniciando criação de usuário");
     const body = await request.json();
+    console.log("[API] Body recebido:", JSON.stringify(body, null, 2));
 
     // Validar dados de entrada
     const data = createUserSchema.parse(body);
+    console.log("[API] Dados validados:", { ...data, senha: "***" });
 
     // Converter strings vazias em undefined para campos opcionais
     const empresaId = data.empresaId && data.empresaId.trim() !== "" ? data.empresaId : undefined;
     const unidadeId = data.unidadeId && data.unidadeId.trim() !== "" ? data.unidadeId : undefined;
     const setorId = data.setorId && data.setorId.trim() !== "" ? data.setorId : undefined;
 
+    console.log("[API] IDs processados:", { empresaId, unidadeId, setorId, role: data.role });
+
     // VALIDAÇÃO: RH e LIDERANCA DEVEM ter empresa vinculada
     if ((data.role === "RH" || data.role === "LIDERANCA") && !empresaId) {
+      console.log("[API] Validação falhou: perfil requer empresa");
       return NextResponse.json(
         { error: `Usuários com perfil ${data.role} devem estar vinculados a uma empresa` },
         { status: 400 }
@@ -36,11 +42,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Verificar se o email já existe
+    console.log("[API] Verificando se email já existe:", data.email);
     const existingUser = await prisma.user.findUnique({
       where: { email: data.email },
     });
 
     if (existingUser) {
+      console.log("[API] Email já existe");
       return NextResponse.json(
         { error: "Email já cadastrado" },
         { status: 400 }
@@ -48,20 +56,26 @@ export async function POST(request: NextRequest) {
     }
 
     // Hashear senha
+    console.log("[API] Hasheando senha...");
     const senhaHash = await hash(data.senha, 10);
+    console.log("[API] Senha hasheada com sucesso");
 
     // Criar usuário
+    console.log("[API] Criando usuário no banco...");
+    const userData = {
+      email: data.email,
+      nome: data.nome,
+      senha: senhaHash,
+      role: data.role,
+      empresaId,
+      unidadeId,
+      setorId,
+      ativo: data.ativo,
+    };
+    console.log("[API] Dados que serão salvos:", { ...userData, senha: "***" });
+
     const user = await prisma.user.create({
-      data: {
-        email: data.email,
-        nome: data.nome,
-        senha: senhaHash,
-        role: data.role,
-        empresaId,
-        unidadeId,
-        setorId,
-        ativo: data.ativo,
-      },
+      data: userData,
       select: {
         id: true,
         email: true,
@@ -75,6 +89,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    console.log("[API] Usuário criado com sucesso:", user.id);
     return NextResponse.json(
       {
         success: true,
@@ -85,15 +100,23 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     if (error instanceof z.ZodError) {
+      console.error("[API] Erro de validação Zod:", error.errors);
       return NextResponse.json(
         { error: "Dados inválidos", details: error.errors },
         { status: 400 }
       );
     }
 
-    console.error("Erro ao criar usuário:", error);
+    console.error("[API] Erro ao criar usuário:", error);
+    console.error("[API] Stack trace:", error instanceof Error ? error.stack : "N/A");
+    console.error("[API] Tipo do erro:", error instanceof Error ? error.constructor.name : typeof error);
+
     return NextResponse.json(
-      { error: "Erro ao criar usuário" },
+      {
+        error: "Erro ao criar usuário",
+        message: error instanceof Error ? error.message : "Erro desconhecido",
+        type: error instanceof Error ? error.constructor.name : typeof error
+      },
       { status: 500 }
     );
   }
