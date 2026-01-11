@@ -76,6 +76,8 @@ export default function DashboardCharts() {
       if (!response.ok) {
         if (result.kAnonymity === false) {
           setError(result.message);
+        } else if (result.message) {
+          setError(result.message);
         } else {
           throw new Error(result.error || "Erro ao carregar dados");
         }
@@ -83,6 +85,7 @@ export default function DashboardCharts() {
         setData(result);
       }
     } catch (err) {
+      console.error("Erro ao carregar dashboard:", err);
       toast.error("Erro ao carregar dashboard");
       setError("Erro ao carregar dados do dashboard");
     } finally {
@@ -112,6 +115,22 @@ export default function DashboardCharts() {
                 Mínimo de 5 respondentes necessário para proteção de dados (LGPD)
               </p>
             )}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Verificar se todos os dados necessários estão disponíveis
+  if (!data.distribuicao || !data.scoresDimensoes || !data.kpis) {
+    return (
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col items-center justify-center h-64 text-center">
+            <AlertCircle className="h-12 w-12 text-yellow-500 mb-4" />
+            <p className="text-gray-600 mb-2">
+              Dados incompletos. Por favor, atualize a página ou entre em contato com o suporte.
+            </p>
           </div>
         </CardContent>
       </Card>
