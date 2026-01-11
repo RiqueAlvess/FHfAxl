@@ -162,94 +162,120 @@ export default function CreateUserPage() {
                 <Label htmlFor="role">Perfil *</Label>
                 <Select
                   value={formData.role}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, role: value })
-                  }
+                  onValueChange={(value) => {
+                    setFormData({ ...formData, role: value });
+                    // Limpar vínculos se mudar para ADMIN
+                    if (value === "ADMIN") {
+                      setFormData(prev => ({
+                        ...prev,
+                        role: value,
+                        empresaId: "",
+                        unidadeId: "",
+                        setorId: "",
+                      }));
+                      setSelectedEmpresa("");
+                      setSelectedUnidade("");
+                    }
+                  }}
                   disabled={isLoading}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Selecione o perfil" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="ADMIN">Administrador</SelectItem>
+                    <SelectItem value="ADMIN">Administrador (Root)</SelectItem>
                     <SelectItem value="RH">RH</SelectItem>
                     <SelectItem value="LIDERANCA">Liderança</SelectItem>
                   </SelectContent>
                 </Select>
+                {formData.role === "ADMIN" && (
+                  <p className="text-xs text-green-600 font-medium">
+                    ✓ ADMIN não precisa de vínculo com empresa
+                  </p>
+                )}
+                {(formData.role === "RH" || formData.role === "LIDERANCA") && (
+                  <p className="text-xs text-amber-600 font-medium">
+                    ⚠ Este perfil REQUER vínculo com empresa
+                  </p>
+                )}
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="empresa">Empresa</Label>
-              <Select
-                value={selectedEmpresa}
-                onValueChange={(value) => {
-                  setSelectedEmpresa(value);
-                  setFormData({ ...formData, empresaId: value });
-                  setSelectedUnidade("");
-                }}
-                disabled={isLoading}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione a empresa (opcional para ADMIN)" />
-                </SelectTrigger>
-                <SelectContent>
-                  {empresas.map((empresa) => (
-                    <SelectItem key={empresa.id} value={empresa.id}>
-                      {empresa.nome}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            {formData.role !== "ADMIN" && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="empresa">Empresa *</Label>
+                  <Select
+                    value={selectedEmpresa}
+                    onValueChange={(value) => {
+                      setSelectedEmpresa(value);
+                      setFormData({ ...formData, empresaId: value });
+                      setSelectedUnidade("");
+                    }}
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione a empresa" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {empresas.map((empresa) => (
+                        <SelectItem key={empresa.id} value={empresa.id}>
+                          {empresa.nome}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-            {selectedEmpresa && selectedEmpresaData && (
-              <div className="space-y-2">
-                <Label htmlFor="unidade">Unidade</Label>
-                <Select
-                  value={selectedUnidade}
-                  onValueChange={(value) => {
-                    setSelectedUnidade(value);
-                    setFormData({ ...formData, unidadeId: value });
-                  }}
-                  disabled={isLoading}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione a unidade (opcional)" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {selectedEmpresaData.unidades.map((unidade) => (
-                      <SelectItem key={unidade.id} value={unidade.id}>
-                        {unidade.nome}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
+                {selectedEmpresa && selectedEmpresaData && (
+                  <div className="space-y-2">
+                    <Label htmlFor="unidade">Unidade</Label>
+                    <Select
+                      value={selectedUnidade}
+                      onValueChange={(value) => {
+                        setSelectedUnidade(value);
+                        setFormData({ ...formData, unidadeId: value });
+                      }}
+                      disabled={isLoading}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione a unidade (opcional)" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {selectedEmpresaData.unidades.map((unidade) => (
+                          <SelectItem key={unidade.id} value={unidade.id}>
+                            {unidade.nome}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
 
-            {selectedUnidade && selectedUnidadeData && (
-              <div className="space-y-2">
-                <Label htmlFor="setor">Setor</Label>
-                <Select
-                  value={formData.setorId}
-                  onValueChange={(value) =>
-                    setFormData({ ...formData, setorId: value })
-                  }
-                  disabled={isLoading}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione o setor (opcional)" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {selectedUnidadeData.setores.map((setor) => (
-                      <SelectItem key={setor.id} value={setor.id}>
-                        {setor.nome}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+                {selectedUnidade && selectedUnidadeData && (
+                  <div className="space-y-2">
+                    <Label htmlFor="setor">Setor</Label>
+                    <Select
+                      value={formData.setorId}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, setorId: value })
+                      }
+                      disabled={isLoading}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione o setor (opcional)" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {selectedUnidadeData.setores.map((setor) => (
+                          <SelectItem key={setor.id} value={setor.id}>
+                            {setor.nome}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+              </>
             )}
 
             <div className="pt-4">
@@ -259,15 +285,16 @@ export default function CreateUserPage() {
             </div>
           </form>
 
-          <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
-            <p className="text-sm text-yellow-800">
-              <strong>⚠️ Observações importantes:</strong>
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+            <p className="text-sm text-blue-800">
+              <strong>ℹ️ Informações importantes:</strong>
             </p>
-            <ul className="list-disc list-inside text-xs text-yellow-700 mt-2 space-y-1">
-              <li>Usuários <strong>RH</strong> e <strong>LIDERANCA</strong> devem estar vinculados a uma empresa</li>
-              <li>Usuários <strong>ADMIN</strong> podem ser criados sem vínculos</li>
-              <li>A senha será hasheada automaticamente usando bcrypt</li>
-              <li>Esta rota é oculta e não deve ser divulgada publicamente</li>
+            <ul className="list-disc list-inside text-xs text-blue-700 mt-2 space-y-1">
+              <li><strong>ADMIN (Root):</strong> Não precisa de empresa - acesso total ao sistema</li>
+              <li><strong>RH:</strong> DEVE estar vinculado a uma empresa específica</li>
+              <li><strong>LIDERANCA:</strong> DEVE estar vinculado a uma empresa (opcionalmente unidade/setor)</li>
+              <li>A senha será hasheada automaticamente usando bcrypt (mínimo 8 caracteres)</li>
+              <li>Esta rota é oculta e destinada apenas à configuração inicial do sistema</li>
             </ul>
           </div>
         </CardContent>

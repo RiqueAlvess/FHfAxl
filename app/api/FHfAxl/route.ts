@@ -22,6 +22,19 @@ export async function POST(request: NextRequest) {
     // Validar dados de entrada
     const data = createUserSchema.parse(body);
 
+    // Converter strings vazias em undefined para campos opcionais
+    const empresaId = data.empresaId && data.empresaId.trim() !== "" ? data.empresaId : undefined;
+    const unidadeId = data.unidadeId && data.unidadeId.trim() !== "" ? data.unidadeId : undefined;
+    const setorId = data.setorId && data.setorId.trim() !== "" ? data.setorId : undefined;
+
+    // VALIDAÇÃO: RH e LIDERANCA DEVEM ter empresa vinculada
+    if ((data.role === "RH" || data.role === "LIDERANCA") && !empresaId) {
+      return NextResponse.json(
+        { error: `Usuários com perfil ${data.role} devem estar vinculados a uma empresa` },
+        { status: 400 }
+      );
+    }
+
     // Verificar se o email já existe
     const existingUser = await prisma.user.findUnique({
       where: { email: data.email },
@@ -44,9 +57,9 @@ export async function POST(request: NextRequest) {
         nome: data.nome,
         senha: senhaHash,
         role: data.role,
-        empresaId: data.empresaId,
-        unidadeId: data.unidadeId,
-        setorId: data.setorId,
+        empresaId,
+        unidadeId,
+        setorId,
         ativo: data.ativo,
       },
       select: {
