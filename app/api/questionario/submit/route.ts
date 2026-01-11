@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { calcularScores, RespostasQuestionario } from "@/lib/scoring";
+import { registrarConsentimentoLGPD } from "@/lib/audit-log";
 
 interface SubmitQuestionarioRequest {
   token: string;
@@ -15,8 +16,15 @@ export async function POST(request: NextRequest) {
     const { token, respostas, consentimentoLGPD, tempoResposta } = body;
 
     if (!token || !respostas || !consentimentoLGPD) {
-      return NextResponse.json({ error: "Dados incompletos" }, { status: 400 });
+      return NextResponse.json({ error: "Dados incompletos. É necessário consentir com os termos LGPD para prosseguir." }, { status: 400 });
     }
+
+    // Extrair dados do request para LGPD
+    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
+                     request.headers.get('x-real-ip') ||
+                     'unknown';
+    const userAgent = request.headers.get('user-agent') || 'unknown';
+    const consentimentoDataHora = new Date();
 
     // Buscar magic link
     const magicLink = await prisma.magicLink.findUnique({
@@ -46,13 +54,18 @@ export async function POST(request: NextRequest) {
 
     // Salvar resposta em transação
     const resposta = await prisma.$transaction(async (tx) => {
-      // Criar resposta
+      // Criar resposta com dados LGPD completos
       const novaResposta = await tx.resposta.create({
         data: {
           magicLinkId: magicLink.id,
           colaboradorId: magicLink.colaboradorId,
           cicloAvaliacaoId: magicLink.cicloAvaliacaoId,
+          // Consentimento LGPD completo
           consentimentoLGPD,
+          consentimentoDataHora,
+          consentimentoIp: ipAddress,
+          consentimentoUserAgent: userAgent,
+          // Respostas
           demandas: respostas.demandas,
           controle: respostas.controle,
           apoioGerencial: respostas.apoioGerencial,
@@ -60,6 +73,7 @@ export async function POST(request: NextRequest) {
           relacionamentos: respostas.relacionamentos,
           papel: respostas.papel,
           mudancas: respostas.mudancas,
+          // Scores calculados
           scoreDemandas: resultado.scoreDemandas,
           scoreControle: resultado.scoreControle,
           scoreApoioGerencial: resultado.scoreApoioGerencial,
@@ -82,8 +96,27 @@ export async function POST(request: NextRequest) {
         },
       });
 
+      // Atualizar data de retenção do colaborador (5 anos a partir da última resposta)
+      const dataRetencao = new Date();
+      dataRetencao.setFullYear(dataRetencao.getFullYear() + 5);
+
+      await tx.colaborador.update({
+        where: { id: magicLink.colaboradorId },
+        data: {
+          dataRetencao,
+        },
+      });
+
       return novaResposta;
     });
+
+    // Registrar consentimento LGPD no audit log
+    await registrarConsentimentoLGPD(
+      magicLink.colaboradorId,
+      magicLink.id,
+      ipAddress,
+      userAgent
+    );
 
     return NextResponse.json({
       success: true,

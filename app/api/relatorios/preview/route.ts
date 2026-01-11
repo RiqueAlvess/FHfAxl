@@ -38,18 +38,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar K-Anonymity
-    const { verificarKAnonymity } = await import("@/lib/dashboard-analytics");
-    const temDadosSuficientes = await verificarKAnonymity(filtros.empresaId);
+    // Verificar K-Anonymity com filtros
+    const { verificarKAnonymity, getMensagemKAnonymityNaoAtendido } = await import("@/lib/k-anonymity");
+    const filtrosKAnonymity = {
+      unidadeId: filtros.unidadeId,
+      setorId: filtros.setorId,
+      cargoId: filtros.cargoId,
+      cicloAvaliacaoId: filtros.cicloAvaliacaoId,
+    };
 
-    if (!temDadosSuficientes) {
+    const resultado = await verificarKAnonymity(filtros.empresaId, filtrosKAnonymity);
+
+    if (!resultado.passed) {
       return NextResponse.json(
         {
           sucesso: false,
-          erro: "Dados insuficientes para gerar preview",
-          mensagem: "Mínimo de 5 respondentes necessário (K-Anonymity)",
+          erro: "K_ANONYMITY_NAO_ATENDIDO",
+          mensagem: getMensagemKAnonymityNaoAtendido(resultado.count),
+          count: resultado.count,
+          minRequired: resultado.minRequired,
         },
-        { status: 400 }
+        { status: 403 }
       );
     }
 
