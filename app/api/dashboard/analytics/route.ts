@@ -4,8 +4,10 @@ import {
   calcularKPIs,
   getDistribuicaoRisco,
   getScoresPorDimensao,
-  verificarKAnonymity,
 } from "@/lib/dashboard-analytics";
+import { verificarKAnonymity, getMensagemKAnonymityNaoAtendido } from "@/lib/k-anonymity";
+import { registrarVisualizacaoAnalytics, registrarBloqueioKAnonymity } from "@/lib/audit-log";
+import { addPrivacyHeaders } from "@/lib/k-anonymity-middleware";
 
 export async function GET(request: NextRequest) {
   try {
@@ -26,30 +28,72 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Verificar K-Anonymity
-    const temDadosSuficientes = await verificarKAnonymity(session.user.empresaId);
+    // Extrair filtros dos query params
+    const { searchParams } = new URL(request.url);
+    const filtros = {
+      unidadeId: searchParams.get('unidadeId') || undefined,
+      setorId: searchParams.get('setorId') || undefined,
+      cargoId: searchParams.get('cargoId') || undefined,
+      cicloAvaliacaoId: searchParams.get('cicloAvaliacaoId') || undefined,
+    };
 
-    if (!temDadosSuficientes) {
+    // Verificar K-Anonymity com os filtros
+    const resultado = await verificarKAnonymity(session.user.empresaId, filtros);
+
+    if (!resultado.passed) {
+      // Registrar bloqueio para auditoria
+      const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
+                       request.headers.get('x-real-ip') ||
+                       'unknown';
+
+      await registrarBloqueioKAnonymity(
+        session.user.id,
+        session.user.empresaId,
+        filtros,
+        resultado.count,
+        resultado.minRequired,
+        ipAddress
+      );
+
       return NextResponse.json({
-        error: "Dados insuficientes",
-        message: "Mínimo de 5 respondentes necessário para exibir análises (K-Anonymity)",
+        error: "K_ANONYMITY_NAO_ATENDIDO",
+        message: getMensagemKAnonymityNaoAtendido(resultado.count),
         kAnonymity: false,
-      });
+        count: resultado.count,
+        minRequired: resultado.minRequired,
+      }, { status: 403 });
     }
 
-    // Buscar dados
+    // Registrar visualização para auditoria
+    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
+                     request.headers.get('x-real-ip') ||
+                     'unknown';
+
+    await registrarVisualizacaoAnalytics(
+      session.user.id,
+      session.user.empresaId,
+      filtros,
+      resultado.count,
+      ipAddress
+    );
+
+    // Buscar dados (com filtros se fornecidos)
     const [kpis, distribuicao, scoresDimensoes] = await Promise.all([
-      calcularKPIs(session.user.empresaId),
-      getDistribuicaoRisco(session.user.empresaId),
-      getScoresPorDimensao(session.user.empresaId),
+      calcularKPIs(session.user.empresaId, filtros),
+      getDistribuicaoRisco(session.user.empresaId, filtros),
+      getScoresPorDimensao(session.user.empresaId, filtros),
     ]);
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       kAnonymity: true,
+      respondentes: resultado.count,
       kpis,
       distribuicao,
       scoresDimensoes,
     });
+
+    // Adicionar headers de privacidade
+    return addPrivacyHeaders(response);
   } catch (error) {
     console.error("Erro ao buscar analytics:", error);
     return NextResponse.json(

@@ -41,17 +41,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar K-Anonymity
-    const { verificarKAnonymity } = await import("@/lib/dashboard-analytics");
-    const temDadosSuficientes = await verificarKAnonymity(filtros.empresaId);
+    // Verificar K-Anonymity com filtros
+    const { verificarKAnonymity, getMensagemKAnonymityNaoAtendido } = await import("@/lib/k-anonymity");
+    const filtrosKAnonymity = {
+      unidadeId: filtros.unidadeId,
+      setorId: filtros.setorId,
+      cargoId: filtros.cargoId,
+      cicloAvaliacaoId: filtros.cicloAvaliacaoId,
+    };
 
-    if (!temDadosSuficientes) {
+    const resultado = await verificarKAnonymity(filtros.empresaId, filtrosKAnonymity);
+
+    if (!resultado.passed) {
       return NextResponse.json(
         {
-          error: "Dados insuficientes para gerar relatório",
-          message: "Mínimo de 5 respondentes necessário (K-Anonymity)",
+          error: "K_ANONYMITY_NAO_ATENDIDO",
+          message: getMensagemKAnonymityNaoAtendido(resultado.count),
+          count: resultado.count,
+          minRequired: resultado.minRequired,
         },
-        { status: 400 }
+        { status: 403 }
       );
     }
 
@@ -86,23 +95,23 @@ export async function POST(request: NextRequest) {
     const arquivoBuffer = await readFile(caminhoArquivo);
     const base64 = arquivoBuffer.toString("base64");
 
-    // Registrar auditoria
-    await prisma.auditLog.create({
-      data: {
-        userId: session.user.id,
-        acao: "EXPORT",
-        entidade: "Relatorio",
-        detalhes: JSON.stringify({
-          tipo: filtros.tipoRelatorio,
-          formato: "excel",
-          empresaId: filtros.empresaId,
-          unidadeId: filtros.unidadeId,
-          setorId: filtros.setorId,
-        }),
-        ip: request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown",
-        userAgent: request.headers.get("user-agent") || "unknown",
+    // Registrar auditoria usando o novo sistema
+    const { registrarGeracaoRelatorio } = await import("@/lib/audit-log");
+    const ipAddress = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+
+    await registrarGeracaoRelatorio(
+      session.user.id,
+      filtros.tipoRelatorio,
+      {
+        empresaId: filtros.empresaId,
+        unidadeId: filtros.unidadeId,
+        setorId: filtros.setorId,
+        cargoId: filtros.cargoId,
+        cicloAvaliacaoId: filtros.cicloAvaliacaoId,
       },
-    });
+      "EXCEL",
+      ipAddress
+    );
 
     // Definir expiração (1 hora)
     const expiracaoUrl = new Date();

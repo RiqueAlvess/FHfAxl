@@ -163,6 +163,9 @@ model Colaborador {
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 
+  // LGPD - Política de Retenção
+  dataRetencao    DateTime?   // Data limite para retenção dos dados (ex: 5 anos após última resposta)
+
   magicLinks      MagicLink[]
   respostas       Resposta[]
 
@@ -171,6 +174,7 @@ model Colaborador {
   @@index([setorId])
   @@index([cargoId])
   @@index([email])
+  @@index([dataRetencao])
 }
 
 // ============================================
@@ -239,6 +243,9 @@ model Resposta {
 
   // Consentimento LGPD
   consentimentoLGPD Boolean   @default(false)
+  consentimentoDataHora DateTime? // Data/hora do consentimento
+  consentimentoIp   String?      // IP do respondente ao consentir
+  consentimentoUserAgent String? // User agent do respondente
 
   // Respostas (35 perguntas, escala 0-4)
   // Demandas (8 perguntas - NEGATIVA)
@@ -293,29 +300,43 @@ model Resposta {
 enum AcaoAuditoria {
   LOGIN
   LOGOUT
+  PASSWORD_RESET
   CREATE
+  READ
   UPDATE
   DELETE
   VIEW
   EXPORT
-  SEND_EMAIL
   IMPORT
+  SEND_EMAIL
+  LGPD_DATA_ACCESS
+  LGPD_DATA_DELETION
+  LGPD_DATA_PORTABILITY
+  LGPD_CONSENT_GIVEN
+  LGPD_CONSENT_REVOKED
+  REPORT_GENERATED
+  REPORT_DOWNLOADED
+  ANALYTICS_VIEWED
+  K_ANONYMITY_CHECK
+  K_ANONYMITY_BLOCKED
 }
 
 model AuditLog {
   id          String         @id @default(cuid())
   userId      String
   user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  acao        AcaoAuditoria
-  entidade    String         // Nome da entidade (User, Colaborador, etc)
-  entidadeId  String?        // ID do registro afetado
-  detalhes    String?        // JSON com detalhes da ação
-  ip          String?
+  action      AcaoAuditoria  @map("acao") // Mapeado para compatibilidade
+  entity      String         @map("entidade") // Nome da entidade (User, Colaborador, etc)
+  entityId    String?        @map("entidadeId") // ID do registro afetado
+  details     Json?          @map("detalhes") // JSON com detalhes da ação
+  ipAddress   String?        @map("ip") // IP do usuário
   userAgent   String?
+  timestamp   DateTime       @default(now()) @map("createdAt") // Compatibilidade
   createdAt   DateTime       @default(now())
 
   @@index([userId])
-  @@index([acao])
-  @@index([entidade])
+  @@index([action])
+  @@index([entity])
+  @@index([timestamp])
   @@index([createdAt])
 }
