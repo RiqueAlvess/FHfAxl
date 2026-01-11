@@ -7,6 +7,7 @@ export interface Pergunta {
   dimensao: string;
   texto: string;
   polaridade: Polaridade;
+  ordem: number;
 }
 
 export interface Dimensao {
@@ -15,6 +16,7 @@ export interface Dimensao {
   polaridade: Polaridade;
   perguntas: number; // quantidade de perguntas
   descricao: string;
+  ordem: number;
 }
 
 export const dimensoes: Dimensao[] = [
@@ -22,289 +24,372 @@ export const dimensoes: Dimensao[] = [
     nome: "Demandas",
     codigo: "demandas",
     polaridade: "NEGATIVA",
-    perguntas: 8,
-    descricao: "Carga e ritmo de trabalho",
+    perguntas: 7,
+    descricao: "Carga de trabalho, ritmo e horários",
+    ordem: 1,
   },
   {
     nome: "Controle",
     codigo: "controle",
     polaridade: "POSITIVA",
     perguntas: 6,
-    descricao: "Autonomia e participação",
+    descricao: "Autonomia e influência sobre o trabalho",
+    ordem: 2,
   },
   {
     nome: "Apoio Gerencial",
     codigo: "apoioGerencial",
     polaridade: "POSITIVA",
     perguntas: 5,
-    descricao: "Suporte da chefia",
+    descricao: "Suporte e incentivo dos supervisores",
+    ordem: 3,
   },
   {
     nome: "Apoio de Colegas",
     codigo: "apoioColegas",
     polaridade: "POSITIVA",
     perguntas: 4,
-    descricao: "Suporte dos colegas",
+    descricao: "Suporte e cooperação entre colegas",
+    ordem: 4,
   },
   {
     nome: "Relacionamentos",
     codigo: "relacionamentos",
     polaridade: "NEGATIVA",
     perguntas: 4,
-    descricao: "Conflitos interpessoais",
+    descricao: "Conflitos e tensões interpessoais",
+    ordem: 5,
   },
   {
     nome: "Papel",
     codigo: "papel",
     polaridade: "POSITIVA",
-    perguntas: 5,
-    descricao: "Clareza de responsabilidades",
+    perguntas: 6,
+    descricao: "Clareza sobre responsabilidades e expectativas",
+    ordem: 6,
   },
   {
     nome: "Mudanças",
     codigo: "mudancas",
     polaridade: "POSITIVA",
     perguntas: 3,
-    descricao: "Gestão de mudanças",
+    descricao: "Como as mudanças são geridas e comunicadas",
+    ordem: 7,
   },
 ];
 
 export const perguntas: Pergunta[] = [
-  // DEMANDAS (8 perguntas - NEGATIVA)
+  // Pergunta 1 - Papel
   {
     id: 1,
-    dimensao: "demandas",
-    texto: "Você tem que trabalhar muito rapidamente?",
-    polaridade: "NEGATIVA",
+    dimensao: "papel",
+    texto: "Tenho clareza sobre o que se espera do meu trabalho",
+    polaridade: "POSITIVA",
+    ordem: 1,
   },
+  // Pergunta 2 - Controle
   {
     id: 2,
-    dimensao: "demandas",
-    texto: "Você tem que trabalhar muito intensamente?",
-    polaridade: "NEGATIVA",
+    dimensao: "controle",
+    texto: "Posso decidir quando fazer uma pausa",
+    polaridade: "POSITIVA",
+    ordem: 2,
   },
+  // Pergunta 3 - Demandas
   {
     id: 3,
     dimensao: "demandas",
-    texto: "Seu trabalho exige muito de você emocionalmente?",
+    texto: "As exigências de trabalho feitas por colegas e supervisores são difíceis de combinar",
     polaridade: "NEGATIVA",
+    ordem: 3,
   },
+  // Pergunta 4 - Papel
   {
     id: 4,
-    dimensao: "demandas",
-    texto: "Você precisa se concentrar por longos períodos de tempo?",
-    polaridade: "NEGATIVA",
+    dimensao: "papel",
+    texto: "Eu sei como fazer o meu trabalho",
+    polaridade: "POSITIVA",
+    ordem: 4,
   },
+  // Pergunta 5 - Relacionamentos
   {
     id: 5,
-    dimensao: "demandas",
-    texto: "Seu trabalho exige muito esforço físico?",
+    dimensao: "relacionamentos",
+    texto: "Falam ou se comportam comigo de forma dura",
     polaridade: "NEGATIVA",
+    ordem: 5,
   },
+  // Pergunta 6 - Demandas
   {
     id: 6,
     dimensao: "demandas",
-    texto: "Você é interrompido frequentemente durante suas tarefas?",
+    texto: "Tenho prazos inatingíveis",
     polaridade: "NEGATIVA",
+    ordem: 6,
   },
+  // Pergunta 7 - Apoio de Colegas
   {
     id: 7,
-    dimensao: "demandas",
-    texto: "Você tem tempo insuficiente para completar suas tarefas?",
-    polaridade: "NEGATIVA",
+    dimensao: "apoioColegas",
+    texto: "Quando o trabalho se torna difícil, posso contar com ajuda dos colegas",
+    polaridade: "POSITIVA",
+    ordem: 7,
   },
+  // Pergunta 8 - Apoio Gerencial
   {
     id: 8,
-    dimensao: "demandas",
-    texto: "Você precisa trabalhar horas extras para finalizar o trabalho?",
-    polaridade: "NEGATIVA",
+    dimensao: "apoioGerencial",
+    texto: "Recebo informações e suporte que me ajudam no trabalho que eu faço",
+    polaridade: "POSITIVA",
+    ordem: 8,
   },
-
-  // CONTROLE (6 perguntas - POSITIVA)
+  // Pergunta 9 - Demandas
   {
     id: 9,
-    dimensao: "controle",
-    texto: "Você tem influência sobre a quantidade de trabalho que lhe é atribuída?",
-    polaridade: "POSITIVA",
+    dimensao: "demandas",
+    texto: "Devo trabalhar muito intensamente",
+    polaridade: "NEGATIVA",
+    ordem: 9,
   },
+  // Pergunta 10 - Controle
   {
     id: 10,
     dimensao: "controle",
-    texto: "Você pode decidir quando fazer pausas?",
+    texto: "Consideram a minha opinião sobre a velocidade do meu trabalho",
     polaridade: "POSITIVA",
+    ordem: 10,
   },
+  // Pergunta 11 - Papel
   {
     id: 11,
-    dimensao: "controle",
-    texto: "Você tem voz nas decisões relacionadas ao seu trabalho?",
+    dimensao: "papel",
+    texto: "Estão claras as minhas tarefas e responsabilidades",
     polaridade: "POSITIVA",
+    ordem: 11,
   },
+  // Pergunta 12 - Demandas
   {
     id: 12,
-    dimensao: "controle",
-    texto: "Você pode escolher com quem trabalhar?",
-    polaridade: "POSITIVA",
+    dimensao: "demandas",
+    texto: "Eu não faço algumas tarefas porque tenho muita coisa para fazer",
+    polaridade: "NEGATIVA",
+    ordem: 12,
   },
+  // Pergunta 13 - Papel
   {
     id: 13,
-    dimensao: "controle",
-    texto: "Você pode definir seu próprio ritmo de trabalho?",
+    dimensao: "papel",
+    texto: "Os objetivos e metas do meu setor são claros para mim",
     polaridade: "POSITIVA",
+    ordem: 13,
   },
+  // Pergunta 14 - Relacionamentos
   {
     id: 14,
-    dimensao: "controle",
-    texto: "Você participa de decisões importantes sobre mudanças no trabalho?",
-    polaridade: "POSITIVA",
+    dimensao: "relacionamentos",
+    texto: "Existem conflitos entre os colegas",
+    polaridade: "NEGATIVA",
+    ordem: 14,
   },
-
-  // APOIO GERENCIAL (5 perguntas - POSITIVA)
+  // Pergunta 15 - Controle
   {
     id: 15,
-    dimensao: "apoioGerencial",
-    texto: "Seu gestor imediato o encoraja e apoia?",
+    dimensao: "controle",
+    texto: "Tenho liberdade de escolha de como fazer meu trabalho",
     polaridade: "POSITIVA",
+    ordem: 15,
   },
+  // Pergunta 16 - Demandas
   {
     id: 16,
-    dimensao: "apoioGerencial",
-    texto: "Seu gestor fornece feedback útil sobre seu trabalho?",
-    polaridade: "POSITIVA",
+    dimensao: "demandas",
+    texto: "Não tenho possibilidade de fazer pausas suficientes",
+    polaridade: "NEGATIVA",
+    ordem: 16,
   },
+  // Pergunta 17 - Papel
   {
     id: 17,
-    dimensao: "apoioGerencial",
-    texto: "Seu gestor está disposto a ouvir seus problemas relacionados ao trabalho?",
+    dimensao: "papel",
+    texto: "Eu vejo como o meu trabalho se encaixa nos objetivos da empresa",
     polaridade: "POSITIVA",
+    ordem: 17,
   },
+  // Pergunta 18 - Demandas
   {
     id: 18,
-    dimensao: "apoioGerencial",
-    texto: "Seu gestor ajuda você a realizar o trabalho quando necessário?",
-    polaridade: "POSITIVA",
+    dimensao: "demandas",
+    texto: "Recebo pressão para trabalhar em outro horário",
+    polaridade: "NEGATIVA",
+    ordem: 18,
   },
+  // Pergunta 19 - Controle
   {
     id: 19,
-    dimensao: "apoioGerencial",
-    texto: "Seu gestor respeita você como pessoa e como profissional?",
+    dimensao: "controle",
+    texto: "Tenho liberdade de escolha para decidir o que fazer no meu trabalho",
     polaridade: "POSITIVA",
+    ordem: 19,
   },
-
-  // APOIO DE COLEGAS (4 perguntas - POSITIVA)
+  // Pergunta 20 - Demandas
   {
     id: 20,
-    dimensao: "apoioColegas",
-    texto: "Seus colegas estão dispostos a ouvir seus problemas relacionados ao trabalho?",
-    polaridade: "POSITIVA",
+    dimensao: "demandas",
+    texto: "Tenho que fazer meu trabalho com muita rapidez",
+    polaridade: "NEGATIVA",
+    ordem: 20,
   },
+  // Pergunta 21 - Relacionamentos
   {
     id: 21,
-    dimensao: "apoioColegas",
-    texto: "Seus colegas fornecem ajuda e apoio quando necessário?",
-    polaridade: "POSITIVA",
+    dimensao: "relacionamentos",
+    texto: "Sinto que sou perseguido no trabalho",
+    polaridade: "NEGATIVA",
+    ordem: 21,
   },
-  {
-    id: 22,
-    dimensao: "apoioColegas",
-    texto: "Você recebe o respeito que merece de seus colegas?",
-    polaridade: "POSITIVA",
-  },
+  // Pergunta 22 - Demandas (REMOVIDA - pergunta duplicada/confusa)
+  // Nota: A pergunta 22 original "As pausas temporárias são impossíveis de cumprir" foi removida
+  // pois é muito similar à pergunta 16 e não faz sentido
+
+  // Pergunta 23 - Apoio Gerencial
   {
     id: 23,
-    dimensao: "apoioColegas",
-    texto: "Você pode contar com seus colegas em situações difíceis?",
+    dimensao: "apoioGerencial",
+    texto: "Posso confiar no meu chefe quando eu tiver problemas no trabalho",
     polaridade: "POSITIVA",
+    ordem: 23,
   },
-
-  // RELACIONAMENTOS (4 perguntas - NEGATIVA)
+  // Pergunta 24 - Apoio de Colegas
   {
     id: 24,
-    dimensao: "relacionamentos",
-    texto: "Você é intimidado ou assediado no trabalho?",
-    polaridade: "NEGATIVA",
+    dimensao: "apoioColegas",
+    texto: "Meus colegas me ajudam e me dão apoio quando eu preciso",
+    polaridade: "POSITIVA",
+    ordem: 24,
   },
+  // Pergunta 25 - Controle
   {
     id: 25,
-    dimensao: "relacionamentos",
-    texto: "Você experimenta conflitos pessoais ou tensões no trabalho?",
-    polaridade: "NEGATIVA",
+    dimensao: "controle",
+    texto: "Minhas sugestões são consideradas sobre como fazer meu trabalho",
+    polaridade: "POSITIVA",
+    ordem: 25,
   },
+  // Pergunta 26 - Mudanças
   {
     id: 26,
-    dimensao: "relacionamentos",
-    texto: "Você é tratado injustamente no trabalho?",
-    polaridade: "NEGATIVA",
+    dimensao: "mudancas",
+    texto: "Tenho oportunidades para pedir explicações ao chefe sobre as mudanças relacionadas ao meu trabalho",
+    polaridade: "POSITIVA",
+    ordem: 26,
   },
+  // Pergunta 27 - Apoio de Colegas
   {
     id: 27,
-    dimensao: "relacionamentos",
-    texto: "Há falta de comunicação ou mal-entendidos com colegas?",
-    polaridade: "NEGATIVA",
+    dimensao: "apoioColegas",
+    texto: "No trabalho os meus colegas demonstram o respeito que mereço",
+    polaridade: "POSITIVA",
+    ordem: 27,
   },
-
-  // PAPEL (5 perguntas - POSITIVA)
+  // Pergunta 28 - Mudanças
   {
     id: 28,
-    dimensao: "papel",
-    texto: "Você compreende claramente o que se espera de você no trabalho?",
+    dimensao: "mudancas",
+    texto: "As pessoas são sempre consultadas sobre as mudanças no trabalho",
     polaridade: "POSITIVA",
+    ordem: 28,
   },
+  // Pergunta 29 - Apoio Gerencial
   {
     id: 29,
-    dimensao: "papel",
-    texto: "Você sabe exatamente quais são suas responsabilidades?",
+    dimensao: "apoioGerencial",
+    texto: "Quando algo no trabalho me perturba ou irrita posso falar com meu chefe",
     polaridade: "POSITIVA",
+    ordem: 29,
   },
+  // Pergunta 30 - Controle
   {
     id: 30,
-    dimensao: "papel",
-    texto: "Você recebe informações claras sobre os objetivos do seu trabalho?",
+    dimensao: "controle",
+    texto: "O meu horário de trabalho pode ser flexível",
     polaridade: "POSITIVA",
+    ordem: 30,
   },
+  // Pergunta 31 - Apoio de Colegas
   {
     id: 31,
-    dimensao: "papel",
-    texto: "Suas tarefas e objetivos estão bem definidos?",
+    dimensao: "apoioColegas",
+    texto: "Os colegas estão disponíveis para escutar os meus problemas de trabalho",
     polaridade: "POSITIVA",
+    ordem: 31,
   },
+  // Pergunta 32 - Mudanças
   {
     id: 32,
-    dimensao: "papel",
-    texto: "Você sabe como seu trabalho contribui para os objetivos da organização?",
+    dimensao: "mudancas",
+    texto: "Quando há mudanças, faço o meu trabalho com o mesmo carinho",
     polaridade: "POSITIVA",
+    ordem: 32,
   },
-
-  // MUDANÇAS (3 perguntas - POSITIVA)
+  // Pergunta 33 - Apoio Gerencial
   {
     id: 33,
-    dimensao: "mudancas",
-    texto: "Você é consultado sobre mudanças que afetam seu trabalho?",
+    dimensao: "apoioGerencial",
+    texto: "Tenho suportado trabalhos emocionalmente exigentes",
     polaridade: "POSITIVA",
+    ordem: 33,
   },
+  // Pergunta 34 - Relacionamentos
   {
     id: 34,
-    dimensao: "mudancas",
-    texto: "As mudanças organizacionais são comunicadas claramente?",
-    polaridade: "POSITIVA",
+    dimensao: "relacionamentos",
+    texto: "As relações no trabalho são tensas",
+    polaridade: "NEGATIVA",
+    ordem: 34,
   },
+  // Pergunta 35 - Apoio Gerencial
   {
     id: 35,
-    dimensao: "mudancas",
-    texto: "Você recebe suporte adequado durante períodos de mudança?",
+    dimensao: "apoioGerencial",
+    texto: "Meu chefe me incentiva no trabalho",
     polaridade: "POSITIVA",
+    ordem: 35,
   },
 ];
 
 // Escala Likert
 export const escalaLikert = [
-  { valor: 0, label: "Nunca" },
-  { valor: 1, label: "Raramente" },
-  { valor: 2, label: "Às vezes" },
-  { valor: 3, label: "Frequentemente" },
-  { valor: 4, label: "Sempre" },
+  { valor: 0, label: "Nunca", emoji: "😌", cor: "emerald" },
+  { valor: 1, label: "Raramente", emoji: "🙂", cor: "green" },
+  { valor: 2, label: "Às vezes", emoji: "😐", cor: "yellow" },
+  { valor: 3, label: "Frequentemente", emoji: "😟", cor: "orange" },
+  { valor: 4, label: "Sempre", emoji: "😰", cor: "red" },
 ];
 
 // Validar total de perguntas
 if (perguntas.length !== 35) {
   throw new Error(`Erro: Esperadas 35 perguntas, encontradas ${perguntas.length}`);
+}
+
+// Agrupar perguntas por dimensão
+export function getPerguntasPorDimensao(codigoDimensao: string): Pergunta[] {
+  return perguntas
+    .filter((p) => p.dimensao === codigoDimensao)
+    .sort((a, b) => a.ordem - b.ordem);
+}
+
+// Obter dimensão por código
+export function getDimensao(codigo: string): Dimensao | undefined {
+  return dimensoes.find((d) => d.codigo === codigo);
+}
+
+// Obter progresso (percentual de perguntas respondidas)
+export function calcularProgresso(respostas: Record<number, number>): number {
+  const totalRespondidas = Object.keys(respostas).length;
+  return Math.round((totalRespondidas / perguntas.length) * 100);
+}
+
+// Obter pergunta por ID
+export function getPergunta(id: number): Pergunta | undefined {
+  return perguntas.find((p) => p.id === id);
 }
