@@ -15,6 +15,17 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     }
 
+    // Verificar se o usuário tem empresaId
+    if (!session.user.empresaId) {
+      return NextResponse.json(
+        {
+          error: "Empresa não associada",
+          message: "Usuário não está associado a nenhuma empresa. Entre em contato com o administrador."
+        },
+        { status: 400 }
+      );
+    }
+
     // Verificar K-Anonymity
     const temDadosSuficientes = await verificarKAnonymity(session.user.empresaId);
 
