@@ -35,6 +35,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // VALIDAÇÃO ADICIONAL: ADMIN não deve ter vínculos
+    if (data.role === "ADMIN" && (empresaId || unidadeId || setorId)) {
+      return NextResponse.json(
+        { error: `Usuários ADMIN não devem ter vínculos com empresa, unidade ou setor` },
+        { status: 400 }
+      );
+    }
+
     // Verificar se o email já existe
     const existingUser = await prisma.user.findUnique({
       where: { email: data.email },

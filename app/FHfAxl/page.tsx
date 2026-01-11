@@ -163,18 +163,19 @@ export default function CreateUserPage() {
                 <Select
                   value={formData.role}
                   onValueChange={(value) => {
-                    setFormData({ ...formData, role: value });
                     // Limpar vínculos se mudar para ADMIN
                     if (value === "ADMIN") {
-                      setFormData(prev => ({
-                        ...prev,
+                      setFormData({
+                        ...formData,
                         role: value,
                         empresaId: "",
                         unidadeId: "",
                         setorId: "",
-                      }));
+                      });
                       setSelectedEmpresa("");
                       setSelectedUnidade("");
+                    } else {
+                      setFormData({ ...formData, role: value });
                     }
                   }}
                   disabled={isLoading}
