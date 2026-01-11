@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { withRateLimit } from "@/lib/rate-limit-helpers";
 
 interface CreateCicloRequest {
   nome: string;
@@ -27,6 +28,17 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Aplicar rate limiting: 30 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "api-write",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/ciclos", method: "POST" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const body: CreateCicloRequest = await request.json();
     const { nome, dataInicio, dataFim, ativo = false } = body;
@@ -90,6 +102,17 @@ export async function GET(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Aplicar rate limiting: 60 requisições por minuto
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "api-read",
+      identifier: session.user.id,
+      request,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/ciclos", method: "GET" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const { searchParams } = new URL(request.url);
     const ativo = searchParams.get("ativo");

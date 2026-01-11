@@ -1,8 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { withRateLimit, getClientIp } from "@/lib/rate-limit-helpers";
 
 export async function GET(request: NextRequest) {
   try {
+    // Aplicar rate limiting: 10 requisições por minuto por IP
+    const clientIp = getClientIp(request);
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "magic-link:validate",
+      identifier: clientIp,
+      request,
+      auditDetails: { endpoint: "/api/magic-link/validate" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
+
     const { searchParams } = new URL(request.url);
     const token = searchParams.get("token");
 
