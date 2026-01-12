@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { NotificationBell } from "@/components/NotificationBell";
 import {
   LayoutDashboard,
   Users,
@@ -86,8 +87,19 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-zinc-950">
-        <div className="p-8">{children}</div>
+      <main className="flex-1 flex flex-col overflow-hidden bg-zinc-950">
+        {/* Header */}
+        <header className="h-16 border-b border-zinc-800 bg-zinc-900 flex items-center justify-between px-6">
+          <div className="flex-1" />
+          <div className="flex items-center gap-2">
+            <NotificationBell />
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-8">{children}</div>
+        </div>
       </main>
     </div>
   );
