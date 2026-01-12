@@ -84,7 +84,8 @@ export const authOptions: NextAuthConfig = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      // Novo login - carregar dados do usuário
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -93,6 +94,12 @@ export const authOptions: NextAuthConfig = {
         token.setorId = user.setorId;
         token.forcarTrocaSenha = user.forcarTrocaSenha;
       }
+
+      // Atualizar token se sessão mudou (ex: perfil atualizado)
+      if (trigger === 'update' && session) {
+        token = { ...token, ...session };
+      }
+
       return token;
     },
     async session({ session, token }) {

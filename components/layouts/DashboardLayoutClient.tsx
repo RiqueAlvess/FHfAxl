@@ -4,7 +4,7 @@ import { signOut } from 'next-auth/react'
 import { MainLayout } from './MainLayout'
 
 interface DashboardLayoutClientProps {
-  userRole: 'ADMIN' | 'RH' | 'COLABORADOR'
+  userRole: 'ADMIN' | 'RH' | 'LIDERANCA' | 'COLABORADOR'
   userName?: string
   userEmail?: string
   children: React.ReactNode

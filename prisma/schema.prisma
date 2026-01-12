@@ -54,6 +54,7 @@ model User {
 
   @@index([empresaId])
   @@index([email])
+  @@index([ativo])
 }
 
 model PasswordResetToken {
@@ -212,6 +213,7 @@ model MagicLink {
   @@index([colaboradorId])
   @@index([status])
   @@index([cicloAvaliacaoId])
+  @@index([expiresAt])
 }
 
 model CicloAvaliacao {
@@ -294,6 +296,7 @@ model Resposta {
   @@index([cicloAvaliacaoId])
   @@index([scoreGlobal])
   @@index([classificacao])
+  @@index([createdAt])
 }
 
 // ============================================

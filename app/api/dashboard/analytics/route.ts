@@ -9,6 +9,7 @@ import { verificarKAnonymity, getMensagemKAnonymityNaoAtendido } from "@/lib/k-a
 import { registrarVisualizacaoAnalytics, registrarBloqueioKAnonymity } from "@/lib/audit-log";
 import { addPrivacyHeaders } from "@/lib/k-anonymity-middleware";
 import { withRateLimit } from "@/lib/rate-limit-helpers";
+import { getCached, CacheKeys } from "@/lib/cache";
 
 export async function GET(request: NextRequest) {
   try {
@@ -90,11 +91,26 @@ export async function GET(request: NextRequest) {
     );
 
     // Buscar dados (com filtros se fornecidos)
-    const [kpis, distribuicao, scoresDimensoes] = await Promise.all([
-      calcularKPIs(session.user.empresaId),
-      getDistribuicaoRisco(session.user.empresaId),
-      getScoresPorDimensao(session.user.empresaId),
-    ]);
+    // Cache de 5 minutos para melhorar performance
+    const cacheKey = CacheKeys.analytics(
+      session.user.empresaId,
+      filtros.cicloAvaliacaoId || 'all'
+    );
+
+    const analyticsData = await getCached(
+      cacheKey,
+      async () => {
+        const [kpis, distribuicao, scoresDimensoes] = await Promise.all([
+          calcularKPIs(session.user.empresaId),
+          getDistribuicaoRisco(session.user.empresaId),
+          getScoresPorDimensao(session.user.empresaId),
+        ]);
+        return { kpis, distribuicao, scoresDimensoes };
+      },
+      300 // 5 minutos
+    );
+
+    const { kpis, distribuicao, scoresDimensoes } = analyticsData;
 
     const response = NextResponse.json({
       kAnonymity: true,

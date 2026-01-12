@@ -15,7 +15,7 @@ const updateEmpresaSchema = z.object({
 // GET - Buscar empresa por ID
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -23,8 +23,10 @@ export async function GET(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     const empresa = await prisma.empresa.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         unidades: {
           include: {
@@ -57,7 +59,7 @@ export async function GET(
       session.user.id,
       'READ',
       'Empresa',
-      params.id,
+      id,
       req
     );
 
@@ -74,7 +76,7 @@ export async function GET(
 // PUT - Atualizar empresa
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -82,12 +84,14 @@ export async function PUT(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     const body = await req.json();
     const data = updateEmpresaSchema.parse(body);
 
     // Verificar se empresa existe
     const empresaExistente = await prisma.empresa.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!empresaExistente) {
@@ -122,7 +126,7 @@ export async function PUT(
 
     // Atualizar empresa
     const empresa = await prisma.empresa.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
       include: {
         _count: {
@@ -140,7 +144,7 @@ export async function PUT(
       session.user.id,
       'UPDATE',
       'Empresa',
-      params.id,
+      id,
       req,
       { changes: data }
     );
@@ -166,7 +170,7 @@ export async function PUT(
 // DELETE - Desativar empresa (soft delete)
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -174,9 +178,11 @@ export async function DELETE(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     // Verificar se empresa existe
     const empresa = await prisma.empresa.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         _count: {
           select: {
@@ -210,7 +216,7 @@ export async function DELETE(
 
     // Soft delete: apenas marcar como inativo
     await prisma.empresa.update({
-      where: { id: params.id },
+      where: { id },
       data: { ativo: false },
     });
 
@@ -218,7 +224,7 @@ export async function DELETE(
       session.user.id,
       'DELETE',
       'Empresa',
-      params.id,
+      id,
       req,
       {
         nome: empresa.nome,

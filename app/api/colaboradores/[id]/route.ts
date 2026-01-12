@@ -15,6 +15,8 @@ export async function GET(
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     }
 
+    const { id } = await params;
+
     // Verificar permissão
     if (session.user.role !== "RH" && session.user.role !== "ADMIN" && session.user.role !== "LIDERANCA") {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
@@ -76,6 +78,8 @@ export async function PUT(
     if (!session) {
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     }
+
+    const { id } = await params;
 
     // Apenas RH e ADMIN podem editar
     if (session.user.role !== "RH" && session.user.role !== "ADMIN") {
@@ -172,6 +176,8 @@ export async function DELETE(
     if (!session) {
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     }
+
+    const { id } = await params;
 
     // Apenas RH e ADMIN podem deletar
     if (session.user.role !== "RH" && session.user.role !== "ADMIN") {

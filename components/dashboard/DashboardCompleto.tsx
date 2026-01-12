@@ -5,25 +5,69 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
 
-// Importar todos os componentes de visualização
+// Importar apenas componentes críticos (above-the-fold)
 import KPICards from "./KPICards";
-import DistribuicaoRiscoChart from "./DistribuicaoRiscoChart";
-import HistogramaScoresChart from "./HistogramaScoresChart";
-import BoxPlotChart from "./BoxPlotChart";
-import DimensoesChart from "./DimensoesChart";
-import RadarDimensoesChart from "./RadarDimensoesChart";
-import HeatmapChart from "./HeatmapChart";
-import PerguntasLineChart from "./PerguntasLineChart";
-import TopPerguntasCriticasTable from "./TopPerguntasCriticasTable";
-import TopPerguntasPositivasTable from "./TopPerguntasPositivasTable";
-import CorrelacaoTempoChart from "./CorrelacaoTempoChart";
-import VariabilidadeDimensoesChart from "./VariabilidadeDimensoesChart";
-import ConsistenciaInternaChart from "./ConsistenciaInternaChart";
-import DistribuicaoRespostasChart from "./DistribuicaoRespostasChart";
-import EvolucaoTemporalChart from "./EvolucaoTemporalChart";
-import ComparativoUnidadesChart from "./ComparativoUnidadesChart";
-import InsightsPanel from "./InsightsPanel";
+
+// Lazy loading de charts pesados - carregam apenas quando necessário
+const DistribuicaoRiscoChart = dynamic(() => import("./DistribuicaoRiscoChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const HistogramaScoresChart = dynamic(() => import("./HistogramaScoresChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const BoxPlotChart = dynamic(() => import("./BoxPlotChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const DimensoesChart = dynamic(() => import("./DimensoesChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const RadarDimensoesChart = dynamic(() => import("./RadarDimensoesChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const VariabilidadeDimensoesChart = dynamic(() => import("./VariabilidadeDimensoesChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const ConsistenciaInternaChart = dynamic(() => import("./ConsistenciaInternaChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const DistribuicaoRespostasChart = dynamic(() => import("./DistribuicaoRespostasChart"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+const InsightsPanel = dynamic(() => import("./InsightsPanel"), {
+  loading: () => <ChartSkeleton />,
+  ssr: false,
+});
+
+// Skeleton para loading dos charts
+function ChartSkeleton() {
+  return (
+    <Card className="bg-zinc-900 border-zinc-800">
+      <CardContent className="pt-6">
+        <div className="h-80 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 text-violet-500 animate-spin" />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 interface DashboardData {
   kAnonymity: boolean;

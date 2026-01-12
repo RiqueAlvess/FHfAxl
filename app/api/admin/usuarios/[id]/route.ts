@@ -20,7 +20,7 @@ const updateUsuarioSchema = z.object({
 // GET - Buscar usuário por ID
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -28,8 +28,10 @@ export async function GET(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     const usuario = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         empresa: { select: { id: true, nome: true } },
         unidade: { select: { id: true, nome: true } },
@@ -52,7 +54,7 @@ export async function GET(
       session.user.id,
       'READ',
       'User',
-      params.id,
+      id,
       req
     );
 
@@ -69,7 +71,7 @@ export async function GET(
 // PUT - Atualizar usuário
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -77,12 +79,14 @@ export async function PUT(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     const body = await req.json();
     const data = updateUsuarioSchema.parse(body);
 
     // Verificar se usuário existe
     const usuarioExistente = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!usuarioExistente) {
@@ -144,7 +148,7 @@ export async function PUT(
 
     // Atualizar usuário
     const usuario = await prisma.user.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
       include: {
         empresa: { select: { id: true, nome: true } },
@@ -160,7 +164,7 @@ export async function PUT(
       session.user.id,
       'UPDATE',
       'User',
-      params.id,
+      id,
       req,
       { changes: data }
     );
@@ -186,7 +190,7 @@ export async function PUT(
 // DELETE - Desativar usuário (soft delete)
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -194,8 +198,10 @@ export async function DELETE(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     // Não permitir que o admin delete a si mesmo
-    if (params.id === session.user.id) {
+    if (id === session.user.id) {
       return NextResponse.json(
         { error: 'Você não pode desativar sua própria conta' },
         { status: 400 }
@@ -204,7 +210,7 @@ export async function DELETE(
 
     // Verificar se usuário existe
     const usuario = await prisma.user.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!usuario) {
@@ -216,7 +222,7 @@ export async function DELETE(
 
     // Soft delete: apenas marcar como inativo
     await prisma.user.update({
-      where: { id: params.id },
+      where: { id },
       data: { ativo: false },
     });
 
@@ -224,7 +230,7 @@ export async function DELETE(
       session.user.id,
       'DELETE',
       'User',
-      params.id,
+      id,
       req,
       {
         nome: usuario.nome,

@@ -14,7 +14,7 @@ const updateCicloSchema = z.object({
 // GET - Buscar ciclo por ID
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -22,8 +22,10 @@ export async function GET(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     const ciclo = await prisma.cicloAvaliacao.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         empresa: {
           select: {
@@ -59,7 +61,7 @@ export async function GET(
       session.user.id,
       'READ',
       'CicloAvaliacao',
-      params.id,
+      id,
       req
     );
 
@@ -76,7 +78,7 @@ export async function GET(
 // PUT - Atualizar ciclo
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -84,12 +86,13 @@ export async function PUT(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
     const body = await req.json();
     const data = updateCicloSchema.parse(body);
 
     // Verificar se ciclo existe
     const cicloExistente = await prisma.cicloAvaliacao.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!cicloExistente) {
@@ -128,7 +131,7 @@ export async function PUT(
 
     // Atualizar ciclo
     const ciclo = await prisma.cicloAvaliacao.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
       include: {
         empresa: {
@@ -150,7 +153,7 @@ export async function PUT(
       session.user.id,
       'UPDATE',
       'CicloAvaliacao',
-      params.id,
+      id,
       req,
       { changes: data }
     );
@@ -176,7 +179,7 @@ export async function PUT(
 // DELETE - Desativar ciclo (soft delete)
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -184,9 +187,11 @@ export async function DELETE(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 403 });
     }
 
+    const { id } = await params;
+
     // Verificar se ciclo existe
     const ciclo = await prisma.cicloAvaliacao.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         _count: {
           select: {
@@ -226,7 +231,7 @@ export async function DELETE(
 
     // Soft delete: apenas marcar como inativo
     await prisma.cicloAvaliacao.update({
-      where: { id: params.id },
+      where: { id },
       data: { ativo: false },
     });
 
@@ -234,7 +239,7 @@ export async function DELETE(
       session.user.id,
       'DELETE',
       'CicloAvaliacao',
-      params.id,
+      id,
       req,
       {
         nome: ciclo.nome,

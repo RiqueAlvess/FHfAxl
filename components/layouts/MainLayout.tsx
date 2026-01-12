@@ -14,7 +14,7 @@ interface MainLayoutProps {
   /**
    * Role do usuário atual
    */
-  userRole: 'ADMIN' | 'RH' | 'COLABORADOR'
+  userRole: 'ADMIN' | 'RH' | 'LIDERANCA' | 'COLABORADOR'
 
   /**
    * Nome do usuário

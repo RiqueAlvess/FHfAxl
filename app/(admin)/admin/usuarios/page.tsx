@@ -7,7 +7,7 @@ export default async function UsuariosAdminPage() {
   const session = await auth();
 
   // Buscar todos os usuários com suas relações
-  const usuarios = await prisma.user.findMany({
+  const usuariosRaw = await prisma.user.findMany({
     include: {
       empresa: true,
       unidade: true,
@@ -18,8 +18,31 @@ export default async function UsuariosAdminPage() {
     },
   });
 
+  // Serializar Dates para strings
+  const usuarios = usuariosRaw.map(user => ({
+    ...user,
+    createdAt: user.createdAt.toISOString(),
+    updatedAt: user.updatedAt.toISOString(),
+    lastLoginAt: user.lastLoginAt?.toISOString() ?? null,
+    empresa: user.empresa ? {
+      ...user.empresa,
+      createdAt: user.empresa.createdAt.toISOString(),
+      updatedAt: user.empresa.updatedAt.toISOString(),
+    } : null,
+    unidade: user.unidade ? {
+      ...user.unidade,
+      createdAt: user.unidade.createdAt.toISOString(),
+      updatedAt: user.unidade.updatedAt.toISOString(),
+    } : null,
+    setor: user.setor ? {
+      ...user.setor,
+      createdAt: user.setor.createdAt.toISOString(),
+      updatedAt: user.setor.updatedAt.toISOString(),
+    } : null,
+  }));
+
   // Buscar empresas para o formulário
-  const empresas = await prisma.empresa.findMany({
+  const empresasRaw = await prisma.empresa.findMany({
     where: { ativo: true },
     orderBy: { nome: 'asc' },
     include: {
@@ -33,6 +56,23 @@ export default async function UsuariosAdminPage() {
       },
     },
   });
+
+  // Serializar empresas
+  const empresas = empresasRaw.map(empresa => ({
+    ...empresa,
+    createdAt: empresa.createdAt.toISOString(),
+    updatedAt: empresa.updatedAt.toISOString(),
+    unidades: empresa.unidades.map(unidade => ({
+      ...unidade,
+      createdAt: unidade.createdAt.toISOString(),
+      updatedAt: unidade.updatedAt.toISOString(),
+      setores: unidade.setores.map(setor => ({
+        ...setor,
+        createdAt: setor.createdAt.toISOString(),
+        updatedAt: setor.updatedAt.toISOString(),
+      })),
+    })),
+  }));
 
   return (
     <div className="space-y-8">
