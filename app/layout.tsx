@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
+import QueryProvider from "@/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "VIVAMENTE360 - Plataforma de Avaliação de Riscos Psicossociais",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="font-sans">
-        {children}
-        <Toaster position="top-right" richColors />
+        <QueryProvider>
+          {children}
+          <Toaster position="top-right" richColors />
+        </QueryProvider>
       </body>
     </html>
   );

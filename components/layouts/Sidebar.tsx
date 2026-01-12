@@ -17,7 +17,7 @@ import {
 import { cn } from '@/lib/utils'
 
 interface SidebarProps {
-  userRole: 'ADMIN' | 'RH' | 'COLABORADOR'
+  userRole: 'ADMIN' | 'RH' | 'LIDERANCA' | 'COLABORADOR'
   userName?: string
   userEmail?: string
   onLogout?: () => void

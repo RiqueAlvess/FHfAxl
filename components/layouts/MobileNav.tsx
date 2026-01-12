@@ -16,7 +16,7 @@ import {
 import { cn } from '@/lib/utils'
 
 interface MobileNavProps {
-  userRole: 'ADMIN' | 'RH' | 'COLABORADOR'
+  userRole: 'ADMIN' | 'RH' | 'LIDERANCA' | 'COLABORADOR'
   userName?: string
 }
 

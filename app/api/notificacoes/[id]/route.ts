@@ -13,6 +13,8 @@ export async function PUT(
       return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
     }
 
+    const { id } = await params;
+
     const notificacao = await prisma.notificacao.findUnique({
       where: { id: (await params).id },
     });
