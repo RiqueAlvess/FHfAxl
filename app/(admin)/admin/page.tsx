@@ -35,7 +35,7 @@ export default async function AdminDashboardPage() {
   // Últimas atividades (logs de auditoria)
   const ultimasAtividades = await prisma.auditLog.findMany({
     take: 10,
-    orderBy: { createdAt: 'desc' },
+    orderBy: { timestamp: 'desc' },
     include: {
       user: {
         select: {
@@ -132,7 +132,7 @@ export default async function AdminDashboardPage() {
                       {log.entidadeId && ` (ID: ${log.entidadeId.substring(0, 8)}...)`}
                     </p>
                     <p className="text-xs text-zinc-500">
-                      {new Date(log.createdAt).toLocaleString('pt-BR')}
+                      {new Date(log.timestamp).toLocaleString('pt-BR')}
                     </p>
                   </div>
                 </div>
