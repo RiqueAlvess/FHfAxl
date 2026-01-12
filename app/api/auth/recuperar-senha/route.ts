@@ -9,8 +9,19 @@ const recuperarSenhaSchema = z.object({
   email: z.string().email("Email inválido"),
 });
 
-async function handler(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
+    // Aplicar rate limiting (máximo 3 tentativas por 15 minutos)
+    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "api-write",
+      identifier: ip,
+      request: req,
+      auditDetails: { endpoint: "/api/auth/recuperar-senha" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
+
     const body = await req.json();
     const { email } = recuperarSenhaSchema.parse(body);
 
@@ -96,9 +107,3 @@ async function handler(req: NextRequest) {
     );
   }
 }
-
-// Aplicar rate limiting (máximo 3 tentativas por 15 minutos)
-export const POST = withRateLimit(handler, {
-  limit: 3,
-  window: 15 * 60 * 1000, // 15 minutos
-});

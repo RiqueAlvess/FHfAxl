@@ -6,8 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { verificarKAnonymity, FiltrosSegmentacao, getMensagemKAnonymityNaoAtendido } from './k-anonymity';
 import { registrarBloqueioKAnonymity, registrarVisualizacaoAnalytics } from './audit-log';
 
@@ -102,7 +101,7 @@ export function comProtecaoKAnonymity(
 
   return async (req: NextRequest, context: { params: any }) => {
     // Verificar autenticação
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session || !session.user) {
       return NextResponse.json(

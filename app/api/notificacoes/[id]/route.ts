@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -14,7 +14,7 @@ export async function PUT(
     }
 
     const notificacao = await prisma.notificacao.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!notificacao) {
@@ -34,7 +34,7 @@ export async function PUT(
 
     // Marcar como lida
     const notificacaoAtualizada = await prisma.notificacao.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: { lida: true },
     });
 

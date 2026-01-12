@@ -11,7 +11,7 @@ interface UpdateCicloRequest {
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -31,7 +31,7 @@ export async function PUT(
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
     const body: UpdateCicloRequest = await request.json();
 
     // Verificar se o ciclo existe e pertence à empresa do usuário
@@ -103,7 +103,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -123,7 +123,7 @@ export async function DELETE(
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     // Verificar se o ciclo existe e pertence à empresa do usuário
     const cicloExistente = await prisma.cicloAvaliacao.findFirst({
@@ -180,7 +180,7 @@ export async function DELETE(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -196,7 +196,7 @@ export async function GET(
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     const ciclo = await prisma.cicloAvaliacao.findFirst({
       where: {
@@ -237,7 +237,7 @@ export async function GET(
       expirados: 0,
     };
 
-    stats.forEach((stat) => {
+    stats.forEach((stat: any) => {
       switch (stat.status) {
         case "SENT":
           statusMap.enviados = stat._count;

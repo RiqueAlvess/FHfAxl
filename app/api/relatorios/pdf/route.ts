@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { gerarPDF } from "@/lib/reports/pdf-generator";
 import * as reportService from "@/lib/reports/report-data-service";
 import type { GerarRelatorioRequest } from "@/types/reports";
 import { readFile } from "fs/promises";
@@ -101,7 +100,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Gerar PDF
-    const { caminhoArquivo, nomeArquivo } = await gerarPDF(dadosRelatorio);
+    const { gerarPDFServer } = await import("@/lib/reports/pdf-generator-server");
+    const { caminhoArquivo, nomeArquivo } = await gerarPDFServer(dadosRelatorio);
 
     // Ler arquivo para retornar
     const arquivoBuffer = await readFile(caminhoArquivo);

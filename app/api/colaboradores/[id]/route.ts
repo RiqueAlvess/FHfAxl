@@ -6,7 +6,7 @@ import { updateColaboradorSchema } from "@/types/colaborador";
 // GET - Detalhes do colaborador (com histórico de magic links)
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -22,7 +22,7 @@ export async function GET(
 
     const colaborador = await prisma.colaborador.findUnique({
       where: {
-        id: params.id,
+        id: (await params).id,
       },
       include: {
         unidade: true,
@@ -68,7 +68,7 @@ export async function GET(
 // PUT - Atualizar colaborador
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -84,7 +84,7 @@ export async function PUT(
 
     // Verificar se colaborador existe e pertence à empresa
     const colaboradorExistente = await prisma.colaborador.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!colaboradorExistente) {
@@ -142,7 +142,7 @@ export async function PUT(
     }
 
     const colaborador = await prisma.colaborador.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: updateData,
       include: {
         unidade: true,
@@ -164,7 +164,7 @@ export async function PUT(
 // DELETE - Soft delete do colaborador
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth();
@@ -180,7 +180,7 @@ export async function DELETE(
 
     // Verificar se colaborador existe e pertence à empresa
     const colaborador = await prisma.colaborador.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!colaborador) {
@@ -196,7 +196,7 @@ export async function DELETE(
 
     // Soft delete
     await prisma.colaborador.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: { ativo: false },
     });
 

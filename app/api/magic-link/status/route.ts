@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
     // Verificar se há expirados que precisam ser atualizados
     const now = new Date();
     const magicLinksAtualizados = await Promise.all(
-      magicLinks.map(async (link) => {
+      magicLinks.map(async (link: any) => {
         if (
           link.status !== "COMPLETED" &&
           link.status !== "EXPIRED" &&
