@@ -1,3 +1,4 @@
+import "server-only";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
@@ -124,4 +125,6 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+// Exporta apenas funções server-side
+// Para signIn e signOut no client, importe diretamente de "next-auth/react"
+export const { handlers, auth } = NextAuth(authOptions);
