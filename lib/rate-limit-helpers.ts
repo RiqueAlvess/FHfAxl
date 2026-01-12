@@ -48,6 +48,7 @@ const FALLBACK_LIMITS: Record<RateLimiterType, { limit: number; window: number }
   "api-read": { limit: 60, window: 60 * 1000 }, // 60 req / 1 min
   "api-write": { limit: 30, window: 60 * 1000 }, // 30 req / 1 min
   "api-general": { limit: 100, window: 60 * 1000 }, // 100 req / 1 min
+  global: { limit: 100, window: 10 * 1000 }, // 100 req / 10 seg
 }
 
 /**
