@@ -141,9 +141,11 @@ export default function ColaboradorFilters({
   };
 
   const handleFilterChange = (key: keyof FilterValues, value: string) => {
+    // Converter "all" para string vazia em filtros de ID
+    const normalizedValue = value === "all" ? "" : value;
     onFiltersChange({
       ...filters,
-      [key]: value,
+      [key]: normalizedValue,
     });
   };
 
@@ -192,14 +194,14 @@ export default function ColaboradorFilters({
               Unidade
             </Label>
             <Select
-              value={filters.unidadeId}
+              value={filters.unidadeId || "all"}
               onValueChange={(value) => handleFilterChange("unidadeId", value)}
             >
               <SelectTrigger className="bg-zinc-950 border-zinc-800 text-zinc-100">
                 <SelectValue placeholder="Todas" />
               </SelectTrigger>
               <SelectContent className="bg-zinc-900 border-zinc-800">
-                <SelectItem value="">Todas</SelectItem>
+                <SelectItem value="all">Todas</SelectItem>
                 {unidades.map((unidade) => (
                   <SelectItem key={unidade.id} value={unidade.id}>
                     {unidade.nome}
@@ -215,7 +217,7 @@ export default function ColaboradorFilters({
               Setor
             </Label>
             <Select
-              value={filters.setorId}
+              value={filters.setorId || "all"}
               onValueChange={(value) => handleFilterChange("setorId", value)}
               disabled={!filters.unidadeId && setoresFiltrados.length === 0}
             >
@@ -223,7 +225,7 @@ export default function ColaboradorFilters({
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent className="bg-zinc-900 border-zinc-800">
-                <SelectItem value="">Todos</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
                 {setoresFiltrados.map((setor) => (
                   <SelectItem key={setor.id} value={setor.id}>
                     {setor.nome}
@@ -239,7 +241,7 @@ export default function ColaboradorFilters({
               Cargo
             </Label>
             <Select
-              value={filters.cargoId}
+              value={filters.cargoId || "all"}
               onValueChange={(value) => handleFilterChange("cargoId", value)}
               disabled={!filters.setorId && cargosFiltrados.length === 0}
             >
@@ -247,7 +249,7 @@ export default function ColaboradorFilters({
                 <SelectValue placeholder="Todos" />
               </SelectTrigger>
               <SelectContent className="bg-zinc-900 border-zinc-800">
-                <SelectItem value="">Todos</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
                 {cargosFiltrados.map((cargo) => (
                   <SelectItem key={cargo.id} value={cargo.id}>
                     {cargo.nome}

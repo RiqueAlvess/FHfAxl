@@ -302,15 +302,15 @@ export function UserFormDialog({
             <div className="space-y-2">
               <Label htmlFor="unidadeId">Unidade (opcional)</Label>
               <Select
-                value={unidadeId || ''}
-                onValueChange={(value) => setValue('unidadeId', value || undefined)}
+                value={unidadeId || 'none'}
+                onValueChange={(value) => setValue('unidadeId', value === 'none' ? undefined : value)}
                 disabled={isLoading}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione a unidade (opcional)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Nenhuma (acesso a toda empresa)</SelectItem>
+                  <SelectItem value="none">Nenhuma (acesso a toda empresa)</SelectItem>
                   {selectedEmpresa.unidades.map((unidade) => (
                     <SelectItem key={unidade.id} value={unidade.id}>
                       {unidade.nome}
@@ -326,15 +326,15 @@ export function UserFormDialog({
             <div className="space-y-2">
               <Label htmlFor="setorId">Setor (opcional)</Label>
               <Select
-                value={watch('setorId') || ''}
-                onValueChange={(value) => setValue('setorId', value || undefined)}
+                value={watch('setorId') || 'none'}
+                onValueChange={(value) => setValue('setorId', value === 'none' ? undefined : value)}
                 disabled={isLoading}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione o setor (opcional)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Nenhum (acesso a toda unidade)</SelectItem>
+                  <SelectItem value="none">Nenhum (acesso a toda unidade)</SelectItem>
                   {selectedUnidade.setores.map((setor) => (
                     <SelectItem key={setor.id} value={setor.id}>
                       {setor.nome}

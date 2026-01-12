@@ -56,14 +56,14 @@ export function EmpresaSelector() {
     <div className="flex items-center gap-2">
       <Building2 className="h-4 w-4 text-muted-foreground" />
       <Select
-        value={empresaAtiva || ''}
-        onValueChange={(value) => setEmpresaAtiva(value || null)}
+        value={empresaAtiva || 'all'}
+        onValueChange={(value) => setEmpresaAtiva(value === 'all' ? null : value)}
       >
         <SelectTrigger className="w-[250px]">
           <SelectValue placeholder="Selecione uma empresa" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="">Todas as empresas</SelectItem>
+          <SelectItem value="all">Todas as empresas</SelectItem>
           {empresas.map((empresa) => (
             <SelectItem key={empresa.id} value={empresa.id}>
               {empresa.nome}
