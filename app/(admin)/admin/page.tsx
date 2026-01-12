@@ -28,9 +28,9 @@ export default async function AdminDashboardPage() {
     _count: true,
   });
 
-  const admins = usuariosPorRole.find(u => u.role === 'ADMIN')?._count || 0;
-  const rhs = usuariosPorRole.find(u => u.role === 'ADMIN')?._count || 0;
-  const liderancas = usuariosPorRole.find(u => u.role === 'LIDERANCA')?._count || 0;
+  const admins = usuariosPorRole.find((u: any) => u.role === 'ADMIN')?._count || 0;
+  const rhs = usuariosPorRole.find((u: any) => u.role === 'RH')?._count || 0;
+  const liderancas = usuariosPorRole.find((u: any) => u.role === 'LIDERANCA')?._count || 0;
 
   // Últimas atividades (logs de auditoria)
   const ultimasAtividades = await prisma.auditLog.findMany({
@@ -113,7 +113,7 @@ export default async function AdminDashboardPage() {
             {ultimasAtividades.length === 0 ? (
               <p className="text-sm text-zinc-400">Nenhuma atividade registrada ainda.</p>
             ) : (
-              ultimasAtividades.map((log) => (
+              ultimasAtividades.map((log: any) => (
                 <div key={log.id} className="flex items-start gap-4 border-b border-zinc-800 pb-4 last:border-b-0">
                   <div className="flex-shrink-0">
                     <div className={`w-2 h-2 mt-2 rounded-full ${

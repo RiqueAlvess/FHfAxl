@@ -91,9 +91,9 @@ export async function GET(request: NextRequest) {
 
     // Buscar dados (com filtros se fornecidos)
     const [kpis, distribuicao, scoresDimensoes] = await Promise.all([
-      calcularKPIs(session.user.empresaId, filtros),
-      getDistribuicaoRisco(session.user.empresaId, filtros),
-      getScoresPorDimensao(session.user.empresaId, filtros),
+      calcularKPIs(session.user.empresaId),
+      getDistribuicaoRisco(session.user.empresaId),
+      getScoresPorDimensao(session.user.empresaId),
     ]);
 
     const response = NextResponse.json({

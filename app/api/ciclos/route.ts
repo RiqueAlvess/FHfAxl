@@ -142,7 +142,7 @@ export async function GET(request: NextRequest) {
 
     // Adicionar estatísticas de magic links por status
     const ciclosComStats = await Promise.all(
-      ciclos.map(async (ciclo) => {
+      ciclos.map(async (ciclo: any) => {
         const stats = await prisma.magicLink.groupBy({
           by: ["status"],
           where: {
@@ -159,7 +159,7 @@ export async function GET(request: NextRequest) {
           expirados: 0,
         };
 
-        stats.forEach((stat) => {
+        stats.forEach((stat: any) => {
           switch (stat.status) {
             case "SENT":
               statusMap.enviados = stat._count;

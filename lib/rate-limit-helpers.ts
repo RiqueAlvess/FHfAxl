@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { type RateLimiterType, getRateLimiter, isRedisAvailable } from "./rate-limit"
-import { logAuditoria } from "./audit-log"
-import { AcaoAuditoria } from "@prisma/client"
+import { registrarAuditLog, AuditAction, AuditEntity } from "./audit-log"
 
 /**
  * Rate Limiting Helpers
@@ -213,11 +212,12 @@ export async function applyRateLimit(
       const ip = getClientIp(request)
       const userAgent = getUserAgent(request)
 
-      await logAuditoria({
+      await registrarAuditLog({
         userId: userId || "system",
-        acao: AcaoAuditoria.RATE_LIMIT_EXCEEDED,
-        entidade: limiterType,
-        detalhes: {
+        action: AuditAction.RATE_LIMIT_EXCEEDED,
+        entity: AuditEntity.SISTEMA,
+        details: {
+          limiterType,
           identifier,
           limit,
           reset,
@@ -226,6 +226,7 @@ export async function applyRateLimit(
           ...auditDetails,
         },
         ipAddress: ip,
+        userAgent,
       })
 
       console.warn(`🚨 Rate limit excedido: ${limiterType} | ${identifier} | IP: ${ip}`)

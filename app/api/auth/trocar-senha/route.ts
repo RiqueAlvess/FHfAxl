@@ -16,8 +16,9 @@ const trocarSenhaSchema = z.object({
     ),
 });
 
-async function handler(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
+    // Aplicar rate limiting (máximo 5 tentativas por 15 minutos)
     const session = await auth();
 
     if (!session?.user?.id) {
@@ -26,6 +27,16 @@ async function handler(req: NextRequest) {
         { status: 401 }
       );
     }
+
+    const rateLimitCheck = await withRateLimit({
+      limiterType: "api-write",
+      identifier: session.user.id,
+      request: req,
+      userId: session.user.id,
+      auditDetails: { endpoint: "/api/auth/trocar-senha" },
+    });
+
+    if (rateLimitCheck) return rateLimitCheck;
 
     const body = await req.json();
     const { senhaAtual, novaSenha } = trocarSenhaSchema.parse(body);
@@ -118,9 +129,3 @@ async function handler(req: NextRequest) {
     );
   }
 }
-
-// Aplicar rate limiting (máximo 5 tentativas por 15 minutos)
-export const POST = withRateLimit(handler, {
-  limit: 5,
-  window: 15 * 60 * 1000, // 15 minutos
-});

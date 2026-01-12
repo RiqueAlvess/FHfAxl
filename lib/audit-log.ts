@@ -44,6 +44,9 @@ export enum AuditAction {
   // K-Anonymity
   K_ANONYMITY_CHECK = 'K_ANONYMITY_CHECK',
   K_ANONYMITY_BLOCKED = 'K_ANONYMITY_BLOCKED',
+
+  // Rate Limiting
+  RATE_LIMIT_EXCEEDED = 'RATE_LIMIT_EXCEEDED',
 }
 
 /**

@@ -37,7 +37,7 @@ export default async function DashboardPage() {
   });
 
   const igrp = scoresGlobais.length > 0
-    ? (scoresGlobais.reduce((acc, r) => acc + r.scoreGlobal, 0) / scoresGlobais.length).toFixed(2)
+    ? (scoresGlobais.reduce((acc: number, r: any) => acc + r.scoreGlobal, 0) / scoresGlobais.length).toFixed(2)
     : "-";
 
   const classificacaoGeral =
