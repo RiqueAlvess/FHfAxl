@@ -1,0 +1,183 @@
+/**
+ * Design Tokens - VIVAMENTE360
+ * Sistema de design centralizado com variáveis CSS
+ *
+ * Uso: Importar no globals.css ou usar hsl(var(--token-name))
+ * Proibido usar hex hardcoded nos componentes
+ */
+
+:root {
+  /* ============================================
+     CORE COLORS - Palette principal
+     ============================================ */
+
+  /* Primary - Cor principal da marca */
+  --primary: 198 72% 19%;           /* #0F3D52 - Teal escuro */
+  --primary-foreground: 0 0% 100%;  /* #FFFFFF - Texto em primary */
+
+  /* Accent - Cor de destaque */
+  --accent: 262.1 83.3% 57.8%;      /* #8B5CF6 - Violet-500 */
+  --accent-light: 266 100% 77%;     /* #C4B5FD - Violet-300 (para gradientes) */
+  --accent-foreground: 0 0% 100%;   /* #FFFFFF - Texto em accent */
+
+  /* Background - Fundo da aplicação */
+  --background: 240 5.9% 10%;       /* #18181B - Zinc-950 */
+  --foreground: 240 5% 96%;         /* #FAFAFA - Zinc-50 */
+
+  /* Card - Containers e cards */
+  --card: 240 4% 16%;               /* #27272A - Zinc-900 */
+  --card-foreground: 240 5% 96%;    /* #FAFAFA - Zinc-50 */
+
+  /* Popover - Popovers e dropdowns */
+  --popover: 240 4% 16%;            /* #27272A - Zinc-900 */
+  --popover-foreground: 240 5% 96%; /* #FAFAFA - Zinc-50 */
+
+  /* Secondary - Cor secundária */
+  --secondary: 240 3.7% 15.9%;      /* #3F3F46 - Zinc-800 */
+  --secondary-foreground: 240 5% 96%; /* #FAFAFA - Zinc-50 */
+
+  /* Muted - Elementos silenciados */
+  --muted: 240 3.7% 15.9%;          /* #3F3F46 - Zinc-800 */
+  --muted-foreground: 240 5% 64.9%; /* #A1A1AA - Zinc-400 */
+
+  /* Destructive - Ações destrutivas e erros */
+  --destructive: 0 72% 51%;         /* #EF4444 - Red-500 */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+
+  /* ============================================
+     SEMANTIC COLORS - Cores semânticas
+     ============================================ */
+
+  /* Success - Sucesso e confirmações */
+  --success: 142 71% 45%;           /* #22C55E - Green-500 */
+  --success-foreground: 0 0% 100%;  /* #FFFFFF */
+
+  /* Warning - Avisos */
+  --warning: 45 93% 47%;            /* #FACC15 - Yellow-500 */
+  --warning-foreground: 0 0% 0%;    /* #000000 */
+
+  /* Info - Informações */
+  --info: 221 83% 53%;              /* #3B82F6 - Blue-500 */
+  --info-foreground: 0 0% 100%;     /* #FFFFFF */
+
+  /* ============================================
+     UI ELEMENTS - Elementos de interface
+     ============================================ */
+
+  /* Border - Bordas */
+  --border: 240 3.7% 15.9%;         /* #3F3F46 - Zinc-800 */
+
+  /* Input - Campos de formulário */
+  --input: 240 3.7% 15.9%;          /* #3F3F46 - Zinc-800 */
+
+  /* Ring - Focus rings */
+  --ring: 262.1 83.3% 57.8%;        /* #8B5CF6 - Violet-500 */
+
+  /* ============================================
+     SPACING & LAYOUT
+     ============================================ */
+
+  /* Border Radius */
+  --radius: 0.5rem;                 /* 8px */
+  --radius-sm: 0.25rem;             /* 4px */
+  --radius-md: 0.375rem;            /* 6px */
+  --radius-lg: 0.5rem;              /* 8px */
+  --radius-xl: 0.75rem;             /* 12px */
+  --radius-2xl: 1rem;               /* 16px */
+  --radius-full: 9999px;            /* Círculo completo */
+
+  /* Sidebar */
+  --sidebar-width: 16rem;           /* 256px */
+  --sidebar-collapsed-width: 4rem;  /* 64px */
+
+  /* Header */
+  --header-height: 4rem;            /* 64px */
+
+  /* ============================================
+     CHART COLORS - Cores para gráficos
+     ============================================ */
+
+  --chart-red: 0 72% 51%;           /* #EF4444 - Red-500 */
+  --chart-orange: 25 95% 53%;       /* #F97316 - Orange-500 */
+  --chart-yellow: 45 93% 47%;       /* #FACC15 - Yellow-500 */
+  --chart-green: 142 71% 45%;       /* #22C55E - Green-500 */
+  --chart-blue: 221 83% 53%;        /* #3B82F6 - Blue-500 */
+  --chart-violet: 262.1 83.3% 57.8%; /* #8B5CF6 - Violet-500 */
+  --chart-pink: 330 81% 60%;        /* #EC4899 - Pink-500 */
+  --chart-cyan: 189 94% 43%;        /* #06B6D4 - Cyan-500 */
+
+  /* ============================================
+     ANIMATIONS & TRANSITIONS
+     ============================================ */
+
+  /* Timing functions */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+/* ============================================
+   DARK THEME (Padrão)
+   ============================================ */
+.dark {
+  /* Mantém as mesmas variáveis para compatibilidade */
+  --background: 240 5.9% 10%;
+  --foreground: 240 5% 96%;
+  --card: 240 4% 16%;
+  --card-foreground: 240 5% 96%;
+  --popover: 240 4% 16%;
+  --popover-foreground: 240 5% 96%;
+  --primary: 198 72% 19%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 240 5% 96%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 262.1 83.3% 57.8%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 262.1 83.3% 57.8%;
+}
+
+/* ============================================
+   LIGHT THEME (Opcional - se precisar no futuro)
+   ============================================ */
+.light {
+  --background: 0 0% 100%;          /* #FFFFFF */
+  --foreground: 240 10% 3.9%;       /* #09090B - Zinc-950 */
+  --card: 0 0% 100%;                /* #FFFFFF */
+  --card-foreground: 240 10% 3.9%;  /* #09090B */
+  --popover: 0 0% 100%;             /* #FFFFFF */
+  --popover-foreground: 240 10% 3.9%; /* #09090B */
+  --primary: 198 72% 19%;           /* #0F3D52 */
+  --primary-foreground: 0 0% 100%;  /* #FFFFFF */
+  --secondary: 240 4.8% 95.9%;      /* #F4F4F5 - Zinc-100 */
+  --secondary-foreground: 240 5.9% 10%; /* #18181B */
+  --muted: 240 4.8% 95.9%;          /* #F4F4F5 */
+  --muted-foreground: 240 3.8% 46.1%; /* #71717A - Zinc-500 */
+  --accent: 262.1 83.3% 57.8%;      /* #8B5CF6 */
+  --accent-foreground: 0 0% 100%;   /* #FFFFFF */
+  --destructive: 0 72% 51%;         /* #EF4444 */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --border: 240 5.9% 90%;           /* #E4E4E7 - Zinc-200 */
+  --input: 240 5.9% 90%;            /* #E4E4E7 */
+  --ring: 262.1 83.3% 57.8%;        /* #8B5CF6 */
+}

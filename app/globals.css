@@ -2,54 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    /* Dark theme como padrão - Zinc palette com acentos Violet */
-    --background: 240 5.9% 10%;         /* zinc-950 */
-    --foreground: 240 5% 96%;           /* zinc-50 */
-    --card: 240 4% 16%;                 /* zinc-900 */
-    --card-foreground: 240 5% 96%;      /* zinc-50 */
-    --popover: 240 4% 16%;              /* zinc-900 */
-    --popover-foreground: 240 5% 96%;   /* zinc-50 */
-    --primary: 262.1 83.3% 57.8%;       /* violet-500 */
-    --primary-foreground: 240 5% 96%;   /* zinc-50 */
-    --secondary: 240 3.7% 15.9%;        /* zinc-800 */
-    --secondary-foreground: 240 5% 96%; /* zinc-50 */
-    --muted: 240 3.7% 15.9%;            /* zinc-800 */
-    --muted-foreground: 240 5% 64.9%;   /* zinc-400 */
-    --accent: 262.1 83.3% 57.8%;        /* violet-500 */
-    --accent-foreground: 240 5% 96%;    /* zinc-50 */
-    --destructive: 0 72% 51%;           /* red-500 */
-    --destructive-foreground: 240 5% 96%; /* zinc-50 */
-    --border: 240 3.7% 15.9%;           /* zinc-800 */
-    --input: 240 3.7% 15.9%;            /* zinc-800 */
-    --ring: 262.1 83.3% 57.8%;          /* violet-500 */
-    --radius: 0.5rem;
-  }
+/* Import Design Tokens - todas as variáveis CSS */
+@import '../styles/design-tokens.module.css';
 
-  .dark {
-    /* Mantém as mesmas variáveis para compatibilidade */
-    --background: 240 5.9% 10%;
-    --foreground: 240 5% 96%;
-    --card: 240 4% 16%;
-    --card-foreground: 240 5% 96%;
-    --popover: 240 4% 16%;
-    --popover-foreground: 240 5% 96%;
-    --primary: 262.1 83.3% 57.8%;
-    --primary-foreground: 240 5% 96%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 240 5% 96%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 262.1 83.3% 57.8%;
-    --accent-foreground: 240 5% 96%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 240 5% 96%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 262.1 83.3% 57.8%;
-  }
-}
+/* Import Animations - keyframes e classes de animação */
+@import '../styles/animations.module.css';
 
 @layer base {
   * {

@@ -9,11 +9,65 @@ Plataforma de Avaliação de Riscos Psicossociais - Conforme NR-1, LGPD, GRO/PGR
 - **Banco de Dados**: PostgreSQL 15+ com Prisma ORM
 - **Autenticação**: NextAuth.js v5
 - **UI**: Shadcn/ui + Tailwind CSS
-- **Gráficos**: Recharts
+- **Gráficos**: Recharts + Chart.js
 - **Email**: Resend + React Email
 - **Tabelas**: TanStack Table
 - **Validação**: Zod
 - **Formulários**: React Hook Form
+
+## Design System
+
+O VIVAMENTE360 utiliza um sistema de design tokens centralizado para garantir consistência visual e facilitar manutenção.
+
+### 🎨 Tokens CSS
+
+Todas as cores, espaçamentos e animações são definidas como variáveis CSS (custom properties) em `styles/design-tokens.module.css`:
+
+- **Cores principais**: `--primary` (#0F3D52), `--accent` (#8B5CF6)
+- **Cores semânticas**: `--success`, `--warning`, `--destructive`, `--info`
+- **Cores para gráficos**: 8 cores pré-definidas (red, orange, yellow, green, blue, violet, pink, cyan)
+- **Espaçamentos**: Border radius, largura de sidebar, altura de header
+- **Animações**: Timing functions, durations, keyframes
+
+### 📦 Componentes
+
+#### Layout Components
+- `MainLayout` - Layout principal com sidebar e header responsivos
+- `Sidebar` - Navegação lateral com estados collapsed/expanded
+- `MobileNav` - Navegação mobile com drawer e bottom bar
+- `Header` - Header com breadcrumb e notificações
+
+#### UI Components
+- `Button`, `Card`, `Input`, `Badge`, `Alert` (Shadcn/ui)
+- `OptionLabel` - Cards de opção com radio buttons
+- `ProgressBar` - Barra de progresso com gradiente
+
+#### Chart Components
+- `RadarChart` - Gráficos radar com Chart.js
+- `PyramidChart` - Gráficos de pirâmide
+
+### 🚫 Regras de Design
+
+**PROIBIDO usar cores hex hardcoded!**
+
+```tsx
+// ❌ ERRADO
+<div style={{ color: '#8B5CF6' }}>
+
+// ✅ CORRETO
+<div className="text-accent">
+// ou
+<div style={{ color: 'hsl(var(--accent))' }}>
+```
+
+**Verificação automática:**
+```bash
+npm run scan:hex  # Detecta e reporta hex hardcoded
+```
+
+### 📚 Documentação
+
+Ver documentação completa em [`docs/DESIGN_TOKENS.md`](docs/DESIGN_TOKENS.md)
 
 ## Estrutura do Projeto
 

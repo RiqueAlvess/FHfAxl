@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "name": "VIVAMENTE360 Design Tokens",
+  "description": "Sistema de design tokens centralizado para exportação e uso em ferramentas de design (Figma, etc.)",
+  "version": "1.0.0",
+  "tokens": {
+    "colors": {
+      "primary": {
+        "value": "#0F3D52",
+        "hsl": "198 72% 19%",
+        "description": "Cor principal da marca - Teal escuro",
+        "usage": "Botões primários, links, elementos de destaque da marca"
+      },
+      "primary-foreground": {
+        "value": "#FFFFFF",
+        "hsl": "0 0% 100%",
+        "description": "Texto sobre cor primary",
+        "usage": "Texto em botões primários, labels em primary"
+      },
+      "accent": {
+        "value": "#8B5CF6",
+        "hsl": "262.1 83.3% 57.8%",
+        "description": "Cor de destaque - Violet 500",
+        "usage": "Elementos interativos, hover states, focus rings"
+      },
+      "accent-light": {
+        "value": "#C4B5FD",
+        "hsl": "266 100% 77%",
+        "description": "Cor de destaque clara - Violet 300",
+        "usage": "Gradientes com accent, estados hover claros"
+      },
+      "accent-foreground": {
+        "value": "#FFFFFF",
+        "hsl": "0 0% 100%",
+        "description": "Texto sobre cor accent",
+        "usage": "Texto em elementos accent"
+      },
+      "background": {
+        "value": "#18181B",
+        "hsl": "240 5.9% 10%",
+        "description": "Fundo principal - Zinc 950",
+        "usage": "Background da página principal"
+      },
+      "foreground": {
+        "value": "#FAFAFA",
+        "hsl": "240 5% 96%",
+        "description": "Texto principal - Zinc 50",
+        "usage": "Texto principal da aplicação"
+      },
+      "card": {
+        "value": "#27272A",
+        "hsl": "240 4% 16%",
+        "description": "Background de cards - Zinc 900",
+        "usage": "Cards, containers elevados"
+      },
+      "card-foreground": {
+        "value": "#FAFAFA",
+        "hsl": "240 5% 96%",
+        "description": "Texto em cards",
+        "usage": "Texto dentro de cards"
+      },
+      "popover": {
+        "value": "#27272A",
+        "hsl": "240 4% 16%",
+        "description": "Background de popovers - Zinc 900",
+        "usage": "Dropdowns, tooltips, modals"
+      },
+      "popover-foreground": {
+        "value": "#FAFAFA",
+        "hsl": "240 5% 96%",
+        "description": "Texto em popovers",
+        "usage": "Texto em dropdowns e tooltips"
+      },
+      "secondary": {
+        "value": "#3F3F46",
+        "hsl": "240 3.7% 15.9%",
+        "description": "Cor secundária - Zinc 800",
+        "usage": "Botões secundários, elementos menos proeminentes"
+      },
+      "secondary-foreground": {
+        "value": "#FAFAFA",
+        "hsl": "240 5% 96%",
+        "description": "Texto sobre cor secondary",
+        "usage": "Texto em botões secundários"
+      },
+      "muted": {
+        "value": "#3F3F46",
+        "hsl": "240 3.7% 15.9%",
+        "description": "Background silenciado - Zinc 800",
+        "usage": "Backgrounds de elementos desativados ou menos importantes"
+      },
+      "muted-foreground": {
+        "value": "#A1A1AA",
+        "hsl": "240 5% 64.9%",
+        "description": "Texto silenciado - Zinc 400",
+        "usage": "Texto de placeholder, descrições, labels secundários"
+      },
+      "destructive": {
+        "value": "#EF4444",
+        "hsl": "0 72% 51%",
+        "description": "Cor destrutiva - Red 500",
+        "usage": "Botões de deletar, mensagens de erro, avisos críticos"
+      },
+      "destructive-foreground": {
+        "value": "#FFFFFF",
+        "hsl": "0 0% 100%",
+        "description": "Texto sobre cor destructive",
+        "usage": "Texto em botões destrutivos"
+      },
+      "success": {
+        "value": "#22C55E",
+        "hsl": "142 71% 45%",
+        "description": "Cor de sucesso - Green 500",
+        "usage": "Mensagens de sucesso, confirmações, ícones positivos"
+      },
+      "success-foreground": {
+        "value": "#FFFFFF",
+        "hsl": "0 0% 100%",
+        "description": "Texto sobre cor success",
+        "usage": "Texto em mensagens de sucesso"
+      },
+      "warning": {
+        "value": "#FACC15",
+        "hsl": "45 93% 47%",
+        "description": "Cor de aviso - Yellow 500",
+        "usage": "Avisos, alertas não críticos"
+      },
+      "warning-foreground": {
+        "value": "#000000",
+        "hsl": "0 0% 0%",
+        "description": "Texto sobre cor warning",
+        "usage": "Texto em avisos amarelos"
+      },
+      "info": {
+        "value": "#3B82F6",
+        "hsl": "221 83% 53%",
+        "description": "Cor informativa - Blue 500",
+        "usage": "Mensagens informativas, dicas"
+      },
+      "info-foreground": {
+        "value": "#FFFFFF",
+        "hsl": "0 0% 100%",
+        "description": "Texto sobre cor info",
+        "usage": "Texto em mensagens informativas"
+      },
+      "border": {
+        "value": "#3F3F46",
+        "hsl": "240 3.7% 15.9%",
+        "description": "Cor de bordas - Zinc 800",
+        "usage": "Bordas de inputs, cards, dividers"
+      },
+      "input": {
+        "value": "#3F3F46",
+        "hsl": "240 3.7% 15.9%",
+        "description": "Background de inputs - Zinc 800",
+        "usage": "Background de campos de formulário"
+      },
+      "ring": {
+        "value": "#8B5CF6",
+        "hsl": "262.1 83.3% 57.8%",
+        "description": "Cor de focus ring - Violet 500",
+        "usage": "Outline de elementos focados (acessibilidade)"
+      }
+    },
+    "chartColors": {
+      "red": {
+        "value": "#EF4444",
+        "hsl": "0 72% 51%",
+        "description": "Vermelho para gráficos - Red 500"
+      },
+      "orange": {
+        "value": "#F97316",
+        "hsl": "25 95% 53%",
+        "description": "Laranja para gráficos - Orange 500"
+      },
+      "yellow": {
+        "value": "#FACC15",
+        "hsl": "45 93% 47%",
+        "description": "Amarelo para gráficos - Yellow 500"
+      },
+      "green": {
+        "value": "#22C55E",
+        "hsl": "142 71% 45%",
+        "description": "Verde para gráficos - Green 500"
+      },
+      "blue": {
+        "value": "#3B82F6",
+        "hsl": "221 83% 53%",
+        "description": "Azul para gráficos - Blue 500"
+      },
+      "violet": {
+        "value": "#8B5CF6",
+        "hsl": "262.1 83.3% 57.8%",
+        "description": "Violeta para gráficos - Violet 500"
+      },
+      "pink": {
+        "value": "#EC4899",
+        "hsl": "330 81% 60%",
+        "description": "Rosa para gráficos - Pink 500"
+      },
+      "cyan": {
+        "value": "#06B6D4",
+        "hsl": "189 94% 43%",
+        "description": "Ciano para gráficos - Cyan 500"
+      }
+    },
+    "spacing": {
+      "radius": {
+        "value": "0.5rem",
+        "description": "Border radius padrão - 8px"
+      },
+      "radius-sm": {
+        "value": "0.25rem",
+        "description": "Border radius pequeno - 4px"
+      },
+      "radius-md": {
+        "value": "0.375rem",
+        "description": "Border radius médio - 6px"
+      },
+      "radius-lg": {
+        "value": "0.5rem",
+        "description": "Border radius grande - 8px"
+      },
+      "radius-xl": {
+        "value": "0.75rem",
+        "description": "Border radius extra-grande - 12px"
+      },
+      "radius-2xl": {
+        "value": "1rem",
+        "description": "Border radius 2x extra-grande - 16px"
+      },
+      "radius-full": {
+        "value": "9999px",
+        "description": "Border radius circular completo"
+      },
+      "sidebar-width": {
+        "value": "16rem",
+        "description": "Largura da sidebar expandida - 256px"
+      },
+      "sidebar-collapsed-width": {
+        "value": "4rem",
+        "description": "Largura da sidebar colapsada - 64px"
+      },
+      "header-height": {
+        "value": "4rem",
+        "description": "Altura do header - 64px"
+      }
+    },
+    "animation": {
+      "timing": {
+        "ease-in-out": {
+          "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+          "description": "Função de timing ease-in-out"
+        },
+        "ease-out": {
+          "value": "cubic-bezier(0, 0, 0.2, 1)",
+          "description": "Função de timing ease-out"
+        },
+        "ease-in": {
+          "value": "cubic-bezier(0.4, 0, 1, 1)",
+          "description": "Função de timing ease-in"
+        }
+      },
+      "duration": {
+        "fast": {
+          "value": "150ms",
+          "description": "Duração rápida de animação"
+        },
+        "normal": {
+          "value": "300ms",
+          "description": "Duração normal de animação"
+        },
+        "slow": {
+          "value": "500ms",
+          "description": "Duração lenta de animação"
+        }
+      }
+    },
+    "shadows": {
+      "sm": {
+        "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "description": "Sombra pequena"
+      },
+      "md": {
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        "description": "Sombra média"
+      },
+      "lg": {
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "description": "Sombra grande"
+      },
+      "xl": {
+        "value": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+        "description": "Sombra extra-grande"
+      },
+      "2xl": {
+        "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+        "description": "Sombra 2x extra-grande"
+      }
+    }
+  }
+}
