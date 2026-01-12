@@ -29,6 +29,8 @@ type DashboardData = {
     dimensao: string;
     scoreMedio: number;
     desvioPadrao: number;
+    polaridade: "positiva" | "negativa";
+    count: number;
   }>;
 };
 
@@ -110,7 +112,7 @@ export default function DashboardEmpresasPage() {
       {/* Gráficos */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <DistribuicaoRiscoChart distribuicao={data.distribuicao} />
-        <DimensoesChart scoresDimensoes={data.scoresDimensoes} />
+        <DimensoesChart dimensoes={data.scoresDimensoes} />
       </div>
     </div>
   );

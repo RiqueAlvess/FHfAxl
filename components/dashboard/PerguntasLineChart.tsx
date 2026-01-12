@@ -30,9 +30,9 @@ export default function PerguntasLineChart({ perguntas }: PerguntasLineChartProp
 
   // Preparar dados para o gráfico
   const lineData = perguntasOrdenadas.map(p => ({
-    numero: `Q${p.numero}`,
-    score: p.scoreMedio,
     ...p,
+    numeroLabel: `Q${p.numero}`,
+    score: p.scoreMedio,
   }));
 
   // Calcular média geral
@@ -51,7 +51,7 @@ export default function PerguntasLineChart({ perguntas }: PerguntasLineChartProp
           <LineChart data={lineData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#3f3f46" />
             <XAxis
-              dataKey="numero"
+              dataKey="numeroLabel"
               tick={{ fill: "#a1a1aa", fontSize: 10 }}
               angle={-45}
               textAnchor="end"

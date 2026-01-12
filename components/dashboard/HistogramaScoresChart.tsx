@@ -64,10 +64,11 @@ export default function HistogramaScoresChart({ histograma }: HistogramaScoresCh
                 borderRadius: "0.5rem",
                 color: "#fafafa",
               }}
-              formatter={(value: number, name: string) => {
-                if (name === "frequencia") return [value, "Frequência"];
-                if (name === "percentual") return [`${value.toFixed(1)}%`, "Percentual"];
-                return [value, name];
+              formatter={(value: number | undefined, name: string | undefined) => {
+                const val = value ?? 0;
+                if (name === "frequencia") return [val, "Frequência"];
+                if (name === "percentual") return [`${val.toFixed(1)}%`, "Percentual"];
+                return [val, name];
               }}
             />
             <Legend

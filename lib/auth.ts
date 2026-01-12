@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import type { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +10,7 @@ const loginSchema = z.object({
   senha: z.string().min(8),
 });
 
-export const authOptions: NextAuthConfig = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -84,7 +83,7 @@ export const authOptions: NextAuthConfig = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
+    async jwt({ token, user, trigger, session }: any) {
       // Novo login - carregar dados do usuário
       if (user) {
         token.id = user.id;
@@ -102,7 +101,7 @@ export const authOptions: NextAuthConfig = {
 
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as Role;
@@ -119,7 +118,7 @@ export const authOptions: NextAuthConfig = {
     error: "/login",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 24 * 60 * 60, // 24 horas
   },
   secret: process.env.NEXTAUTH_SECRET,

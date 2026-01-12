@@ -25,6 +25,7 @@ export interface FiltrosRelatorio {
   cicloAvaliacaoId?: string;
   unidadeId?: string;
   setorId?: string;
+  cargoId?: string;
   periodoInicio?: Date;
   periodoFim?: Date;
 }

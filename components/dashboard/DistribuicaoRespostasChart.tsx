@@ -40,11 +40,10 @@ export default function DistribuicaoRespostasChart({ distribuicao }: Distribuica
 
   // Preparar dados para os gráficos
   const pieData = distribuicaoOrdenada.map((item) => ({
+    ...item,
     name: `${item.valor} - ${item.rotulo}`,
     value: item.frequencia,
-    percentual: item.percentual,
     cor: CORES_ESCALA[item.valor as keyof typeof CORES_ESCALA],
-    ...item,
   }));
 
   // Calcular total de respostas
@@ -72,7 +71,7 @@ export default function DistribuicaoRespostasChart({ distribuicao }: Distribuica
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ percentual, valor }) => `${valor}: ${percentual.toFixed(1)}%`}
+                  label={(props: any) => `${props.valor}: ${props.percentual.toFixed(1)}%`}
                   outerRadius={90}
                   fill="#8884d8"
                   dataKey="value"
@@ -88,10 +87,10 @@ export default function DistribuicaoRespostasChart({ distribuicao }: Distribuica
                     borderRadius: "0.5rem",
                     color: "#fafafa",
                   }}
-                  formatter={(value: number, name: string) => {
+                  formatter={(value: number | undefined, name: string | undefined) => {
                     const item = pieData.find(d => `${d.valor} - ${d.rotulo}` === name);
                     return [
-                      `${value} respostas (${item?.percentual.toFixed(1)}%)`,
+                      `${value ?? 0} respostas (${item?.percentual.toFixed(1)}%)`,
                       item?.rotulo
                     ];
                   }}
@@ -121,7 +120,7 @@ export default function DistribuicaoRespostasChart({ distribuicao }: Distribuica
                     borderRadius: "0.5rem",
                     color: "#fafafa",
                   }}
-                  formatter={(value: number) => [`${value} respostas`, "Frequência"]}
+                  formatter={(value: number | undefined) => [`${value ?? 0} respostas`, "Frequência"]}
                 />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {pieData.map((entry, index) => (

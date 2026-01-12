@@ -129,7 +129,7 @@ export function getClientIp(request: NextRequest): string {
   }
 
   // Fallback para IP remoto (não confiável em produção com proxies)
-  return request.ip || "unknown"
+  return (request as any).ip || "unknown"
 }
 
 /**

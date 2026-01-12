@@ -9,7 +9,7 @@ const usuarioSchema = z.object({
   nome: z.string().min(3, 'Nome deve ter no mínimo 3 caracteres'),
   email: z.string().email('Email inválido'),
   role: z.enum(['ADMIN', 'RH', 'LIDERANCA'], {
-    errorMap: () => ({ message: 'Role inválido' }),
+    message: 'Role inválido',
   }),
   empresaId: z.string().optional(),
   unidadeId: z.string().optional(),
@@ -169,7 +169,7 @@ export async function POST(req: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Dados inválidos', details: error.errors },
+        { error: 'Dados inválidos', details: error.issues },
         { status: 400 }
       );
     }

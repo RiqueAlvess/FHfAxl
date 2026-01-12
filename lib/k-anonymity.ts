@@ -300,9 +300,9 @@ export async function registrarTentativaAcessoNegada(
           motivo: 'K_ANONYMITY_NAO_ATENDIDO',
           count,
           minRequired: MIN_K_ANONYMITY,
-          filtros,
+          filtros: filtros as any,
           timestamp: new Date().toISOString(),
-        },
+        } as any,
         ipAddress: 'internal',
       },
     });
