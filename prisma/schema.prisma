@@ -49,6 +49,9 @@ model User {
   // Logs de auditoria
   auditLogs         AuditLog[]
 
+  // Notificações
+  notificacoes      Notificacao[]
+
   @@index([empresaId])
   @@index([email])
 }
@@ -338,4 +341,32 @@ model AuditLog {
   @@index([action])
   @@index([entity])
   @@index([timestamp])
+}
+
+// ============================================
+// NOTIFICAÇÕES
+// ============================================
+
+enum TipoNotificacao {
+  NOVO_CICLO
+  LEMBRETE_QUESTIONARIO
+  QUESTIONARIO_RESPONDIDO
+  RELATORIO_PRONTO
+  AVISO_SISTEMA
+}
+
+model Notificacao {
+  id          String            @id @default(cuid())
+  userId      String
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tipo        TipoNotificacao
+  titulo      String
+  mensagem    String
+  link        String?           // Link para a ação relacionada (opcional)
+  lida        Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+
+  @@index([userId])
+  @@index([lida])
+  @@index([createdAt])
 }
