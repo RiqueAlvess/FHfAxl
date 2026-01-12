@@ -58,6 +58,7 @@
     "recharts": "latest",
     "recharts-to-png": "^3.0.1",
     "resend": "latest",
+    "server-only": "^0.0.1",
     "sonner": "latest",
     "tailwind-merge": "latest",
     "typescript": "latest",
