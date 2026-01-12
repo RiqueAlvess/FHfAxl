@@ -30,6 +30,8 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const empresaId = session.user.empresaId; // Type narrowing
+
     // Aplicar rate limiting: 30 requisições por minuto
     const rateLimitCheck = await withRateLimit({
       limiterType: "dashboard-analytics",
@@ -51,7 +53,7 @@ export async function GET(request: NextRequest) {
     };
 
     // Verificar K-Anonymity com os filtros
-    const resultado = await verificarKAnonymity(session.user.empresaId, filtros);
+    const resultado = await verificarKAnonymity(empresaId, filtros);
 
     if (!resultado.passed) {
       // Registrar bloqueio para auditoria
@@ -61,7 +63,7 @@ export async function GET(request: NextRequest) {
 
       await registrarBloqueioKAnonymity(
         session.user.id,
-        session.user.empresaId,
+        empresaId,
         filtros,
         resultado.count,
         resultado.minRequired,
@@ -84,7 +86,7 @@ export async function GET(request: NextRequest) {
 
     await registrarVisualizacaoAnalytics(
       session.user.id,
-      session.user.empresaId,
+      empresaId,
       filtros,
       resultado.count,
       ipAddress
@@ -93,7 +95,7 @@ export async function GET(request: NextRequest) {
     // Buscar dados (com filtros se fornecidos)
     // Cache de 5 minutos para melhorar performance
     const cacheKey = CacheKeys.analytics(
-      session.user.empresaId,
+      empresaId,
       filtros.cicloAvaliacaoId || 'all'
     );
 
@@ -101,9 +103,9 @@ export async function GET(request: NextRequest) {
       cacheKey,
       async () => {
         const [kpis, distribuicao, scoresDimensoes] = await Promise.all([
-          calcularKPIs(session.user.empresaId),
-          getDistribuicaoRisco(session.user.empresaId),
-          getScoresPorDimensao(session.user.empresaId),
+          calcularKPIs(empresaId),
+          getDistribuicaoRisco(empresaId),
+          getScoresPorDimensao(empresaId),
         ]);
         return { kpis, distribuicao, scoresDimensoes };
       },

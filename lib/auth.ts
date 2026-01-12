@@ -1,5 +1,4 @@
-import "server-only";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +10,7 @@ const loginSchema = z.object({
   senha: z.string().min(8),
 });
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -19,8 +18,10 @@ export const authOptions = {
         email: { label: "Email", type: "email" },
         senha: { label: "Senha", type: "password" },
       },
-      async authorize(credentials, _request) {
+      async authorize(credentials) {
         try {
+          if (!credentials) return null;
+
           // Validar dados de entrada
           const { email, senha } = loginSchema.parse(credentials);
 
@@ -84,7 +85,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger, session }: any) {
+    async jwt({ token, user }) {
       // Novo login - carregar dados do usuário
       if (user) {
         token.id = user.id;
@@ -95,14 +96,9 @@ export const authOptions = {
         token.forcarTrocaSenha = user.forcarTrocaSenha;
       }
 
-      // Atualizar token se sessão mudou (ex: perfil atualizado)
-      if (trigger === 'update' && session) {
-        token = { ...token, ...session };
-      }
-
       return token;
     },
-    async session({ session, token }: any) {
+    async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as Role;
@@ -125,6 +121,7 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-// Exporta apenas funções server-side
-// Para signIn e signOut no client, importe diretamente de "next-auth/react"
-export const { handlers, auth } = NextAuth(authOptions);
+export default NextAuth(authOptions);
+
+// Helper function para obter a sessão no servidor (compatível com NextAuth v4)
+export const auth = () => getServerSession(authOptions);

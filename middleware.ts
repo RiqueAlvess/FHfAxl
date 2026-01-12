@@ -1,12 +1,13 @@
-import { auth } from "@/lib/auth";
+import { withAuth } from "next-auth/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { canAccessAdminPanel } from "@/lib/authorization";
 import { globalRateLimiter } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/rate-limit-helpers";
 
-export default auth(async (req: any) => {
-  const session = req.auth;
-  const path = req.nextUrl.pathname;
+export default withAuth(
+  async function middleware(req) {
+    const token = req.nextauth.token;
+    const path = req.nextUrl.pathname;
 
   // ============================================================================
   // RATE LIMITING GLOBAL - Primeira camada de proteção
@@ -66,31 +67,48 @@ export default auth(async (req: any) => {
     return NextResponse.next();
   }
 
-  // Verificar se está autenticado
-  if (!session?.user) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
-
   // Verificar se usuário precisa trocar senha
-  if (session.user.forcarTrocaSenha && !path.startsWith("/trocar-senha")) {
+  if (token?.forcarTrocaSenha && !path.startsWith("/trocar-senha")) {
     return NextResponse.redirect(new URL("/trocar-senha", req.url));
   }
 
   // Proteger rotas de admin - apenas ADMIN pode acessar
   if (path.startsWith("/admin")) {
-    if (!canAccessAdminPanel(session)) {
+    if (token?.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
   }
 
   // Redirecionar ADMIN para painel admin se tentar acessar dashboard
-  if (path === "/dashboard" && session.user.role === "ADMIN") {
+  if (path === "/dashboard" && token?.role === "ADMIN") {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
 
   // Permitir acesso
   return NextResponse.next();
-});
+  },
+  {
+    callbacks: {
+      authorized: ({ token, req }) => {
+        const path = req.nextUrl.pathname;
+
+        // Rotas públicas
+        const isPublicRoute =
+          path.startsWith("/login") ||
+          path.startsWith("/recuperar-senha") ||
+          path.startsWith("/redefinir-senha") ||
+          path.startsWith("/questionario") ||
+          path.startsWith("/FHfAxl") ||
+          path === "/";
+
+        if (isPublicRoute) return true;
+
+        // Requer autenticação
+        return !!token;
+      },
+    },
+  }
+);
 
 export const config = {
   matcher: [

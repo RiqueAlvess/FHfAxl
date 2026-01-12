@@ -48,7 +48,7 @@
     "lucide-react": "latest",
     "nanoid": "latest",
     "next": "^16.1.1",
-    "next-auth": "latest",
+    "next-auth": "^4.24.11",
     "papaparse": "latest",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.1",
