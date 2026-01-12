@@ -10,7 +10,10 @@ import {
   Shield,
   LogOut,
   Database,
+  BarChart3,
+  FileText,
 } from "lucide-react";
+import { AdminContentWrapper } from "@/components/admin/AdminContentWrapper";
 
 export default async function AdminLayout({
   children,
@@ -65,6 +68,35 @@ export default async function AdminLayout({
             </Button>
           </Link>
 
+          <div className="pt-2 border-t border-zinc-800">
+            <p className="px-3 py-2 text-xs font-semibold text-zinc-500 uppercase">
+              Visualizações por Empresa
+            </p>
+          </div>
+
+          <Link href="/admin/dashboard-empresas">
+            <Button variant="ghost" className="w-full justify-start text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800 transition-colors">
+              <BarChart3 className="mr-2 h-4 w-4" />
+              Dashboard Empresas
+            </Button>
+          </Link>
+
+          <Link href="/admin/colaboradores">
+            <Button variant="ghost" className="w-full justify-start text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800 transition-colors">
+              <Users className="mr-2 h-4 w-4" />
+              Colaboradores
+            </Button>
+          </Link>
+
+          <Link href="/admin/relatorios">
+            <Button variant="ghost" className="w-full justify-start text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800 transition-colors">
+              <FileText className="mr-2 h-4 w-4" />
+              Relatórios
+            </Button>
+          </Link>
+
+          <div className="pt-2 border-t border-zinc-800 mt-2"></div>
+
           <Link href="/admin/auditoria">
             <Button variant="ghost" className="w-full justify-start text-zinc-300 hover:text-zinc-50 hover:bg-zinc-800 transition-colors">
               <Database className="mr-2 h-4 w-4" />
@@ -98,7 +130,9 @@ export default async function AdminLayout({
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto bg-zinc-950">
-        <div className="p-8">{children}</div>
+        <AdminContentWrapper>
+          <div className="p-8">{children}</div>
+        </AdminContentWrapper>
       </main>
     </div>
   );
