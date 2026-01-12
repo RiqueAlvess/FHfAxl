@@ -134,6 +134,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Sem permissão" }, { status: 403 });
     }
 
+    if (!session.user.empresaId) {
+      return NextResponse.json({ error: "Usuário não está vinculado a uma empresa" }, { status: 400 });
+    }
+
     // Aplicar rate limiting: 30 requisições por minuto
     const rateLimitCheck = await withRateLimit({
       limiterType: "api-write",
