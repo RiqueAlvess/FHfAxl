@@ -181,6 +181,22 @@ export const apiGeneralLimiter = redis ? new Ratelimit({
 }) : null
 
 /**
+ * Rate Limiter Global (Middleware)
+ * Limite: 100 requisições por 10 segundos por IP
+ * Protege: TODA a aplicação contra abuso, DDoS, scrapers
+ * Aplicado: Em TODAS as rotas através do middleware
+ *
+ * Nota: Este é o primeiro nível de proteção. Rotas específicas
+ * podem ter limitadores adicionais mais restritivos.
+ */
+export const globalRateLimiter = redis ? new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(100, "10 s"),
+  analytics: true,
+  prefix: "middleware:global",
+}) : null
+
+/**
  * Tipos de Rate Limiters disponíveis
  */
 export type RateLimiterType =
@@ -196,6 +212,7 @@ export type RateLimiterType =
   | "api-read"
   | "api-write"
   | "api-general"
+  | "global"
 
 /**
  * Mapeia o tipo de rate limiter para sua instância
@@ -226,6 +243,8 @@ export function getRateLimiter(type: RateLimiterType): Ratelimit | null {
       return apiWriteLimiter
     case "api-general":
       return apiGeneralLimiter
+    case "global":
+      return globalRateLimiter
     default:
       return null
   }
