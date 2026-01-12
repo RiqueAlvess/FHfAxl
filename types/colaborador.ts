@@ -19,7 +19,7 @@ export const createColaboradorSchema = z.object({
   setorId: z.string().min(1, "Setor é obrigatório"),
   cargoId: z.string().min(1, "Cargo é obrigatório"),
   dataNascimento: z.string().optional().nullable(),
-  sexo: z.enum(["MASCULINO", "FEMININO", "OUTRO", "NAO_INFORMADO"]).optional().default("NAO_INFORMADO"),
+  sexo: z.enum(["MASCULINO", "FEMININO", "OUTRO", "NAO_INFORMADO"]),
 });
 
 export type CreateColaboradorInput = z.infer<typeof createColaboradorSchema>;

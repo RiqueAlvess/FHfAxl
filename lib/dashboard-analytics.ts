@@ -51,6 +51,7 @@ export interface ScorePorDimensao {
   dimensao: string;
   scoreMedio: number;
   desvioPadrao: number;
+  polaridade: "positiva" | "negativa";
   count: number;
 }
 
@@ -329,6 +330,7 @@ export async function getScoresPorDimensao(empresaId: string): Promise<ScorePorD
       dimensao: dim.nome,
       scoreMedio: Number(media.toFixed(2)),
       desvioPadrao: Number(desvioPadrao.toFixed(2)),
+      polaridade: dim.tipo as "positiva" | "negativa",
       count: scores.length,
     };
   });
@@ -508,7 +510,7 @@ export async function calcularCorrelacao(empresaId: string): Promise<CorrelacaoD
         empresaId,
         ativo: true,
       },
-      tempoResposta: { not: null },
+      tempoResposta: { not: null as any },
     },
     select: {
       tempoResposta: true,
@@ -590,10 +592,10 @@ export async function calcularTendencia(empresaId: string): Promise<TendenciaDat
     },
     select: {
       scoreGlobal: true,
-      criadoEm: true,
+      createdAt: true,
     },
     orderBy: {
-      criadoEm: "asc",
+      createdAt: "asc",
     },
   });
 
@@ -614,9 +616,9 @@ export async function calcularTendencia(empresaId: string): Promise<TendenciaDat
   const pontosPorMes = new Map<string, { soma: number; count: number; data: Date }>();
 
   respostas.forEach((r) => {
-    const mes = `${r.criadoEm.getFullYear()}-${String(r.criadoEm.getMonth() + 1).padStart(2, "0")}`;
+    const mes = `${r.createdAt.getFullYear()}-${String(r.createdAt.getMonth() + 1).padStart(2, "0")}`;
     if (!pontosPorMes.has(mes)) {
-      pontosPorMes.set(mes, { soma: 0, count: 0, data: r.criadoEm });
+      pontosPorMes.set(mes, { soma: 0, count: 0, data: r.createdAt });
     }
     const ponto = pontosPorMes.get(mes)!;
     ponto.soma += r.scoreGlobal;
@@ -674,13 +676,13 @@ export async function getPerguntasCriticas(empresaId: string, top: number = 10):
       },
     },
     select: {
-      respostasDemandas: true,
-      respostasControle: true,
-      respostasApoioGerencial: true,
-      respostasApoioColegas: true,
-      respostasRelacionamentos: true,
-      respostasPapel: true,
-      respostasMudancas: true,
+      demandas: true,
+      controle: true,
+      apoioGerencial: true,
+      apoioColegas: true,
+      relacionamentos: true,
+      papel: true,
+      mudancas: true,
     },
   });
 
@@ -689,13 +691,13 @@ export async function getPerguntasCriticas(empresaId: string, top: number = 10):
   const analise: Map<string, { soma: number; count: number; criticos: number }> = new Map();
 
   const dimensoes = [
-    { key: "respostasDemandas", nome: "Demandas", total: 8 },
-    { key: "respostasControle", nome: "Controle", total: 6 },
-    { key: "respostasApoioGerencial", nome: "Apoio Gerencial", total: 5 },
-    { key: "respostasApoioColegas", nome: "Apoio de Colegas", total: 4 },
-    { key: "respostasRelacionamentos", nome: "Relacionamentos", total: 4 },
-    { key: "respostasPapel", nome: "Papel", total: 5 },
-    { key: "respostasMudancas", nome: "Mudanças", total: 3 },
+    { key: "demandas", nome: "Demandas", total: 8 },
+    { key: "controle", nome: "Controle", total: 6 },
+    { key: "apoioGerencial", nome: "Apoio Gerencial", total: 5 },
+    { key: "apoioColegas", nome: "Apoio de Colegas", total: 4 },
+    { key: "relacionamentos", nome: "Relacionamentos", total: 4 },
+    { key: "papel", nome: "Papel", total: 5 },
+    { key: "mudancas", nome: "Mudanças", total: 3 },
   ];
 
   respostas.forEach((resposta) => {
@@ -756,13 +758,13 @@ export async function getPerguntasPositivas(empresaId: string, top: number = 10)
       },
     },
     select: {
-      respostasDemandas: true,
-      respostasControle: true,
-      respostasApoioGerencial: true,
-      respostasApoioColegas: true,
-      respostasRelacionamentos: true,
-      respostasPapel: true,
-      respostasMudancas: true,
+      demandas: true,
+      controle: true,
+      apoioGerencial: true,
+      apoioColegas: true,
+      relacionamentos: true,
+      papel: true,
+      mudancas: true,
     },
   });
 
@@ -771,13 +773,13 @@ export async function getPerguntasPositivas(empresaId: string, top: number = 10)
   const analise: Map<string, { soma: number; count: number; positivos: number }> = new Map();
 
   const dimensoes = [
-    { key: "respostasDemandas", nome: "Demandas" },
-    { key: "respostasControle", nome: "Controle" },
-    { key: "respostasApoioGerencial", nome: "Apoio Gerencial" },
-    { key: "respostasApoioColegas", nome: "Apoio de Colegas" },
-    { key: "respostasRelacionamentos", nome: "Relacionamentos" },
-    { key: "respostasPapel", nome: "Papel" },
-    { key: "respostasMudancas", nome: "Mudanças" },
+    { key: "demandas", nome: "Demandas" },
+    { key: "controle", nome: "Controle" },
+    { key: "apoioGerencial", nome: "Apoio Gerencial" },
+    { key: "apoioColegas", nome: "Apoio de Colegas" },
+    { key: "relacionamentos", nome: "Relacionamentos" },
+    { key: "papel", nome: "Papel" },
+    { key: "mudancas", nome: "Mudanças" },
   ];
 
   respostas.forEach((resposta) => {

@@ -393,7 +393,7 @@ export async function buscarAuditLogs(filtros: {
       include: {
         user: {
           select: {
-            name: true,
+            nome: true,
             email: true,
           },
         },
@@ -435,7 +435,7 @@ export async function buscarAcessosColaborador(
     include: {
       user: {
         select: {
-          name: true,
+          nome: true,
           email: true,
         },
       },
@@ -462,7 +462,7 @@ export async function gerarRelatorioAuditoria(
     include: {
       user: {
         select: {
-          name: true,
+          nome: true,
           email: true,
           empresaId: true,
         },

@@ -27,7 +27,7 @@ interface NavItem {
   label: string
   href: string
   icon: React.ElementType
-  allowedRoles?: ('ADMIN' | 'RH' | 'COLABORADOR')[]
+  allowedRoles?: ('ADMIN' | 'RH' | 'LIDERANCA' | 'COLABORADOR')[]
 }
 
 const navItems: NavItem[] = [

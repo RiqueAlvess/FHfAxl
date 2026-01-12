@@ -78,7 +78,7 @@ export default function DistribuicaoRiscoChart({ distribuicao }: DistribuicaoRis
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percentual }) => `${name}: ${percentual}%`}
+                  label={(props: any) => `${props.name}: ${props.percentual}%`}
                   outerRadius={90}
                   fill="#8884d8"
                   dataKey="value"
@@ -123,7 +123,7 @@ export default function DistribuicaoRiscoChart({ distribuicao }: DistribuicaoRis
                     borderRadius: "0.5rem",
                     color: "#fafafa",
                   }}
-                  formatter={(value: number) => [`${value.toFixed(1)}%`, "Percentual"]}
+                  formatter={(value: number | undefined) => [`${(value ?? 0).toFixed(1)}%`, "Percentual"]}
                 />
                 <Bar dataKey="percentualNum" radius={[0, 4, 4, 0]}>
                   {barData.map((entry, index) => (

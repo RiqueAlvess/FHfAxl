@@ -4,7 +4,7 @@ import { canAccessAdminPanel } from "@/lib/authorization";
 import { globalRateLimiter } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/rate-limit-helpers";
 
-export default auth(async (req) => {
+export default auth(async (req: any) => {
   const session = req.auth;
   const path = req.nextUrl.pathname;
 

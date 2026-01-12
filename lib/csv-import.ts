@@ -138,7 +138,7 @@ async function processBatch(
       // Processar sexo
       let sexo: "MASCULINO" | "FEMININO" | "OUTRO" | "NAO_INFORMADO" = "NAO_INFORMADO";
       if (validatedRow.sexo) {
-        const sexoMap: Record<string, typeof sexo> = {
+        const sexoMap: Record<string, "MASCULINO" | "FEMININO" | "OUTRO" | "NAO_INFORMADO"> = {
           M: "MASCULINO",
           F: "FEMININO",
           O: "OUTRO",

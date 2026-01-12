@@ -108,7 +108,7 @@ export async function PUT(
     const validation = updateColaboradorSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json(
-        { error: "Dados inválidos", details: validation.error.errors },
+        { error: "Dados inválidos", details: validation.error.issues },
         { status: 400 }
       );
     }

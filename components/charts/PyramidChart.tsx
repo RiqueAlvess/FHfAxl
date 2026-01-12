@@ -138,7 +138,7 @@ export function PyramidChart({
               label += ': '
             }
             // Mostra valores absolutos (sem negativos)
-            const value = Math.abs(context.parsed.x)
+            const value = Math.abs(context.parsed.x ?? 0)
             label += value.toLocaleString()
             return label
           },

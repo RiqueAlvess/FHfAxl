@@ -27,8 +27,6 @@ interface ConsistenciaInternaChartProps {
 export default function ConsistenciaInternaChart({ dimensoes }: ConsistenciaInternaChartProps) {
   // Preparar dados para scatter plot
   const scatterData = dimensoes.map((dim) => ({
-    scoreMedio: dim.scoreMedio,
-    desvioPadrao: dim.desvioPadrao,
     ...dim,
   }));
 
