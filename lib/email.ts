@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Validar variáveis de ambiente
+if (!process.env.RESEND_API_KEY) {
+  console.warn("⚠️  RESEND_API_KEY não configurada. Emails não serão enviados.");
+}
+
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 interface SendEmailOptions {
   to: string;
@@ -9,17 +16,51 @@ interface SendEmailOptions {
 }
 
 export async function sendEmail({ to, subject, html }: SendEmailOptions) {
+  // Log em modo desenvolvimento
+  if (process.env.NODE_ENV === "development") {
+    console.log("=== EMAIL DEBUG ===");
+    console.log("To:", to);
+    console.log("Subject:", subject);
+    console.log("Has Resend configured:", !!resend);
+    console.log("==================");
+  }
+
+  // Verificar se Resend está configurado
+  if (!resend) {
+    const error = "RESEND_API_KEY não configurada";
+    console.error("❌", error);
+    return { success: false, error };
+  }
+
   try {
-    const data = await resend.emails.send({
-      from: process.env.EMAIL_FROM || "help@3sdev.com.br",
+    const fromEmail = process.env.EMAIL_FROM || "help@3sdev.com.br";
+
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
       to,
       subject,
       html,
     });
 
+    if (error) {
+      console.error("❌ Erro Resend:", error);
+      throw new Error(error.message);
+    }
+
+    if (process.env.NODE_ENV === "development") {
+      console.log("✅ Email enviado com sucesso:", data);
+    }
+
     return { success: true, data };
   } catch (error) {
-    console.error("Erro ao enviar email:", error);
+    console.error("❌ Erro ao enviar email:", error);
+
+    // Log detalhado do erro
+    if (error instanceof Error) {
+      console.error("Mensagem:", error.message);
+      console.error("Stack:", error.stack);
+    }
+
     return { success: false, error };
   }
 }
