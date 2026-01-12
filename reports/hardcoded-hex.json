@@ -1,0 +1,1750 @@
+{
+  "scannedAt": "2026-01-12T03:50:36.947Z",
+  "totalFiles": 16,
+  "filesWithHex": 16,
+  "totalOccurrences": 226,
+  "occurrences": [
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 76,
+      "column": 62,
+      "hex": "#3F3F46",
+      "context": "ke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 80,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 85,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 86,
+      "column": 87,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 90,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 91,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 93,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 119,
+      "column": 27,
+      "hex": "#8B5CF6",
+      "context": "=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 121,
+      "column": 84,
+      "hex": "#8B5CF6",
+      "context": " \"#8b5cf6\", fontSize: 12 }}",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 127,
+      "column": 27,
+      "hex": "#3B82F6",
+      "context": "=\"#3b82f6\"",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 129,
+      "column": 79,
+      "hex": "#3B82F6",
+      "context": " \"#3b82f6\", fontSize: 12 }}",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 134,
+      "column": 63,
+      "hex": "#3F3F46",
+      "context": "ll=\"#3f3f46\" barSize={2} />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 135,
+      "column": 54,
+      "hex": "#8B5CF6",
+      "context": "ll=\"#8b5cf6\" fillOpacity={0.6} barSize={60} radius",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 136,
+      "column": 63,
+      "hex": "#3F3F46",
+      "context": "ll=\"#3f3f46\" barSize={2} />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/BoxPlotChart.tsx",
+      "line": 142,
+      "column": 27,
+      "hex": "#EF4444",
+      "context": "#ef4444\"",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 49,
+      "column": 30,
+      "hex": "#22C55E",
+      "context": " <= 40) return \"#22c55e\"; // Verde - Satisfatório",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 50,
+      "column": 30,
+      "hex": "#EAB308",
+      "context": " <= 80) return \"#eab308\"; // Amarelo - Atenção"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 51,
+      "column": 13,
+      "hex": "#EF4444",
+      "context": "return \"#ef4444\"; // Vermelho - Crítico",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 82,
+      "column": 62,
+      "hex": "#3F3F46",
+      "context": "ke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 86,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 87,
+      "column": 95,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 92,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\", fontSize: 12 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 97,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 98,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 100,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 126,
+      "column": 43,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 133,
+      "column": 27,
+      "hex": "#8B5CF6",
+      "context": "=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 137,
+      "column": 28,
+      "hex": "#8B5CF6",
+      "context": "#8b5cf6\",",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 146,
+      "column": 27,
+      "hex": "#22C55E",
+      "context": "=\"#22c55e\"",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ComparativoUnidadesChart.tsx",
+      "line": 152,
+      "column": 27,
+      "hex": "#EAB308",
+      "context": "=\"#eab308\""
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 42,
+      "column": 53,
+      "hex": "#EF4444",
+      "context": "ediaDP) return \"#ef4444\";",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 44,
+      "column": 54,
+      "hex": "#F97316",
+      "context": "ediaDP) return \"#f97316\";",
+      "suggestedToken": "--chart-orange"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 46,
+      "column": 55,
+      "hex": "#22C55E",
+      "context": "ediaDP) return \"#22c55e\";",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 48,
+      "column": 13,
+      "hex": "#EAB308",
+      "context": "return \"#eab308\";"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 62,
+      "column": 58,
+      "hex": "#3F3F46",
+      "context": "stroke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 67,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 68,
+      "column": 91,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 75,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 76,
+      "column": 91,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 81,
+      "column": 35,
+      "hex": "#18181B",
+      "context": "r: \"#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 82,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "lid #3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 84,
+      "column": 25,
+      "hex": "#FAFAFA",
+      "context": "r: \"#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 122,
+      "column": 23,
+      "hex": "#8B5CF6",
+      "context": "roke=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 126,
+      "column": 24,
+      "hex": "#8B5CF6",
+      "context": "l: \"#8b5cf6\",",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 133,
+      "column": 23,
+      "hex": "#3B82F6",
+      "context": "roke=\"#3b82f6\"",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 137,
+      "column": 24,
+      "hex": "#3B82F6",
+      "context": "l: \"#3b82f6\",",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/ConsistenciaInternaChart.tsx",
+      "line": 146,
+      "column": 21,
+      "hex": "#8B5CF6",
+      "context": "fill=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 74,
+      "column": 62,
+      "hex": "#3F3F46",
+      "context": "ke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 79,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 80,
+      "column": 111,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 86,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 87,
+      "column": 93,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 93,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 94,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 96,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 119,
+      "column": 27,
+      "hex": "#8B5CF6",
+      "context": "=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 121,
+      "column": 91,
+      "hex": "#8B5CF6",
+      "context": " \"#8b5cf6\", fontSize: 11 }}",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 125,
+      "column": 27,
+      "hex": "#3B82F6",
+      "context": "=\"#3b82f6\"",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 127,
+      "column": 83,
+      "hex": "#3B82F6",
+      "context": " \"#3b82f6\", fontSize: 11 }}",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/CorrelacaoTempoChart.tsx",
+      "line": 133,
+      "column": 25,
+      "hex": "#8B5CF6",
+      "context": "=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DashboardCharts.tsx",
+      "line": 55,
+      "column": 18,
+      "hex": "#22C55E",
+      "context": "satisfatorio: \"#22c55e\",",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DashboardCharts.tsx",
+      "line": 56,
+      "column": 13,
+      "hex": "#EAB308",
+      "context": "atencao: \"#eab308\","
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DashboardCharts.tsx",
+      "line": 57,
+      "column": 13,
+      "hex": "#EF4444",
+      "context": "critico: \"#ef4444\",",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DashboardCharts.tsx",
+      "line": 58,
+      "column": 13,
+      "hex": "#3B82F6",
+      "context": "primary: \"#3b82f6\",",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DashboardCharts.tsx",
+      "line": 59,
+      "column": 15,
+      "hex": "#8B5CF6",
+      "context": "secondary: \"#8b5cf6\",",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DashboardCharts.tsx",
+      "line": 219,
+      "column": 31,
+      "hex": "#8884D8",
+      "context": "4d8\""
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 38,
+      "column": 31,
+      "hex": "#22C55E",
+      "context": "<= 7) return \"#22c55e\"; // Verde - Baixo risco",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 39,
+      "column": 32,
+      "hex": "#EAB308",
+      "context": "= 14) return \"#eab308\"; // Amarelo - Médio risco"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 40,
+      "column": 15,
+      "hex": "#EF4444",
+      "context": "return \"#ef4444\"; // Vermelho - Alto risco",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 43,
+      "column": 32,
+      "hex": "#22C55E",
+      "context": "= 14) return \"#22c55e\"; // Verde - Alto score posi",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 44,
+      "column": 31,
+      "hex": "#EAB308",
+      "context": ">= 7) return \"#eab308\"; // Amarelo - Score moderad"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 45,
+      "column": 15,
+      "hex": "#EF4444",
+      "context": "return \"#ef4444\"; // Vermelho - Baixo score",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 74,
+      "column": 58,
+      "hex": "#3F3F46",
+      "context": "stroke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 78,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 79,
+      "column": 91,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 84,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\", fontSize: 12 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 89,
+      "column": 35,
+      "hex": "#18181B",
+      "context": "r: \"#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 90,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "lid #3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 92,
+      "column": 25,
+      "hex": "#FAFAFA",
+      "context": "r: \"#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 117,
+      "column": 39,
+      "hex": "#A1A1AA",
+      "context": "lor: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 124,
+      "column": 23,
+      "hex": "#8B5CF6",
+      "context": "roke=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DimensoesChart.tsx",
+      "line": 126,
+      "column": 51,
+      "hex": "#8B5CF6",
+      "context": "ill: \"#8b5cf6\", fontSize: 11 }}",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 30,
+      "column": 7,
+      "hex": "#22C55E",
+      "context": "0: \"#22c55e\", // Verde - Nunca",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 31,
+      "column": 7,
+      "hex": "#84CC16",
+      "context": "1: \"#84cc16\", // Verde claro - Raram"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 32,
+      "column": 7,
+      "hex": "#EAB308",
+      "context": "2: \"#eab308\", // Amarelo - Às vezes"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 33,
+      "column": 7,
+      "hex": "#F97316",
+      "context": "3: \"#f97316\", // Laranja - Frequente",
+      "suggestedToken": "--chart-orange"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 34,
+      "column": 7,
+      "hex": "#EF4444",
+      "context": "4: \"#ef4444\", // Vermelho - Sempre",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 77,
+      "column": 25,
+      "hex": "#8884D8",
+      "context": "=\"#8884d8\""
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 86,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 87,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 89,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 107,
+      "column": 62,
+      "hex": "#3F3F46",
+      "context": "ke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 110,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 111,
+      "column": 99,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 114,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 115,
+      "column": 92,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 119,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 120,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRespostasChart.tsx",
+      "line": 122,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 27,
+      "column": 18,
+      "hex": "#22C55E",
+      "context": "satisfatorio: \"#22c55e\",",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 28,
+      "column": 13,
+      "hex": "#EAB308",
+      "context": "atencao: \"#eab308\","
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 29,
+      "column": 13,
+      "hex": "#EF4444",
+      "context": "critico: \"#ef4444\",",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 83,
+      "column": 25,
+      "hex": "#8884D8",
+      "context": "=\"#8884d8\""
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 92,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 93,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 95,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 106,
+      "column": 62,
+      "hex": "#3F3F46",
+      "context": "ke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 110,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 111,
+      "column": 98,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 116,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 121,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 122,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/DistribuicaoRiscoChart.tsx",
+      "line": 124,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 92,
+      "column": 58,
+      "hex": "#3F3F46",
+      "context": "stroke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 95,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\", fontSize: 12 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 101,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 102,
+      "column": 89,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 107,
+      "column": 35,
+      "hex": "#18181B",
+      "context": "r: \"#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 108,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "lid #3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 110,
+      "column": 25,
+      "hex": "#FAFAFA",
+      "context": "r: \"#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 133,
+      "column": 39,
+      "hex": "#A1A1AA",
+      "context": "lor: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 145,
+      "column": 21,
+      "hex": "#8B5CF6",
+      "context": "fill=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 154,
+      "column": 23,
+      "hex": "#8B5CF6",
+      "context": "roke=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 156,
+      "column": 29,
+      "hex": "#8B5CF6",
+      "context": "ill: \"#8b5cf6\", r: 5 }}",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 157,
+      "column": 41,
+      "hex": "#A78BFA",
+      "context": "ill: \"#a78bfa\" }}"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/EvolucaoTemporalChart.tsx",
+      "line": 165,
+      "column": 25,
+      "hex": "#3B82F6",
+      "context": "ke=\"#3b82f6\"",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 31,
+      "column": 35,
+      "hex": "#22C55E",
+      "context": " <= 40) return \"#22c55e\"; // Verde - Satisfatório",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 32,
+      "column": 35,
+      "hex": "#EAB308",
+      "context": " <= 80) return \"#eab308\"; // Amarelo - Atenção"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 33,
+      "column": 13,
+      "hex": "#EF4444",
+      "context": "return \"#ef4444\"; // Vermelho - Crítico",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 47,
+      "column": 58,
+      "hex": "#3F3F46",
+      "context": "stroke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 50,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\", fontSize: 12 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 54,
+      "column": 95,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 57,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 58,
+      "column": 88,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 62,
+      "column": 35,
+      "hex": "#18181B",
+      "context": "r: \"#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 63,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "lid #3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 65,
+      "column": 25,
+      "hex": "#FAFAFA",
+      "context": "r: \"#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/HistogramaScoresChart.tsx",
+      "line": 74,
+      "column": 39,
+      "hex": "#A1A1AA",
+      "context": "lor: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 52,
+      "column": 58,
+      "hex": "#3F3F46",
+      "context": "stroke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 55,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\", fontSize: 10 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 63,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 64,
+      "column": 89,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 69,
+      "column": 35,
+      "hex": "#18181B",
+      "context": "r: \"#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 70,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "lid #3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 72,
+      "column": 25,
+      "hex": "#FAFAFA",
+      "context": "r: \"#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 104,
+      "column": 23,
+      "hex": "#8B5CF6",
+      "context": "roke=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 108,
+      "column": 24,
+      "hex": "#8B5CF6",
+      "context": "l: \"#8b5cf6\",",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 117,
+      "column": 23,
+      "hex": "#EF4444",
+      "context": "roke=\"#ef4444\"",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 121,
+      "column": 24,
+      "hex": "#EF4444",
+      "context": "l: \"#ef4444\",",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 130,
+      "column": 23,
+      "hex": "#8B5CF6",
+      "context": "roke=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 132,
+      "column": 29,
+      "hex": "#8B5CF6",
+      "context": "ill: \"#8b5cf6\", r: 3 }}",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/PerguntasLineChart.tsx",
+      "line": 133,
+      "column": 41,
+      "hex": "#A78BFA",
+      "context": "ill: \"#a78bfa\" }}"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 57,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "ke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 60,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\", fontSize: 12 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 65,
+      "column": 34,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 70,
+      "column": 39,
+      "hex": "#18181B",
+      "context": "#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 71,
+      "column": 40,
+      "hex": "#3F3F46",
+      "context": "#3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 73,
+      "column": 29,
+      "hex": "#FAFAFA",
+      "context": "#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 97,
+      "column": 43,
+      "hex": "#A1A1AA",
+      "context": " \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 103,
+      "column": 27,
+      "hex": "#8B5CF6",
+      "context": "=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/RadarDimensoesChart.tsx",
+      "line": 104,
+      "column": 25,
+      "hex": "#8B5CF6",
+      "context": "=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 37,
+      "column": 37,
+      "hex": "#EF4444",
+      "context": " * 1.5) return \"#ef4444\"; // Alto - Vermelho",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 38,
+      "column": 31,
+      "hex": "#EAB308",
+      "context": "pMedio) return \"#eab308\"; // Médio-Alto - Amarelo"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 39,
+      "column": 37,
+      "hex": "#3B82F6",
+      "context": " * 0.5) return \"#3b82f6\"; // Médio - Azul",
+      "suggestedToken": "--info ou --chart-blue"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 40,
+      "column": 13,
+      "hex": "#22C55E",
+      "context": "return \"#22c55e\"; // Baixo - Verde",
+      "suggestedToken": "--success ou --chart-green"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 54,
+      "column": 58,
+      "hex": "#3F3F46",
+      "context": "stroke=\"#3f3f46\" />",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 57,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 58,
+      "column": 93,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 63,
+      "column": 30,
+      "hex": "#A1A1AA",
+      "context": "ill: \"#a1a1aa\", fontSize: 12 }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 68,
+      "column": 35,
+      "hex": "#18181B",
+      "context": "r: \"#18181b\",",
+      "suggestedToken": "--background (zinc-950)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 69,
+      "column": 36,
+      "hex": "#3F3F46",
+      "context": "lid #3f3f46\",",
+      "suggestedToken": "--secondary ou --border (zinc-800)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 71,
+      "column": 25,
+      "hex": "#FAFAFA",
+      "context": "r: \"#fafafa\",",
+      "suggestedToken": "--foreground (zinc-50)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 102,
+      "column": 39,
+      "hex": "#A1A1AA",
+      "context": "lor: \"#a1a1aa\" }}",
+      "suggestedToken": "--muted-foreground (zinc-400)"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 109,
+      "column": 23,
+      "hex": "#8B5CF6",
+      "context": "roke=\"#8b5cf6\"",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/dashboard/VariabilidadeDimensoesChart.tsx",
+      "line": 113,
+      "column": 24,
+      "hex": "#8B5CF6",
+      "context": "l: \"#8b5cf6\",",
+      "suggestedToken": "--accent"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 181,
+      "column": 57,
+      "hex": "#667EEA",
+      "context": "ent(135deg, #667eea 0%, #764ba2 100%); padding: 40"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 181,
+      "column": 69,
+      "hex": "#764BA2",
+      "context": "#667eea 0%, #764ba2 100%); padding: 40px; text-ali"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 185,
+      "column": 29,
+      "hex": "#333",
+      "context": "e=\"color: #333;\">Olá, colaborador@exemplo.com</h2>"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 186,
+      "column": 28,
+      "hex": "#666",
+      "context": "e=\"color: #666; line-height: 1.6;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 190,
+      "column": 28,
+      "hex": "#666",
+      "context": "e=\"color: #666; line-height: 1.6;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 196,
+      "column": 59,
+      "hex": "#667EEA",
+      "context": "deg, #667eea 0%, #764ba2 100%);"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 196,
+      "column": 71,
+      "hex": "#764BA2",
+      "context": " 0%, #764ba2 100%);"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 205,
+      "column": 28,
+      "hex": "#666",
+      "context": "e=\"color: #666; font-size: 14px;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 209,
+      "column": 28,
+      "hex": "#999",
+      "context": "e=\"color: #999; font-size: 12px; margin-top: 30px;"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 213,
+      "column": 33,
+      "hex": "#F5F5F5",
+      "context": "background: #f5f5f5; padding: 20px; text-align: ce"
+    },
+    {
+      "file": "/home/user/FHfAxl/components/questionarios/BulkSendDialog.tsx",
+      "line": 213,
+      "column": 84,
+      "hex": "#666",
+      "context": "ter; color: #666; font-size: 12px;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 41,
+      "column": 46,
+      "hex": "#2563EB",
+      "context": "saCorPrimaria || \"#2563eb\";"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 44,
+      "column": 8,
+      "hex": "#1E40AF",
+      "context": ": \"#1e40af\";"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 54,
+      "column": 75,
+      "hex": "#333",
+      "context": "ht: 1.6; color: #333; max-width: 600px; margin: 0 "
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 62,
+      "column": 31,
+      "hex": "#E0E7FF",
+      "context": "e=\"color: #e0e7ff; margin: 5px 0 0 0; font-size: 1"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 65,
+      "column": 26,
+      "hex": "#E0E7FF",
+      "context": "yle=\"color: #e0e7ff; margin: 10px 0 0 0;\">Avaliaçã"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 68,
+      "column": 31,
+      "hex": "#F9FAFB",
+      "context": "=\"background: #f9fafb; padding: 30px; border-radiu"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 82,
+      "column": 43,
+      "hex": "#6B7280",
+      "context": "4px; color: #6b7280;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 86,
+      "column": 43,
+      "hex": "#6B7280",
+      "context": "4px; color: #6b7280; margin-top: 30px;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 92,
+      "column": 78,
+      "hex": "#9CA3AF",
+      "context": " 12px; color: #9ca3af;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 120,
+      "column": 75,
+      "hex": "#333",
+      "context": "ht: 1.6; color: #333; max-width: 600px; margin: 0 "
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 121,
+      "column": 55,
+      "hex": "#2563EB",
+      "context": "dient(135deg, #2563eb 0%, #1e40af 100%); padding: "
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 121,
+      "column": 67,
+      "hex": "#1E40AF",
+      "context": ", #2563eb 0%, #1e40af 100%); padding: 30px; text-a"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 123,
+      "column": 26,
+      "hex": "#E0E7FF",
+      "context": "yle=\"color: #e0e7ff; margin: 10px 0 0 0;\">Redefini"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 126,
+      "column": 31,
+      "hex": "#F9FAFB",
+      "context": "=\"background: #f9fafb; padding: 30px; border-radiu"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 133,
+      "column": 33,
+      "hex": "#2563EB",
+      "context": "round: #2563eb; color: white; padding: 14px 30px; "
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 138,
+      "column": 43,
+      "hex": "#6B7280",
+      "context": "4px; color: #6b7280;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 142,
+      "column": 43,
+      "hex": "#EF4444",
+      "context": "4px; color: #ef4444; margin-top: 20px;\">",
+      "suggestedToken": "--destructive ou --chart-red"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 147,
+      "column": 43,
+      "hex": "#6B7280",
+      "context": "4px; color: #6b7280; margin-top: 30px;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 149,
+      "column": 54,
+      "hex": "#2563EB",
+      "context": "l; color: #2563eb;\">${resetLink}</span>"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/email.ts",
+      "line": 153,
+      "column": 78,
+      "hex": "#9CA3AF",
+      "context": " 12px; color: #9ca3af;\">"
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 37,
+      "column": 13,
+      "hex": "#1F2937",
+      "context": "color: \"#1f2937\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 41,
+      "column": 28,
+      "hex": "#2563EB",
+      "context": "ottom: \"2 solid #2563eb\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 47,
+      "column": 13,
+      "hex": "#1E40AF",
+      "context": "color: \"#1e40af\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 52,
+      "column": 13,
+      "hex": "#64748B",
+      "context": "color: \"#64748b\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 61,
+      "column": 13,
+      "hex": "#1E40AF",
+      "context": "color: \"#1e40af\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 63,
+      "column": 28,
+      "hex": "#CBD5E1",
+      "context": "ottom: \"1 solid #cbd5e1\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 74,
+      "column": 13,
+      "hex": "#475569",
+      "context": "color: \"#475569\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 79,
+      "column": 13,
+      "hex": "#1F2937",
+      "context": "color: \"#1f2937\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 87,
+      "column": 23,
+      "hex": "#E0E7FF",
+      "context": "ckgroundColor: \"#e0e7ff\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 93,
+      "column": 28,
+      "hex": "#E2E8F0",
+      "context": "ottom: \"1 solid #e2e8f0\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 106,
+      "column": 23,
+      "hex": "#DCFCE7",
+      "context": "ckgroundColor: \"#dcfce7\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 107,
+      "column": 13,
+      "hex": "#166534",
+      "context": "color: \"#166534\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 110,
+      "column": 23,
+      "hex": "#FEF3C7",
+      "context": "ckgroundColor: \"#fef3c7\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 111,
+      "column": 13,
+      "hex": "#92400E",
+      "context": "color: \"#92400e\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 114,
+      "column": 23,
+      "hex": "#FEE2E2",
+      "context": "ckgroundColor: \"#fee2e2\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 115,
+      "column": 13,
+      "hex": "#991B1B",
+      "context": "color: \"#991b1b\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 122,
+      "column": 25,
+      "hex": "#E2E8F0",
+      "context": "erTop: \"1 solid #e2e8f0\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 125,
+      "column": 13,
+      "hex": "#94A3B8",
+      "context": "color: \"#94a3b8\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 132,
+      "column": 23,
+      "hex": "#F1F5F9",
+      "context": "ckgroundColor: \"#f1f5f9\","
+    },
+    {
+      "file": "/home/user/FHfAxl/lib/reports/pdf-generator.tsx",
+      "line": 135,
+      "column": 13,
+      "hex": "#475569",
+      "context": "color: \"#475569\","
+    }
+  ]
+}

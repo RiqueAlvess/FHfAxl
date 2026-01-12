@@ -1,0 +1,342 @@
+/**
+ * Animations Module
+ * Keyframes e classes de animação reutilizáveis
+ *
+ * Uso: Importar no globals.css ou usar diretamente nas classes
+ */
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.animate-fadeInUp {
+  animation: fadeInUp var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-fadeOut {
+  animation: fadeOut var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-slideDown {
+  animation: slideDown var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn var(--duration-normal, 300ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-successPop {
+  animation: successPop var(--duration-slow, 500ms) var(--ease-out, ease-out) forwards;
+}
+
+.animate-confetti {
+  animation: confetti 3s var(--ease-in, ease-in) forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s var(--ease-in-out, ease-in-out) infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s var(--ease-in-out, ease-in-out) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s var(--ease-in-out, ease-in-out) infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s var(--ease-in-out, ease-in-out);
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s var(--ease-in-out, ease-in-out);
+}
+
+/* ============================================
+   ANIMATION DELAYS
+   ============================================ */
+
+.delay-0 {
+  animation-delay: 0ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+/* ============================================
+   ANIMATION DURATIONS
+   ============================================ */
+
+.duration-fast {
+  animation-duration: var(--duration-fast, 150ms);
+}
+
+.duration-normal {
+  animation-duration: var(--duration-normal, 300ms);
+}
+
+.duration-slow {
+  animation-duration: var(--duration-slow, 500ms);
+}
+
+/* ============================================
+   SPECIAL EFFECTS
+   ============================================ */
+
+/* Glow effect for success states */
+.glow-success {
+  box-shadow: 0 0 10px hsl(var(--success) / 0.5),
+              0 0 20px hsl(var(--success) / 0.3),
+              0 0 30px hsl(var(--success) / 0.1);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Glow effect for accent elements */
+.glow-accent {
+  box-shadow: 0 0 10px hsl(var(--accent) / 0.5),
+              0 0 20px hsl(var(--accent) / 0.3),
+              0 0 30px hsl(var(--accent) / 0.1);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform var(--duration-fast, 150ms) var(--ease-out, ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Hover scale effect */
+.hover-scale {
+  transition: transform var(--duration-fast, 150ms) var(--ease-out, ease-out);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Loading skeleton shimmer */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--muted-foreground) / 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
