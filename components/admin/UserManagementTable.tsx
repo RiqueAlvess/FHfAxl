@@ -143,11 +143,11 @@ export default function UserManagementTable({ usuarios: initialUsuarios, empresa
 
   const getStatusBadge = (ativo: boolean) => {
     return ativo ? (
-      <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+      <Badge variant="outline" className="bg-emerald-900/30 text-emerald-400 border-emerald-700">
         Ativo
       </Badge>
     ) : (
-      <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+      <Badge variant="outline" className="bg-red-900/30 text-red-400 border-red-700">
         Inativo
       </Badge>
     );
@@ -178,7 +178,7 @@ export default function UserManagementTable({ usuarios: initialUsuarios, empresa
         return empresa ? (
           <span className="text-sm">{empresa.nome}</span>
         ) : (
-          <span className="text-gray-400 text-sm italic">Nenhuma</span>
+          <span className="text-zinc-400 text-sm italic">Nenhuma</span>
         );
       },
     },
@@ -190,7 +190,7 @@ export default function UserManagementTable({ usuarios: initialUsuarios, empresa
         return unidade ? (
           <span className="text-sm">{unidade.nome}</span>
         ) : (
-          <span className="text-gray-400 text-sm italic">-</span>
+          <span className="text-zinc-400 text-sm italic">-</span>
         );
       },
     },
@@ -209,7 +209,7 @@ export default function UserManagementTable({ usuarios: initialUsuarios, empresa
             {format(new Date(lastLogin), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
           </span>
         ) : (
-          <span className="text-gray-400 text-sm italic">Nunca</span>
+          <span className="text-zinc-400 text-sm italic">Nunca</span>
         );
       },
     },
@@ -275,7 +275,7 @@ export default function UserManagementTable({ usuarios: initialUsuarios, empresa
       {/* Barra de pesquisa e ações */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2 flex-1 max-w-sm">
-          <Search className="h-4 w-4 text-gray-400" />
+          <Search className="h-4 w-4 text-zinc-400" />
           <Input
             placeholder="Buscar por nome ou email..."
             value={(table.getColumn('nome')?.getFilterValue() as string) ?? ''}

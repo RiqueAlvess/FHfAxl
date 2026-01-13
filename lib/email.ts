@@ -79,10 +79,10 @@ export function getMagicLinkEmailTemplate(
     timeStyle: "short",
   }).format(expiresAt);
 
-  const corPrimaria = empresaCorPrimaria || "#2563eb";
+  const corPrimaria = empresaCorPrimaria || "#8b5cf6";
   const corEscura = empresaCorPrimaria
     ? `${empresaCorPrimaria}dd`
-    : "#1e40af";
+    : "#7c3aed";
 
   return `
     <!DOCTYPE html>
@@ -159,7 +159,7 @@ export function getPasswordResetEmailTemplate(
       <title>Redefinir Senha - VIVAMENTE360</title>
     </head>
     <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <div style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+      <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
         <h1 style="color: white; margin: 0;">VIVAMENTE360</h1>
         <p style="color: #e0e7ff; margin: 10px 0 0 0;">Redefinição de Senha</p>
       </div>
@@ -171,7 +171,7 @@ export function getPasswordResetEmailTemplate(
 
         <div style="text-align: center; margin: 30px 0;">
           <a href="${resetLink}"
-             style="background: #2563eb; color: white; padding: 14px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+             style="background: #8b5cf6; color: white; padding: 14px 30px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
             Redefinir Senha
           </a>
         </div>
@@ -187,7 +187,7 @@ export function getPasswordResetEmailTemplate(
 
         <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
           Se você não conseguir clicar no botão, copie e cole este link no seu navegador:<br>
-          <span style="word-break: break-all; color: #2563eb;">${resetLink}</span>
+          <span style="word-break: break-all; color: #8b5cf6;">${resetLink}</span>
         </p>
       </div>
 

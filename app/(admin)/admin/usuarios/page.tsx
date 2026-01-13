@@ -78,7 +78,7 @@ export default async function UsuariosAdminPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold">Gerenciar Usuários</h1>
-        <p className="text-gray-500">Controle total de acessos ao sistema</p>
+        <p className="text-zinc-400">Controle total de acessos ao sistema</p>
       </div>
 
       <Card>
@@ -100,47 +100,47 @@ export default async function UsuariosAdminPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="border-l-4 border-yellow-500 pl-4">
-              <h3 className="font-semibold text-yellow-700">ADMIN</h3>
-              <p className="text-sm text-gray-600">
+            <div className="border-l-4 border-amber-500 pl-4">
+              <h3 className="font-semibold text-amber-400">ADMIN</h3>
+              <p className="text-sm text-zinc-400">
                 Usuário master do sistema. Independente de empresa, acessa tudo e vê tudo.
                 Tem acesso ao painel de administração para controlar acessos e criar usuários.
               </p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-zinc-400 mt-1">
                 <strong>Campos obrigatórios:</strong> Nome, Email, Senha
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-zinc-400">
                 <strong>Campos opcionais:</strong> Empresa, Unidade, Setor (geralmente não preenchidos)
               </p>
             </div>
 
-            <div className="border-l-4 border-blue-500 pl-4">
-              <h3 className="font-semibold text-blue-700">RH</h3>
-              <p className="text-sm text-gray-600">
+            <div className="border-l-4 border-violet-500 pl-4">
+              <h3 className="font-semibold text-violet-400">RH</h3>
+              <p className="text-sm text-zinc-400">
                 Usuário vinculado a UMA empresa específica. Pode ver todo conteúdo voltado à sua empresa.
                 Acessa todos os dados da empresa (todas unidades, setores e cargos). Não lida com regras da plataforma.
               </p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-zinc-400 mt-1">
                 <strong>Campos obrigatórios:</strong> Nome, Email, Senha, Empresa
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-zinc-400">
                 <strong>Campos opcionais:</strong> Unidade, Setor (não utilizados para RH)
               </p>
             </div>
 
-            <div className="border-l-4 border-green-500 pl-4">
-              <h3 className="font-semibold text-green-700">LIDERANÇA</h3>
-              <p className="text-sm text-gray-600">
+            <div className="border-l-4 border-emerald-500 pl-4">
+              <h3 className="font-semibold text-emerald-400">LIDERANÇA</h3>
+              <p className="text-sm text-zinc-400">
                 Usuário vinculado a uma empresa, geralmente limitado a uma única unidade e/ou setor.
                 Vê apenas dados da sua unidade/setor específico.
               </p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-zinc-400 mt-1">
                 <strong>Campos obrigatórios:</strong> Nome, Email, Senha, Empresa
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-zinc-400">
                 <strong>Campos opcionais:</strong> Unidade (limita acesso à unidade), Setor (limita acesso ao setor)
               </p>
-              <p className="text-xs text-gray-400 mt-1 italic">
+              <p className="text-xs text-zinc-400 mt-1 italic">
                 Se apenas Unidade for preenchida: acessa toda a unidade.
                 Se Unidade e Setor forem preenchidos: acessa apenas o setor.
                 Se apenas Setor for preenchido: acessa apenas o setor.

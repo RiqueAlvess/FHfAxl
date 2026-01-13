@@ -96,7 +96,7 @@ export default function CreateUserPage() {
   );
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800 p-4">
       <Card className="w-full max-w-2xl">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">
@@ -155,7 +155,7 @@ export default function CreateUserPage() {
                   disabled={isLoading}
                   minLength={8}
                 />
-                <p className="text-xs text-gray-500">Mínimo 8 caracteres</p>
+                <p className="text-xs text-zinc-400">Mínimo 8 caracteres</p>
               </div>
 
               <div className="space-y-2">
@@ -189,12 +189,12 @@ export default function CreateUserPage() {
                   </SelectContent>
                 </Select>
                 {formData.role === "ADMIN" && (
-                  <p className="text-xs text-green-600 font-medium">
+                  <p className="text-xs text-emerald-400 font-medium">
                     ✓ ADMIN não precisa de vínculo com empresa
                   </p>
                 )}
                 {(formData.role === "RH" || formData.role === "LIDERANCA") && (
-                  <p className="text-xs text-amber-600 font-medium">
+                  <p className="text-xs text-amber-400 font-medium">
                     ⚠ Este perfil REQUER vínculo com empresa
                   </p>
                 )}
@@ -285,11 +285,11 @@ export default function CreateUserPage() {
             </div>
           </form>
 
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-            <p className="text-sm text-blue-800">
+          <div className="mt-6 p-4 bg-violet-900/20 border border-violet-700 rounded-md">
+            <p className="text-sm text-violet-300">
               <strong>ℹ️ Informações importantes:</strong>
             </p>
-            <ul className="list-disc list-inside text-xs text-blue-700 mt-2 space-y-1">
+            <ul className="list-disc list-inside text-xs text-violet-400 mt-2 space-y-1">
               <li><strong>ADMIN (Root):</strong> Não precisa de empresa - acesso total ao sistema</li>
               <li><strong>RH:</strong> DEVE estar vinculado a uma empresa específica</li>
               <li><strong>LIDERANCA:</strong> DEVE estar vinculado a uma empresa (opcionalmente unidade/setor)</li>
