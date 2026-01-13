@@ -154,32 +154,32 @@ export default function DashboardCharts() {
     <div className="space-y-6">
       {/* KPIs Estatísticos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
+        <Card className="bg-white border-gray-300">
           <CardHeader>
-            <CardTitle className="text-sm">Mediana do Score</CardTitle>
+            <CardTitle className="text-sm text-black">Mediana do Score</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{data.kpis.scoreMediano}</div>
+            <div className="text-3xl font-bold text-black">{data.kpis.scoreMediano}</div>
             <p className="text-xs text-gray-500">Valor central da distribuição</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border-gray-300">
           <CardHeader>
-            <CardTitle className="text-sm">Desvio Padrão</CardTitle>
+            <CardTitle className="text-sm text-black">Desvio Padrão</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{data.kpis.desvioPadrao}</div>
+            <div className="text-3xl font-bold text-black">{data.kpis.desvioPadrao}</div>
             <p className="text-xs text-gray-500">Dispersão dos scores</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border-gray-300">
           <CardHeader>
-            <CardTitle className="text-sm">Coef. Variação</CardTitle>
+            <CardTitle className="text-sm text-black">Coef. Variação</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{data.kpis.coeficienteVariacao}%</div>
+            <div className="text-3xl font-bold text-black">{data.kpis.coeficienteVariacao}%</div>
             <p className="text-xs text-gray-500">Variabilidade relativa</p>
           </CardContent>
         </Card>
@@ -194,9 +194,9 @@ export default function DashboardCharts() {
         </TabsList>
 
         <TabsContent value="distribuicao" className="space-y-4">
-          <Card>
+          <Card className="bg-white border-gray-300">
             <CardHeader>
-              <CardTitle>Distribuição de Risco</CardTitle>
+              <CardTitle className="text-black">Distribuição de Risco</CardTitle>
               <CardDescription>
                 Classificação dos respondentes por nível de risco psicossocial
               </CardDescription>
@@ -272,9 +272,9 @@ export default function DashboardCharts() {
         </TabsContent>
 
         <TabsContent value="dimensoes" className="space-y-4">
-          <Card>
+          <Card className="bg-white border-gray-300">
             <CardHeader>
-              <CardTitle>Pontuação Média por Dimensão</CardTitle>
+              <CardTitle className="text-black">Pontuação Média por Dimensão</CardTitle>
               <CardDescription>
                 Score médio (0-20) para cada dimensão do questionário HSE-IT
               </CardDescription>
@@ -309,9 +309,9 @@ export default function DashboardCharts() {
         </TabsContent>
 
         <TabsContent value="radar" className="space-y-4">
-          <Card>
+          <Card className="bg-white border-gray-300">
             <CardHeader>
-              <CardTitle>Radar de Dimensões</CardTitle>
+              <CardTitle className="text-black">Radar de Dimensões</CardTitle>
               <CardDescription>Visão 360° dos riscos psicossociais por dimensão</CardDescription>
             </CardHeader>
             <CardContent>
@@ -345,9 +345,9 @@ export default function DashboardCharts() {
 
       {/* Indicadores Adicionais */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card>
+        <Card className="bg-white border-gray-300">
           <CardHeader>
-            <CardTitle>Taxa de Risco Alto</CardTitle>
+            <CardTitle className="text-black">Taxa de Risco Alto</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold text-red-600">{data.kpis.taxaRiscoAlto}%</div>
@@ -357,9 +357,9 @@ export default function DashboardCharts() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border-gray-300">
           <CardHeader>
-            <CardTitle>Tempo Médio de Resposta</CardTitle>
+            <CardTitle className="text-black">Tempo Médio de Resposta</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold text-blue-600">

@@ -8,40 +8,40 @@
 
 :root {
   /* ============================================
-     CORE COLORS - Palette principal
+     CORE COLORS - Palette principal (LIGHT THEME)
      ============================================ */
 
-  /* Primary - Cor principal da marca */
-  --primary: 198 72% 19%;           /* #0F3D52 - Teal escuro */
-  --primary-foreground: 0 0% 100%;  /* #FFFFFF - Texto em primary */
+  /* Primary - Botões pretos */
+  --primary: 0 0% 9%;               /* #171717 - Preto quase */
+  --primary-foreground: 0 0% 100%;  /* #FFFFFF - Texto em botões */
 
   /* Accent - Cor de destaque */
-  --accent: 262.1 83.3% 57.8%;      /* #8B5CF6 - Violet-500 */
-  --accent-light: 266 100% 77%;     /* #C4B5FD - Violet-300 (para gradientes) */
+  --accent: 0 0% 20%;               /* #333333 - Cinza escuro */
+  --accent-light: 0 0% 40%;         /* #666666 - Cinza médio */
   --accent-foreground: 0 0% 100%;   /* #FFFFFF - Texto em accent */
 
-  /* Background - Fundo da aplicação */
-  --background: 240 5.9% 10%;       /* #18181B - Zinc-950 */
-  --foreground: 240 5% 96%;         /* #FAFAFA - Zinc-50 */
+  /* Background - Fundo branco */
+  --background: 0 0% 100%;          /* #FFFFFF - Branco */
+  --foreground: 0 0% 9%;            /* #171717 - Preto */
 
-  /* Card - Containers e cards */
-  --card: 240 4% 16%;               /* #27272A - Zinc-900 */
-  --card-foreground: 240 5% 96%;    /* #FAFAFA - Zinc-50 */
+  /* Card - Containers e cards brancos */
+  --card: 0 0% 100%;                /* #FFFFFF - Branco */
+  --card-foreground: 0 0% 9%;       /* #171717 - Preto */
 
   /* Popover - Popovers e dropdowns */
-  --popover: 240 4% 16%;            /* #27272A - Zinc-900 */
-  --popover-foreground: 240 5% 96%; /* #FAFAFA - Zinc-50 */
+  --popover: 0 0% 100%;             /* #FFFFFF - Branco */
+  --popover-foreground: 0 0% 9%;    /* #171717 - Preto */
 
-  /* Secondary - Cor secundária */
-  --secondary: 240 3.7% 15.9%;      /* #3F3F46 - Zinc-800 */
-  --secondary-foreground: 240 5% 96%; /* #FAFAFA - Zinc-50 */
+  /* Secondary - Cor secundária cinza claro */
+  --secondary: 0 0% 96%;            /* #F5F5F5 - Cinza bem claro */
+  --secondary-foreground: 0 0% 9%;  /* #171717 - Preto */
 
   /* Muted - Elementos silenciados */
-  --muted: 240 3.7% 15.9%;          /* #3F3F46 - Zinc-800 */
-  --muted-foreground: 240 5% 64.9%; /* #A1A1AA - Zinc-400 */
+  --muted: 0 0% 96%;                /* #F5F5F5 - Cinza bem claro */
+  --muted-foreground: 0 0% 45%;     /* #737373 - Cinza médio */
 
   /* Destructive - Ações destrutivas e erros */
-  --destructive: 0 72% 51%;         /* #EF4444 - Red-500 */
+  --destructive: 0 84% 60%;         /* #F87171 - Red-400 */
   --destructive-foreground: 0 0% 100%; /* #FFFFFF */
 
   /* ============================================
@@ -53,7 +53,7 @@
   --success-foreground: 0 0% 100%;  /* #FFFFFF */
 
   /* Warning - Avisos */
-  --warning: 45 93% 47%;            /* #FACC15 - Yellow-500 */
+  --warning: 45 93% 47%;            /* #EAB308 - Yellow-500 */
   --warning-foreground: 0 0% 0%;    /* #000000 */
 
   /* Info - Informações */
@@ -64,14 +64,14 @@
      UI ELEMENTS - Elementos de interface
      ============================================ */
 
-  /* Border - Bordas */
-  --border: 240 3.7% 15.9%;         /* #3F3F46 - Zinc-800 */
+  /* Border - Bordas cinza claro */
+  --border: 0 0% 90%;               /* #E5E5E5 - Cinza claro */
 
   /* Input - Campos de formulário */
-  --input: 240 3.7% 15.9%;          /* #3F3F46 - Zinc-800 */
+  --input: 0 0% 90%;                /* #E5E5E5 - Cinza claro */
 
-  /* Ring - Focus rings */
-  --ring: 262.1 83.3% 57.8%;        /* #8B5CF6 - Violet-500 */
+  /* Ring - Focus rings preto */
+  --ring: 0 0% 9%;                  /* #171717 - Preto */
 
   /* ============================================
      SPACING & LAYOUT
